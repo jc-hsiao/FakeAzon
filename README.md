@@ -8,8 +8,8 @@ Users will be able to enter online store and browse a variety of items and add t
   * Price
   * Product Description 
   * Price
-
-
+  * Photo 
+* Upon signing back in, the online store shall persist data on items that were previously added into the cart.
 
 
 ### Classes
