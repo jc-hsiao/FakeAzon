@@ -1,7 +1,9 @@
 # Description #
+
 Users will be able to enter online store and browse a variety of items and add them to their shopping cart. Upon user requests they will be able to checkout and their order will be processed. 
 
 ### Unique Features
+
 * User shall be able to review order history.
 * Cart shall automatically update to keep track of order total.
 * Items shall provide information on the following:
@@ -12,12 +14,9 @@ Users will be able to enter online store and browse a variety of items and add t
 * Upon signing back in, the online store shall persist data on items that were previously added into the cart.
 
 
-### Classes
+# Classes
 
-
-
-
-This JustCode project should have several phases. As you complete each phase, you need to make sure you have tests, demos, and a little documentation about the Project (and the phase you just completed).
+User Class
 
 - Decide on Project
   - One of the projs below, or your own ideas.
