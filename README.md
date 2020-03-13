@@ -2,7 +2,7 @@
 
 Users will be able to enter online store and browse a variety of items and add them to their shopping cart. Upon user requests they will be able to checkout and their order will be processed. 
 
-### Unique Features
+## Unique Features
 
 * User shall be able to review order history.
 * Cart shall automatically update to keep track of order total.
@@ -14,9 +14,10 @@ Users will be able to enter online store and browse a variety of items and add t
 * Upon signing back in, the online store shall persist data on items that were previously added into the cart.
 
 
-# Classes
+## Classes
 
-User Class
+### User Class 
+
 
 - Decide on Project
   - One of the projs below, or your own ideas.
