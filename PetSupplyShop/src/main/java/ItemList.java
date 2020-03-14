@@ -44,7 +44,7 @@ public class ItemList {
         return items.size();
     }
 
-    public String getName(){
+    public String getListName(){
         return listName;
     }
 
