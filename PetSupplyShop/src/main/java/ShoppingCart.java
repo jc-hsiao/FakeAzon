@@ -1,19 +1,16 @@
 import java.util.HashMap;
+import java.util.Map;
 
 public class ShoppingCart {
 
 
-    HashMap<Item,Integer> items;
-    Double cartValue;
-
+    private HashMap<Item,Integer> items;
 
     public ShoppingCart(){
-        items = new HashMap<Item, Integer>();
-        cartValue = 0.00;
+        items = new HashMap<>();
     }
 
     public boolean add(Item item, int amount){
-
         if(items.containsKey(item)){
             items.put(item , items.get(item) + amount);
             return true;
@@ -25,7 +22,6 @@ public class ShoppingCart {
         }
     }
     public boolean remove(Item item){
-
         if(items.containsKey(item)){
             items.remove(item);
             return true;
@@ -34,8 +30,7 @@ public class ShoppingCart {
         }
     }
 
-    public boolean replaceItemAmount(Item item , int newAmount){
-
+    public boolean changeItemQuantity(Item item , int newAmount){
         if (items.containsKey(item)) {
             items.put(item, newAmount);
             return true;
@@ -43,36 +38,32 @@ public class ShoppingCart {
             return false;
         }
     }
+
     public Integer getItemAmount(Item item){
         return items.get(item);
-    }
-
-    public boolean increaseItemAmount(Item item , int amountToIncrease){
-
-        if(items.containsKey(item)){
-            items.put(item , items.get(item) + amountToIncrease);
-            return true;
-        }else{
-            return false;
-        }
     }
 
     public Integer getNumOfItems(){
         return this.items.size();
     }
 
-    public Double getCartValue(){
-        return this.cartValue;
+    public Double getItemTotal(Item item){
+        return items.get(item)*item.getPrice();
+    }
+
+    public Double getGrandTotal(){
+        Double sum = 0.0;
+        if(items.size()==0)
+            return sum;
+        for (Map.Entry<Item,Integer> e :items.entrySet()) {
+            sum += getItemTotal(e.getKey());
+        }
+        return sum;
     }
 
     public HashMap<Item , Integer> getItems(){
         return this.items;
     }
-
-
-
-
-
 
 
 }
