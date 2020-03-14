@@ -4,12 +4,20 @@ public class Item {
     private Integer itemID;
     private Double price;
     private String category;
-    private String brand;
+    private Brand brand;
 
     public Item(){}
 
     public Item(Integer id) {
+        this(id,"",0.0,"",null);
+    }
+
+    public Item(Integer id, String name, Double price, String category, Brand brand) {
+        this.name = name;
         this.itemID = id;
+        this.price = price;
+        this.category = category;
+        this.brand = brand;
     }
 
     public String getItemName() {
@@ -44,11 +52,11 @@ public class Item {
         this.category = category;
     }
 
-    public String getBrand() {
+    public Brand getBrand() {
         return brand;
     }
 
-    public void setBrand(String brand) {
+    public void setBrand(Brand brand) {
         this.brand = brand;
     }
 

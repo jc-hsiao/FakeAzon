@@ -58,12 +58,17 @@ public class User {
         return shoppingCart.remove(item);
     }
 
-    public boolean changeQuantity(Item item, int amount){
+    public boolean checkIfCartHas(Item item){return shoppingCart.containsItem(item);}
+
+    public boolean changeQuantityOfItemInCart(Item item, int amount){
         return shoppingCart.changeItemQuantity(item, amount);
     }
 
     public int getItemQuantity(Item item){
-        return shoppingCart.getItemAmount(item);
+        if(shoppingCart.containsItem(item))
+            return shoppingCart.getItemAmount(item);
+        else
+            return 0;
     }
 
     public int getNumOfItemInCart(){
