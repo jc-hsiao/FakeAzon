@@ -5,9 +5,9 @@ import java.util.HashMap;
 
 public class ShoppingCartTest {
 
-    Item item1 = new Item();
-    Item item2 = new Item();
-    Item item3 = new Item();
+    Item item1 = new Item(1);
+    Item item2 = new Item(2);
+    Item item3 = new Item(3);
 
 
 
@@ -69,7 +69,7 @@ public class ShoppingCartTest {
         ShoppingCart cart = new ShoppingCart();
         boolean addItem1 = cart.add(item1 ,1);
 
-        Item notInCart = new Item();
+        Item notInCart = new Item(7);
         boolean notInCartResult = cart.remove(notInCart);
 
         Integer expectedSize1 = 1;
@@ -99,7 +99,7 @@ public class ShoppingCartTest {
         Integer expectedAmount1 = 1;
         Assert.assertEquals(expectedAmount1 , cart.getItemAmount(item1));
 
-        Item notInCart = new Item();
+        Item notInCart = new Item(7);
         boolean replaceBool = cart.replaceItemAmount(notInCart , 10);
 
         Integer expectedAmount2 = 1;
@@ -123,7 +123,7 @@ public class ShoppingCartTest {
         ShoppingCart cart = new ShoppingCart();
         boolean addItem1 = cart.add(item1 ,1);
 
-        Item nonexixtent =  new Item();
+        Item nonexixtent =  new Item(7);
         boolean increase20 = cart.increaseItemAmount(nonexixtent , 20);
 
         Integer expectedAmount2 = 1;
@@ -143,8 +143,8 @@ public class ShoppingCartTest {
 
         Assert.assertEquals(expectedValue1 , actualValue1);
 
-        Item item1 = new Item(); // Waiting on items to be created with price field
-        Item item2 = new Item(); // Waiting on items to be created with price field
+        Item item1 = new Item(0); // Waiting on items to be created with price field
+        Item item2 = new Item(0); // Waiting on items to be created with price field
 
         Double expectedValue2 = 0.00;//Post-Items Value
         Double actualValue2 =  cart.getCartValue();
