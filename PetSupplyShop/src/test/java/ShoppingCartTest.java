@@ -1,6 +1,5 @@
 import org.junit.Assert;
 import org.junit.Test;
-
 import java.util.HashMap;
 
 public class ShoppingCartTest {
@@ -86,7 +85,7 @@ public class ShoppingCartTest {
         Integer expectedAmount1 = 1;
         Assert.assertEquals(expectedAmount1 , cart.getItemAmount(item1));
 
-        cart.replaceItemAmount(item1 , 10);
+        cart.changeItemQuantity(item1 , 10);
         Integer expectedAmount2 = 10;
         Assert.assertEquals(expectedAmount2 , cart.getItemAmount(item1));
     }
@@ -100,69 +99,64 @@ public class ShoppingCartTest {
         Assert.assertEquals(expectedAmount1 , cart.getItemAmount(item1));
 
         Item notInCart = new Item();
-        boolean replaceBool = cart.replaceItemAmount(notInCart , 10);
+        boolean replaceBool = cart.changeItemQuantity(notInCart , 10);
 
         Integer expectedAmount2 = 1;
         Assert.assertEquals(expectedAmount2 , cart.getItemAmount(item1));
         Assert.assertFalse(replaceBool);
     }
+
     @Test
-    public void increaseItemAmountTest(){
-
+    public void getItemTotalTest(){
         ShoppingCart cart = new ShoppingCart();
-        boolean addItem1 = cart.add(item1 ,1);
+        Item item1 = new Item();
+        item1.setPrice(3.0);
+        cart.add(item1,5);
 
-        boolean increase20 = cart.increaseItemAmount(item1 , 20);
+        Double expectedValue = 15.0;
+        Double actualValue =  cart.getItemTotal(item1);
 
-        Integer expectedAmount2 = 21;
-        Assert.assertEquals(expectedAmount2 , cart.getItemAmount(item1));
-        Assert.assertTrue(increase20);
-    }
-    @Test
-    public void  increaseNonItemAmountTest(){
-        ShoppingCart cart = new ShoppingCart();
-        boolean addItem1 = cart.add(item1 ,1);
-
-        Item nonexixtent =  new Item();
-        boolean increase20 = cart.increaseItemAmount(nonexixtent , 20);
-
-        Integer expectedAmount2 = 1;
-        Assert.assertEquals(expectedAmount2 , cart.getItemAmount(item1));
-        Assert.assertFalse(increase20);
+        Assert.assertEquals(expectedValue , actualValue);
     }
 
-    // NOT FINISHED
-
     @Test
-    public void getCartValueTest(){
+    public void getGrandTotalEmptyTest(){
 
         ShoppingCart cart = new ShoppingCart();
 
-        Double expectedValue1 = 0.00;//Pre-Items Value
-        Double actualValue1 =  cart.getCartValue();
+        Double expectedValue = 0.00;//Pre-Items Value
+        Double actualValue =  cart.getGrandTotal();
 
-        Assert.assertEquals(expectedValue1 , actualValue1);
+        Assert.assertEquals(expectedValue , actualValue);
+    }
 
-        Item item1 = new Item(); // Waiting on items to be created with price field
-        Item item2 = new Item(); // Waiting on items to be created with price field
+    @Test
+    public void getGrandTotalTest(){
+        ShoppingCart cart = new ShoppingCart();
+        Item item1 = new Item();
+        item1.setPrice(20.0);
+        Item item2 = new Item();
+        item2.setPrice(5.0);
 
-        Double expectedValue2 = 0.00;//Post-Items Value
-        Double actualValue2 =  cart.getCartValue();
+        cart.add(item1,1);
+        cart.add(item2,2);
 
-        Assert.assertEquals(expectedValue2 , actualValue2);
+        Double expectedValue = 30.0;
+        Double actualValue =  cart.getGrandTotal();
+
+        Assert.assertEquals(expectedValue , actualValue);
     }
 
     @Test
     public void getItemsTest(){
 
         ShoppingCart cart = new ShoppingCart();
-        HashMap<Item , Integer> emptyMap = new HashMap<Item, Integer>();
+        HashMap<Item , Integer> emptyMap = new HashMap<>();
         Assert.assertEquals(emptyMap , cart.getItems());
 
-        boolean addItem1 = cart.add(item1 ,1);
-        boolean addItem2 = cart.add(item2 ,1);
-        boolean addItem3 = cart.add(item3 ,1);
-
+        Assert.assertTrue(cart.add(item1 ,1));
+        Assert.assertTrue(cart.add(item2 ,1));
+        Assert.assertTrue(cart.add(item3 ,1));
         Assert.assertTrue(cart.getItems().containsKey(item1));
         Assert.assertTrue(cart.getItems().containsKey(item2));
         Assert.assertTrue(cart.getItems().containsKey(item3));

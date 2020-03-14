@@ -2,38 +2,38 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class ItemList {
-    String listName;
-    Set<Item> items;
+    private int id;
+    private String listName;
+    private Set<Item> items;
 
-    public ItemList(){
-        listName = "";
+    public ItemList(){}
+
+    public ItemList(int id, String listName){
+        this.id = id;
+        this.listName = listName;
         items = new HashSet<>();
     }
 
-    public ItemList(String listName, Set<Item> items){
-        this.listName = listName;
-        this.items = items;
-    }
-
-    public Item getItem(){
+    public Item getItem(int itemId){
+        for (Item i:items) {
+            if(i.getItemID()==itemId)
+                return i;
+        }
         return null;
     }
 
-    public boolean addItem(Item item){
-        if(!items.contains(item)) {
-            items.add(item);
-            return true;
-        }else
-            return false;//add failed
+    public void addItem(Item item){
+        items.add(item);
     }
 
-    public boolean removeItem(Item item){
-        if(!items.contains(item)) {
-            return false;
-        }else{
-            items.remove(item);
-            return true;
-        }
+    public void removeItem(int itemId){
+        Item item = getItem(itemId);
+        items.remove(item);
+    }
+
+    public boolean containItem(int itemId){
+        Item item = getItem(itemId);
+        return items.contains(item);
     }
 
     public void clearItems(){
@@ -52,4 +52,7 @@ public class ItemList {
         listName = newListName;
     }
 
+    public int getId() { return id; }
+
+    public void setId(int id) { this.id = id; }
 }

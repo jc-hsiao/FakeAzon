@@ -6,6 +6,8 @@ public class Item {
     private String category;
     private String brand;
 
+    public Item(){}
+
     public Item(Integer id) {
         this.itemID = id;
     }
