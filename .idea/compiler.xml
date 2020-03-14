@@ -10,7 +10,6 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="PetShop" target="1.5" />
       <module name="PetSupplyShop" target="1.5" />
     </bytecodeTargetLevel>
   </component>
