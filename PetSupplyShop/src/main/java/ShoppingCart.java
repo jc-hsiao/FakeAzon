@@ -21,7 +21,6 @@ public class ShoppingCart {
             return false;
         }
     }
-
     public boolean remove(Item item){
         if(items.containsKey(item)){
             items.remove(item);
