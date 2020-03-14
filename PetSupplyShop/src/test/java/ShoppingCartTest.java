@@ -4,9 +4,9 @@ import java.util.HashMap;
 
 public class ShoppingCartTest {
 
-    Item item1 = new Item();
-    Item item2 = new Item();
-    Item item3 = new Item();
+    Item item1 = new Item(1);
+    Item item2 = new Item(2);
+    Item item3 = new Item(3);
 
 
 
@@ -68,7 +68,7 @@ public class ShoppingCartTest {
         ShoppingCart cart = new ShoppingCart();
         boolean addItem1 = cart.add(item1 ,1);
 
-        Item notInCart = new Item();
+        Item notInCart = new Item(7);
         boolean notInCartResult = cart.remove(notInCart);
 
         Integer expectedSize1 = 1;
@@ -98,7 +98,8 @@ public class ShoppingCartTest {
         Integer expectedAmount1 = 1;
         Assert.assertEquals(expectedAmount1 , cart.getItemAmount(item1));
 
-        Item notInCart = new Item();
+
+        Item notInCart = new Item(7);
         boolean replaceBool = cart.changeItemQuantity(notInCart , 10);
 
         Integer expectedAmount2 = 1;
@@ -124,6 +125,9 @@ public class ShoppingCartTest {
 
         ShoppingCart cart = new ShoppingCart();
 
+        Item nonexixtent =  new Item(7);
+        boolean increase20 = cart.changeItemQuantity(nonexixtent , 20);
+
         Double expectedValue = 0.00;//Pre-Items Value
         Double actualValue =  cart.getGrandTotal();
 
@@ -138,13 +142,15 @@ public class ShoppingCartTest {
         Item item2 = new Item();
         item2.setPrice(5.0);
 
-        cart.add(item1,1);
-        cart.add(item2,2);
+        boolean boolItem1 = cart.add(item1 ,1);
+        boolean boolItem2 = cart.add(item2 ,2);
 
         Double expectedValue = 30.0;
         Double actualValue =  cart.getGrandTotal();
 
         Assert.assertEquals(expectedValue , actualValue);
+        Assert.assertTrue(boolItem1);
+        Assert.assertTrue(boolItem2);
     }
 
     @Test
