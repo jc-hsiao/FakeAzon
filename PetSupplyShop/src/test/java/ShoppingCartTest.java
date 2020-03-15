@@ -1,5 +1,8 @@
+import shop.Item;
 import org.junit.Assert;
 import org.junit.Test;
+import shop.ShoppingCart;
+
 import java.util.HashMap;
 
 public class ShoppingCartTest {

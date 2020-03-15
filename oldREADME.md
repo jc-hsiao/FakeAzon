@@ -31,7 +31,7 @@ This JustCode project should have several phases. As you complete each phase, yo
 * Text Adventure Game
 * March Madness bracket manager
 * A "YouAreEll" client/server Clone
-* Catalog/ShoppingCart
+* Catalog/shop.ShoppingCart
 * InventorySystem w BarCodes (like)
 * A (stock) Market Info Display
 * A pro sports dashboard

@@ -4,7 +4,7 @@ Users will be able to enter online store and browse a variety of items and add t
 
 ## Unique Features
 
-* User shall be able to review order history.
+* shop.User shall be able to review order history.
 * Cart shall automatically update to keep track of order total.
 * Items shall provide information on the following:
   * Price
@@ -16,28 +16,28 @@ Users will be able to enter online store and browse a variety of items and add t
 
 ## Classes
 
-### User Class 
+### shop.User Class 
  * Shopping Cart
  * Name
  * Email
  * ID
  
 ### Shopping Cart
- * Items Map<Item, Quantity>
+ * Items Map<shop.itemlists.shop.itemlists, Quantity>
  * Total Items List
  
-### Item
+### shop.itemlists.shop.itemlists
  * ItemID
- * Item Price
+ * shop.itemlists.shop.itemlists Price
  * Category
- * Brand
+ * shop.Brand
  
-### Order
+### shop.Order
  * UserID
  * Shopping Cart
  * Date
  
-### Brand
+### shop.Brand
  * BrandName
- * Item
+ * shop.itemlists.shop.itemlists
  

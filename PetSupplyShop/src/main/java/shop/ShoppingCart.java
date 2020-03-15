@@ -1,8 +1,9 @@
+package shop;
+
 import java.util.HashMap;
 import java.util.Map;
 
 public class ShoppingCart {
-
 
     private HashMap<Item,Integer> items;
 
@@ -11,7 +12,7 @@ public class ShoppingCart {
     }
 
     public boolean add(Item item, int amount){
-        if(items.containsKey(item)){
+        if(items.containsKey(item) && amount > 0){
             items.put(item , items.get(item) + amount);
             return true;
         }else if(!items.containsKey(item) && amount > 0){
@@ -30,8 +31,18 @@ public class ShoppingCart {
         }
     }
 
+    public boolean containsItem(Item item){
+        return items.containsKey(item);
+    }
+
     public boolean changeItemQuantity(Item item , int newAmount){
         if (items.containsKey(item)) {
+            if(newAmount==0) {
+                items.remove(item);
+                return true;
+            }else if (newAmount<0){
+                return false;
+            }
             items.put(item, newAmount);
             return true;
         } else {
@@ -40,7 +51,7 @@ public class ShoppingCart {
     }
 
     public Integer getItemAmount(Item item){
-        return items.get(item);
+        return items.getOrDefault(item, 0);
     }
 
     public Integer getNumOfItems(){
@@ -61,9 +72,12 @@ public class ShoppingCart {
         return sum;
     }
 
-    public HashMap<Item , Integer> getItems(){
-        return this.items;
+    public void clearCart(){
+        items.clear();
     }
 
+    public HashMap<Item, Integer> getItems(){
+        return this.items;
+    }
 
 }

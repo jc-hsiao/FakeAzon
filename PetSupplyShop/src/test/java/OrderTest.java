@@ -1,5 +1,8 @@
 import org.junit.Assert;
 import org.junit.Test;
+import shop.Item;
+import shop.Order;
+import shop.User;
 
 import java.util.Date;
 
@@ -26,11 +29,11 @@ public class OrderTest {
     }
     @Test
     public void getShoppingCartTest(){
-
+        user.addItemToCart(new Item(),2);
+        user.addItemToCart(new Item(),1);
+        user.addItemToCart(new Item(),5);
         Order order = new Order(user);
-        ShoppingCart expectedCart =  user.getShoppingCart();
-        ShoppingCart actualCart =  order.getShoppingCart();
 
-        Assert.assertEquals(expectedCart , actualCart);
+        Assert.assertEquals(3 , order.getShoppingCart().size());
     }
 }

@@ -1,17 +1,20 @@
+package shop;
+
+import shop.itemlists.WishList;
 import java.util.ArrayList;
 import java.util.List;
 
 public class User {
-    private int id;
+    private Integer id;
     private String firstName;
     private String lastName;
     private ShoppingCart shoppingCart;
     private List<Order> orderHistory;
-    private List<ItemList> wishLists;
+    private List<WishList> wishLists;
 
     public User(){}
 
-    public User(int id, String firstName, String lastName){
+    public User(Integer id, String firstName, String lastName){
         this.id=id;
         this.firstName=firstName;
         this.lastName=lastName;
@@ -20,7 +23,7 @@ public class User {
         wishLists = new ArrayList<>();
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
@@ -58,36 +61,59 @@ public class User {
         return shoppingCart.remove(item);
     }
 
-    public boolean changeQuantity(Item item, int amount){
+    public boolean checkIfCartHas(Item item){return shoppingCart.containsItem(item);}
+
+    public boolean changeQuantityOfItemInCart(Item item, int amount){
         return shoppingCart.changeItemQuantity(item, amount);
     }
 
     public int getItemQuantity(Item item){
-        return shoppingCart.getItemAmount(item);
+        if(shoppingCart.containsItem(item))
+            return shoppingCart.getItemAmount(item);
+        else
+            return 0;
     }
 
     public int getNumOfItemInCart(){
         return shoppingCart.getNumOfItems();
     }
 
-    //==========================Order History==========================
+    public boolean checkOut(){
+        if(shoppingCart.getNumOfItems()==0)
+            return false;
+        Order newOrder = new Order(this);
+        orderHistory.add(newOrder);
+        shoppingCart.clearCart();
+        return true;
+    }
+
+    //==========================shop.Order History==========================
 
     public List<Order> getOrderHistory() {
         return orderHistory;
     }
 
-    public void setOrderHistory(List<Order> orderHistory) {
-        this.orderHistory = orderHistory;
+    public int getNumOfOrderHistory() {
+        return orderHistory.size();
     }
+
+    //public void setOrderHistory(List<Order> orderHistory) {
+    //    this.orderHistory = orderHistory;
+    //}
 
     //==========================Wish Lists==========================
 
-    public List<ItemList> getWishLists() {
+    public List<WishList> getWishLists() {
         return wishLists;
     }
 
-    public void setWishLists(List<ItemList> wishLists) {
-        this.wishLists = wishLists;
+    //public void setWishLists(List<WishList> wishLists) {
+        //this.wishLists = wishLists;
+    //}
+
+    public void createWishList(int listId, String wishListName){
+        WishList newWishList = new WishList(listId, wishListName);
+        wishLists.add(newWishList);
     }
 
     public void renameWishList(int listId, String newName){
@@ -96,9 +122,12 @@ public class User {
             l.setListName(newName); });
     }
 
-    public void createWishList(int listId, String wishListName){
-        ItemList newWishList = new ItemList(listId, wishListName);
-        wishLists.add(newWishList);
+    public WishList findWishList(int listId){
+        for (WishList l :wishLists) {
+            if(l.getId()==listId)
+                return l;
+        }
+        return null;
     }
 
     public void removeWishList(int listId){
@@ -106,7 +135,7 @@ public class User {
     }
 
     public boolean addItemToWishList(Item item, int listId){
-        for (ItemList l:wishLists) {
+        for (WishList l:wishLists) {
             if(l.getId()==listId) {
                 l.addItem(item);
                 return true;
@@ -116,7 +145,7 @@ public class User {
     }
 
     public boolean removeItemFromWishList(Item item, int listId){
-        for (ItemList l:wishLists) {
+        for (WishList l:wishLists) {
             if(l.getId()==listId && l.containItem(item.getItemID())) {
                 l.addItem(item);
                 return true;
@@ -125,7 +154,7 @@ public class User {
         return false;
     }
 
-    public void clearItemFromList(int listId){
+    public void clearItemInList(int listId){
         wishLists.forEach( l -> {
             if(l.getId()==listId)
                 l.clearItems();
