@@ -14,9 +14,10 @@ public class ApiConnectionTest {
 
     @Test
     public void testFetchApiQuery(){
-        String search = "headphones";
+        String search = "mouse";
         String resultOfCall = ApiConnection.fetchApiQuery(ApiConnection.createApiQuery(search));
         System.out.println(resultOfCall);
     }
+
 
 }
