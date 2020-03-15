@@ -9,13 +9,15 @@ Users will be able to enter online store and browse a variety of items and add t
 * Items shall provide information on the following:
   * Price
   * Product Description 
-  * Price
   * Photo 
 * Upon signing back in, the online store shall persist data on items that were previously added into the cart.
 
 
 ## Classes
 
+### Abstract ItemList
+ * Set<Item> 
+ 
 ### User Class 
  * Shopping Cart
  * Name
