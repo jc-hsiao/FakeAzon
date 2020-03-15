@@ -135,7 +135,7 @@ public class _MainApp {
                 return  false;
             }else{
                 //                 "Select a product to add to your cart      : "
-                System.out.println("Sorry Invalid Input  - Enter Y or N       : ");
+                System.out.print("Sorry Invalid Input  - Enter Y or N       : ");
                 yORn = getStringInput();
             }
         }
@@ -162,6 +162,7 @@ public class _MainApp {
         }
         return validInput;
     }
+    // ****************************************************************************** PRINTING USERS CART **************
     public void  printUsersCart(){
 
         System.out.println("\n" + "----------------------------------------------" + "\n" +
@@ -193,9 +194,11 @@ public class _MainApp {
 
             System.out.println("\n");
             mainApp.displayItems();
+
             System.out.print("\n" + "Select a product to add to your cart      : ");
             Integer choice = mainApp.getNumberInput();
             choice = mainApp.checkIfValid(choice);
+
             System.out.print("Enter amount to add                       : ");
             Integer amount = mainApp.getNumberInput();
 
@@ -207,12 +210,36 @@ public class _MainApp {
             String yesOrNo = mainApp.getStringInput();
 
             boolean keepShopping = mainApp.validateContinue(yesOrNo);
-
             if(keepShopping){
                 stayInStore = true;
             }else{
                 stayInStore = false;
+
+
+                System.out.println("\n" + "            BEFORE CHECKING OUT             ");
+
+                System.out.println("Would you like to remove Items  -  Y or N : ");
+                String removeYorN = mainApp.getStringInput();
+                boolean removeItems = mainApp.validateContinue(removeYorN);
+
+                if(removeItems){
+                    //               "Would you like to keep shopping -  Y or N : "
+                    System.out.print("Select item to remove from your cart      : ");
+                    Integer removeChoice = mainApp.getNumberInput();
+                    removeChoice = mainApp.checkIfValid(removeChoice);
+
+                    System.out.print("Enter amount to remove                    : ");
+                    Integer amountToRemove = mainApp.getNumberInput();
+
+                    if(mainApp.user.checkIfCartHas(mainApp.getItmById(removeChoice))){
+                        mainApp.user.changeQuantityOfItemInCart(mainApp.getItmById(removeChoice) , amountToRemove);
+                        mainApp.printUsersCart();
+                    }
+
+                }
             }
+
+
         }
 
         System.out.println("\n" + "Thank you");
