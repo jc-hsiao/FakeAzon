@@ -1,7 +1,7 @@
+import shop.Item;
 import org.junit.Test;
-
-import java.util.List;
-
+import shop.Brand;
+import shop.itemlists.ProductList;
 import static org.junit.Assert.*;
 import static org.junit.Assert.assertEquals;
 
@@ -61,12 +61,19 @@ public class BrandTest {
         // Given
         Brand b = new Brand(1, "Petco");
         Item item = new Item(2);
-        b.addItem(item);
-        // When
-       b.removeByID(2);
-       // Then
-       assertEquals(0, b.getSize());
-       assertNull(b.getItem(2));
+        b.addItem(item);// When
+        boolean remove = b.removeItemByID(2);
+        // Then
+        assertEquals(0, b.getSize());
+        assertNull(b.getItem(2));
+        assertTrue(remove);
+    }
+
+    @Test
+    public void removeItemByIDFailTest(){
+        // Given
+        Brand b = new Brand(1, "Petco");
+        assertFalse(b.removeItemByID(2));
     }
 
     @Test
@@ -159,9 +166,9 @@ public class BrandTest {
         b.addItem(item);
         b.addItem(item1);
         b.addItem(item2);
-        List<Item> brandList= b.getBrandList();
+        ProductList brandList= b.getBrandList();
         // Then
-        assertEquals(brandList.size(), 3);
+        assertEquals(brandList.getListSize(), 3);
     }
 
 }

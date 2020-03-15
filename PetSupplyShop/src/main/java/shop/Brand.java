@@ -1,49 +1,47 @@
-import java.util.ArrayList;
-import java.util.List;
+package shop;
+import shop.itemlists.ProductList;
 
 public class Brand {
 
     private String brandName;
     private int id;
-    private List<Item> brandList;
+    private ProductList listOfProduct;
 
     public Brand(){};
 
     public Brand(int id, String brandName) {
         this.id = id;
         this.brandName = brandName;
-        brandList = new ArrayList<>();
+        this.listOfProduct = new ProductList();
     }
 
     public void addItem(Item item){
-        brandList.add(item);
+        listOfProduct.addItem(item);
     }
 
     public Item getItem(int itemID){
-        for(Item i : brandList){
-            if(i.getItemID() == itemID){
-                return i;
-            }
-        }
-        return null;
+        return listOfProduct.getItem(itemID);
     }
 
-    public void removeByID(int itemID){
-        Item item = getItem(itemID);
-        brandList.remove(item);
+    public boolean removeItemByID(int itemID){
+        if(listOfProduct.containItem(itemID)) {
+            listOfProduct.removeItem(itemID);
+            return true;
+        }else{
+            return false;
+        }
     }
 
     public boolean containsItem(int itemID){
-        Item item = getItem(itemID);
-        return brandList.contains(item);
+        return listOfProduct.containItem(itemID);
     }
 
     public void clearBrandList(){
-        brandList.clear();
+        listOfProduct.clearItems();
     }
 
     public int getSize(){
-        return brandList.size();
+        return listOfProduct.getListSize();
     }
 
     public String getBrandName() {
@@ -62,7 +60,7 @@ public class Brand {
         this.id = id;
     }
 
-    public List<Item> getBrandList() {
-        return this.brandList;
+    public ProductList getBrandList() {
+        return listOfProduct;
     }
 }

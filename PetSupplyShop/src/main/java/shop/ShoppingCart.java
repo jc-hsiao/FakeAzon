@@ -1,8 +1,9 @@
+package shop;
+
 import java.util.HashMap;
 import java.util.Map;
 
 public class ShoppingCart {
-
 
     private HashMap<Item,Integer> items;
 
@@ -71,9 +72,12 @@ public class ShoppingCart {
         return sum;
     }
 
-    public HashMap<Item , Integer> getItems(){
-        return this.items;
+    public void clearCart(){
+        items.clear();
     }
 
+    public HashMap<Item, Integer> getItems(){
+        return this.items;
+    }
 
 }

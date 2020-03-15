@@ -1,4 +1,7 @@
 import static org.junit.Assert.*;
+
+import shop.Brand;
+import shop.Item;
 import org.junit.Test;
 
 public class ItemTest {
@@ -76,15 +79,14 @@ public class ItemTest {
     public void setBrand(){
         // Given
         Item item = new Item(1);
-        String expected = "Newmans Own Organics Dog Food";
+        String brandName = "Newmans Own Organics Dog Food";
+        Brand expected = new Brand(100,brandName);
 
         // When
-
-        //item.setBrand("Newmans Own Organics Dog Food");
-        //String actual = item.getBrand();
+        item.setBrand(expected);
 
         // Then
-        //assertEquals(expected, actual);
+        assertEquals(expected, item.getBrand());
     }
 
 
