@@ -1,10 +1,19 @@
-package shop;
+package shop.API;
 
-
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.core.util.DefaultPrettyPrinter;
+import com.fasterxml.jackson.databind.ObjectWriter;
 import kong.unirest.HttpResponse;
 import kong.unirest.Unirest;
 
+import java.io.File;
+import java.io.IOException;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+
 public class ApiConnection {
+
 
 
     public static String createApiQuery(String search){
@@ -25,22 +34,20 @@ public class ApiConnection {
         return response.getBody();
     }
 
+//    public static void main(String[] args) throws IOException {
+//        System.out.println(jsonLoadData("headphones"));
+//    }
 
+    public static String jsonLoadData(String query) throws IOException {
+        ObjectMapper objectMapper = new ObjectMapper();
+        String response = objectMapper.readValue(fetchApiQuery(createApiQuery(query)), new TypeReference<String>() {});
 
-
+        return response;
+    }
 
 }
 
 
-//        "ASIN":"B019U00D7K"
-//        "title":"COWIN E7 Active Noise Cancelling Headphones Bluetooth Headphones with Microphone Deep Bass Wireless Headphones Over Ear, Comfortable Protein Earpads, 30 Hours Playtime for Travel/Work, Black"
-//        "price":"$59.99"
-//        "listPrice":"$59.99"
-//        "imageUrl":"https://images-na.ssl-images-amazon.com/images/I/41xvqzmxLZL._SL160_.jpg"
-//        "detailPageURL":"https://www.amazon.com/Cancelling-Headphones-Bluetooth-Microphone-Comfortable/dp/B019U00D7K"
-//        "rating":"4.5"
-//        "totalReviews":"18325"
-//        "subtitle":"COWIN"
-//        "isPrimeEligible":"1"
-//        }
+
+
 
