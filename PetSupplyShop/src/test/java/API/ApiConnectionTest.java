@@ -7,7 +7,7 @@ import static org.junit.Assert.*;
 public class ApiConnectionTest {
 
     @Test
-    public void testCreateApiQuery(){
+    public void createApiQueryTest(){
         String search = "headphones";
         String actual =  ApiConnection.createApiQuery(search);
         String expected = "https://amazon-price1.p.rapidapi.com/search?keywords=headphones&marketplace=US";
@@ -15,7 +15,7 @@ public class ApiConnectionTest {
     }
 
     @Test
-    public void testFetchApiQuery(){
+    public void fetchApiQueryTest(){
         String search = "mouse";
         String resultOfCall = ApiConnection.fetchApiQuery(ApiConnection.createApiQuery(search));
         System.out.println(resultOfCall);
