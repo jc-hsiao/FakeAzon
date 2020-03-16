@@ -1,5 +1,7 @@
+package API;
+
 import org.junit.Test;
-import shop.ApiConnection;
+import shop.API.ApiConnection;
 import static org.junit.Assert.*;
 
 public class ApiConnectionTest {
@@ -18,6 +20,5 @@ public class ApiConnectionTest {
         String resultOfCall = ApiConnection.fetchApiQuery(ApiConnection.createApiQuery(search));
         System.out.println(resultOfCall);
     }
-
 
 }
