@@ -48,12 +48,12 @@ public class ShoppingCart {
             if(newAmount==0) {
                 items.remove(item);
                 return true;
-            }else if (newAmount<0){
+            }else if (newAmount < 0){
                 return false;
             }else {
                 items.put(item, newAmount);
+                return true;
             }
-            return true;
         } else {
             return false;
         }

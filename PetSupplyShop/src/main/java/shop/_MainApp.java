@@ -42,11 +42,11 @@ public class _MainApp {
     public static ArrayList<Item> getListOfItems(){
         Brand brand1 = new Brand(1, "Pedigree");
         Brand brand2 = new Brand(2, "Kong");
-        Item item1 = new Item(1, "dry dog food", 10.5, "Pet Food", brand1);
-        Item item2 = new Item(2, "wet dog food", 3.5, "Pet Food", brand1);
-        Item item3 = new Item(3, "dry cat food", 10.5, "Pet Food", brand1);
-        Item item4 = new Item(4, "squeaker rattle", 8.59, "Pet Toys", brand2);
-        Item item5 = new Item(5, "jumbler ball", 12.99, "Pet Toys", brand2);
+        Item item1 = new Item(1, "dry dog food    ", 10.5,  "Pet Food", brand1);
+        Item item2 = new Item(2, "wet dog food    ", 3.5,   "Pet Food", brand1);
+        Item item3 = new Item(3, "dry cat food    ", 10.5,  "Pet Food", brand1);
+        Item item4 = new Item(4, "squeaker rattle ", 8.59,  "Pet Toys", brand2);
+        Item item5 = new Item(5, "jumbler ball    ", 12.99, "Pet Toys", brand2);
         ArrayList<Item> itemList = new ArrayList<>();
         itemList.add(item1);
         itemList.add(item2);
@@ -162,6 +162,8 @@ public class _MainApp {
         }
         return validInput;
     }
+
+
     // ****************************************************************************** PRINTING USERS CART **************
     public void  printUsersCart(){
 
@@ -175,10 +177,40 @@ public class _MainApp {
             Double priceTotal = element.getPrice() * quantity;
             System.out.println(name + " [ Quantity ] = [ " + quantity + " ] Total = [ " + priceTotal + " ]");
         }
-        System.out.println("----------------------------------------------");
-        System.out.println("Grand Total =              : " + user.getShoppingCart().getGrandTotal());
-        System.out.print("----------------------------------------------" + "\n");
+        System.out.println("--------------------------------------------------------");
+        System.out.println("Grand Total                                  =  $" + user.getShoppingCart().getGrandTotal());
+        System.out.print("--------------------------------------------------------" + "\n");
     }
+
+    // ***************************************************************************
+
+    public void handleRemovingItem(){
+
+        printUsersCart();
+        System.out.print("Select item to remove from your cart      : ");
+
+        Integer removeChoice = getNumberInput();
+        removeChoice = checkIfValid(removeChoice);
+
+        if(user.checkIfCartHas(getItmById(removeChoice))){
+            System.out.print("Enter amount to remove                    : ");
+            Integer amountToRemove = getNumberInput();
+            boolean removed = user.changeQuantityOfItemInCart(getItmById(removeChoice) , user.getShoppingCart().getItemAmount(getItmById(removeChoice)) - amountToRemove);
+            if(removed){
+
+                System.out.println("\n" + "Item has been removed successfully        : ");
+                printUsersCart();
+            }else{
+                //                 "Would you like to keep shopping -  Y or N : "
+                System.out.println("Sorry invalid amount to remove            : ");
+            }
+
+        }else{
+            System.out.println("ERROR :            Item not found in cart : ");
+        }
+    }
+
+
     // ***********************************************************************************************   MAIN   ********
 
     public static void main(String[] args) {
@@ -209,43 +241,19 @@ public class _MainApp {
             System.out.print("Would you like to keep shopping -  Y or N : ");
             String yesOrNo = mainApp.getStringInput();
 
-            boolean keepShopping = mainApp.validateContinue(yesOrNo);
-            if(keepShopping){
-                stayInStore = true;
-            }else{
-                stayInStore = false;
-
-
+            stayInStore = mainApp.validateContinue(yesOrNo);
+            if(!stayInStore){
                 System.out.println("\n" + "            BEFORE CHECKING OUT             ");
 
-                System.out.println("Would you like to remove Items  -  Y or N : ");
+                System.out.print("Would you like to remove Items  -  Y or N : ");
                 String removeYorN = mainApp.getStringInput();
                 boolean removeItems = mainApp.validateContinue(removeYorN);
 
                 if(removeItems){
-                    //               "Would you like to keep shopping -  Y or N : "
-                    System.out.print("Select item to remove from your cart      : ");
-                    Integer removeChoice = mainApp.getNumberInput();
-                    removeChoice = mainApp.checkIfValid(removeChoice);
-
-                    System.out.print("Enter amount to remove                    : ");
-                    Integer amountToRemove = mainApp.getNumberInput();
-
-                    if(mainApp.user.checkIfCartHas(mainApp.getItmById(removeChoice))){
-                        mainApp.user.changeQuantityOfItemInCart(mainApp.getItmById(removeChoice) , amountToRemove);
-                        mainApp.printUsersCart();
-                    }
-
+                    mainApp.handleRemovingItem();
                 }
             }
-
-
         }
-
         System.out.println("\n" + "Thank you");
-
     }
-
-
-
 }
