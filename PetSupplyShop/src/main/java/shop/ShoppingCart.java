@@ -30,6 +30,14 @@ public class ShoppingCart {
             return false;
         }
     }
+    public boolean removeByAmount(Item item , Integer amount){
+        if(items.containsKey(item) && items.get(item) >= amount){
+            items.put(item , items.get(item) - amount);
+            return true;
+        }else {
+            return false;
+        }
+    }
 
     public boolean containsItem(Item item){
         return items.containsKey(item);
@@ -40,11 +48,12 @@ public class ShoppingCart {
             if(newAmount==0) {
                 items.remove(item);
                 return true;
-            }else if (newAmount<0){
+            }else if (newAmount < 0){
                 return false;
+            }else {
+                items.put(item, newAmount);
+                return true;
             }
-            items.put(item, newAmount);
-            return true;
         } else {
             return false;
         }
