@@ -1,6 +1,6 @@
 # Description #
 
-Users will be able to enter online store and browse a variety of items and add them to their shopping cart. Upon user requests they will be able to checkout and their order will be processed. 
+Users will be able to enter online store and browse a variety of items and add them to their shopping cart. Upon user requests they will be able to checkout and their order will be processed. Users will be able to review their order history and credentials will be persistently saved. Upon logging in if they saved items into their cart then they will remain there until items are removed.  
 
 ## Unique Features
 
@@ -9,12 +9,12 @@ Users will be able to enter online store and browse a variety of items and add t
 * Items shall provide information on the following:
   * Price
   * Product Description 
-  * Price
   * Photo 
 * Upon signing back in, the online store shall persist data on items that were previously added into the cart.
 
 
 ## Classes
+
 
 ### shop.User Class 
  * Shopping Cart
