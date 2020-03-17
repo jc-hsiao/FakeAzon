@@ -7,8 +7,13 @@ import java.util.Scanner;
 
 public class _MainApp {
 
+
+
     User user;
     String name;
+    ArrayList<Item> itemOptions;
+
+
 
     // ************************************************************************************* WELCOME MESSAGE ***********
 
@@ -112,13 +117,13 @@ public class _MainApp {
 
     public Item getItmById(Integer choice){
         Item item = null;
-        for(Item element : getListOfItems()){
+        for(Item element : itemOptions){
 
-            if(choice == element.getItemID()){
+            if(choice.equals(element.getItemID())){
                 return element;
             }
         }
-        return item;
+        return null;
     }
 
     // ************************************************************** CHECK IF USER WOULD LIKE TO KEEP SHOPPING ********
@@ -142,8 +147,8 @@ public class _MainApp {
         return validChoice;
     }
 
-
     // *************************************************************************** Checking vs Items List **************
+
     public Integer checkIfValid(Integer choice){
 
         Integer validInput = null;
@@ -178,11 +183,11 @@ public class _MainApp {
             System.out.println(name + " [ Quantity ] = [ " + quantity + " ] Total = [ " + priceTotal + " ]");
         }
         System.out.println("--------------------------------------------------------");
-        System.out.println("Grand Total                                  =  $" + user.getShoppingCart().getGrandTotal());
+        System.out.println("Grand Total                                  =  $" +user.getShoppingCart().getGrandTotal());
         System.out.print("--------------------------------------------------------" + "\n");
     }
 
-    // ***************************************************************************
+    // *************************************************************************** HANDLE REMOVING ITEMSE **************
 
     public void handleRemovingItem(){
 
@@ -214,8 +219,10 @@ public class _MainApp {
     // ***********************************************************************************************   MAIN   ********
 
     public static void main(String[] args) {
-
         _MainApp mainApp = new _MainApp();
+
+        mainApp.itemOptions = getListOfItems();
+
         mainApp.printWelcome();
         mainApp.getUserCredentials();
 
@@ -242,18 +249,38 @@ public class _MainApp {
             String yesOrNo = mainApp.getStringInput();
 
             stayInStore = mainApp.validateContinue(yesOrNo);
-            if(!stayInStore){
-                System.out.println("\n" + "            BEFORE CHECKING OUT             ");
 
-                System.out.print("Would you like to remove Items  -  Y or N : ");
-                String removeYorN = mainApp.getStringInput();
-                boolean removeItems = mainApp.validateContinue(removeYorN);
 
-                if(removeItems){
-                    mainApp.handleRemovingItem();
-                }
-            }
         }
+
+        System.out.println("\n" + "            BEFORE CHECKING OUT             ");
+        System.out.print("Would you like to remove Items  -  Y or N : ");
+        String removeYorN = mainApp.getStringInput();
+
+        boolean readyToRemoveItems = true;
+
+        while (readyToRemoveItems){
+
+            boolean removeItems = mainApp.validateContinue(removeYorN);
+
+            if(removeItems){
+                mainApp.handleRemovingItem();
+                //                 "Would you like to remove Items  -  Y or N : "
+                System.out.print("Remove Additional Items ?       -  Y or N : ");
+                removeYorN = mainApp.getStringInput();
+                boolean removeAgain = mainApp.validateContinue(removeYorN);
+                if(!removeAgain){
+                    readyToRemoveItems = false;
+                    System.out.println("\n" + "   Thank You For Shopping At AnimalZon   " + "\n");
+                }
+            }else{
+                System.out.println("\n" + "   Thank You For Shopping At AnimalZon   " + "\n");
+                readyToRemoveItems = false;
+
+            }
+
+        }
+
         System.out.println("\n" + "Thank you");
     }
 }
