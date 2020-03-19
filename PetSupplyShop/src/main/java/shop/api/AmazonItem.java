@@ -10,6 +10,9 @@ public class AmazonItem {
     private String detailPageUrl;
     private double rating;
     private int totalReviews;
+
+
+
     private String subtitle;
     private boolean isPrimeEligible;
 

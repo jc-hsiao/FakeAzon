@@ -38,6 +38,7 @@ public class SQLConnection {
     }
 
     /*
+
     *****  TESTING PURPOSES  *******
     public static void main(String[] args) {
         getConnection();
@@ -49,6 +50,9 @@ public class SQLConnection {
             e.printStackTrace();
         }
     }
+
+
+  
      */
 
 
