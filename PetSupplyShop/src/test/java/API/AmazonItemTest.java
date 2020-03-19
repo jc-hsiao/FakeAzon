@@ -4,7 +4,7 @@ import static org.junit.Assert.*;
 
 import org.junit.Before;
 import org.junit.Test;
-import shop.api.AmazonItem;
+import shop.API.AmazonItem;
 
 public class AmazonItemTest {
 

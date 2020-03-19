@@ -1,4 +1,4 @@
-package shop.api;
+package shop.API;
 
 public class AmazonItem {
 

@@ -1,7 +1,7 @@
 package API;
 
 import org.junit.Test;
-import shop.api.ApiConnection;
+import shop.API.ApiConnection;
 import static org.junit.Assert.*;
 
 public class ApiConnectionTest {
