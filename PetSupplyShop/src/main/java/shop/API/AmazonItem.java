@@ -4,12 +4,13 @@ public class AmazonItem {
 
     private String ASIN;
     private String title;
-    private double price;
-    private double listPrice;
+    private String price;
+    private String listPrice;
     private String imageUrl;
     private String detailPageUrl;
     private double rating;
     private int totalReviews;
+    private String subtitle;
     private boolean isPrimeEligible;
 
     public AmazonItem() {}
@@ -30,19 +31,19 @@ public class AmazonItem {
         this.title = title;
     }
 
-    public double getPrice() {
+    public String getPrice() {
         return price;
     }
 
-    public void setPrice(double price) {
+    public void setPrice(String price) {
         this.price = price;
     }
 
-    public double getListPrice() {
+    public String getListPrice() {
         return listPrice;
     }
 
-    public void setListPrice(double listPrice) {
+    public void setListPrice(String listPrice) {
         this.listPrice = listPrice;
     }
 
@@ -84,6 +85,14 @@ public class AmazonItem {
 
     public void setPrimeEligible(boolean primeEligible) {
         isPrimeEligible = primeEligible;
+    }
+
+    public String getSubtitle() {
+        return subtitle;
+    }
+
+    public void setSubtitle(String subtitle) {
+        this.subtitle = subtitle;
     }
 
 }

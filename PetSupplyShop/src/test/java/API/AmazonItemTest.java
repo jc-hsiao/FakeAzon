@@ -29,14 +29,14 @@ public class AmazonItemTest {
 
     @Test
     public void setPriceTest(){
-        item.setPrice(10.99);
-        assertEquals(10.99, item.getPrice(), .001);
+        item.setPrice("$10.99");
+        assertEquals("$10.99", item.getPrice());
     }
 
     @Test
     public void setListPriceTest(){
-        item.setListPrice(10.99);
-        assertEquals(10.99, item.getListPrice(), .001);
+        item.setListPrice("$10.99");
+        assertEquals("$10.99", item.getListPrice());
     }
 
     @Test
