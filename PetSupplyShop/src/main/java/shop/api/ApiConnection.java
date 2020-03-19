@@ -32,7 +32,7 @@ public class ApiConnection {
 
 
     public static void main(String[] args) throws IOException {
-        ArrayList<AmazonItem> a =jsonLoadData("headphones");
+        ArrayList<shop.api.AmazonItem> a =jsonLoadData("headphones");
         for (AmazonItem item :a) {
             System.out.println(item.getTitle());
             System.out.println(item.getPrice());
@@ -40,7 +40,7 @@ public class ApiConnection {
 
     }
 
-    public static ArrayList<AmazonItem> jsonLoadData(String query) throws IOException {
+    public static ArrayList<shop.api.AmazonItem> jsonLoadData(String query) throws IOException {
         ObjectMapper objectMapper = new ObjectMapper();
         objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
         return objectMapper.readValue(fetchApiQuery(createApiQuery(query)), new TypeReference<ArrayList<AmazonItem>>() {});
