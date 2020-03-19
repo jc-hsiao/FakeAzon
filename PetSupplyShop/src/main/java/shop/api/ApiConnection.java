@@ -1,19 +1,15 @@
-package shop.API;
+package shop.api;
 
 import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.core.util.DefaultPrettyPrinter;
-import com.fasterxml.jackson.databind.ObjectWriter;
 import kong.unirest.HttpResponse;
 import kong.unirest.Unirest;
 
-import java.io.File;
 import java.io.IOException;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 
 public class ApiConnection {
-
 
 
     public static String createApiQuery(String search){
