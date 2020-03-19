@@ -7,9 +7,9 @@ import java.util.HashMap;
 
 public class ShoppingCartTest {
 
-    Item item1 = new Item(1);
-    Item item2 = new Item(2);
-    Item item3 = new Item(3);
+    Item item1 = new Item("A1");
+    Item item2 = new Item("A2");
+    Item item3 = new Item("A3");
 
 
 
@@ -71,7 +71,7 @@ public class ShoppingCartTest {
         ShoppingCart cart = new ShoppingCart();
         boolean addItem1 = cart.add(item1 ,1);
 
-        Item notInCart = new Item(7);
+        Item notInCart = new Item("A7");
         boolean notInCartResult = cart.remove(notInCart);
 
         Integer expectedSize1 = 1;
@@ -102,7 +102,7 @@ public class ShoppingCartTest {
         Assert.assertEquals(expectedAmount1 , cart.getItemAmount(item1));
 
 
-        Item notInCart = new Item(7);
+        Item notInCart = new Item("A7");
         boolean replaceBool = cart.changeItemQuantity(notInCart , 10);
 
         Integer expectedAmount2 = 1;
@@ -128,7 +128,7 @@ public class ShoppingCartTest {
 
         ShoppingCart cart = new ShoppingCart();
 
-        Item nonexixtent =  new Item(7);
+        Item nonexixtent =  new Item("A7");
         boolean increase20 = cart.changeItemQuantity(nonexixtent , 20);
 
         Double expectedValue = 0.00;//Pre-Items Value

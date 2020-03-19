@@ -11,7 +11,7 @@ public abstract class ItemList {
 
     public ItemList(){}
 
-    public Item getItem(int itemId){
+    public Item getItem(String itemId){
         for (Item i:items) {
             if(i.getItemID()==itemId)
                 return i;
@@ -23,12 +23,12 @@ public abstract class ItemList {
         items.add(item);
     }
 
-    public void removeItem(int itemId){
+    public void removeItem(String itemId){
         Item item = getItem(itemId);
         items.remove(item);
     }
 
-    public boolean containItem(int itemId){
+    public boolean containItem(String itemId){
         Item item = getItem(itemId);
         return items.contains(item);
     }

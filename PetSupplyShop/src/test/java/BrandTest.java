@@ -30,10 +30,10 @@ public class BrandTest {
         // Given
         Brand b = new Brand(1, "Petco");
         Item item = new Item();
-        item.setItemID(2);
+        item.setItemID("A1");
         b.addItem(item);
         // Then
-        assertEquals(item, b.getItem(2));
+        assertEquals(item, b.getItem("A1"));
     }
 
     @Test
@@ -41,31 +41,31 @@ public class BrandTest {
         // Given
         Brand b = new Brand(1, "Petco");
         // Then
-        assertNull(b.getItem(3));
+        assertNull(b.getItem("A1"));
     }
 
     @Test
     public void addItemTest(){
         // Given
         Brand b = new Brand(1, "Petco");
-        Item item = new Item(2);
+        Item item = new Item("A1");
         // When
         b.addItem(item);
         // Then
         assertEquals(1, b.getSize());
-        assertEquals(item, b.getItem(2));
+        assertEquals(item, b.getItem("A1"));
     }
 
     @Test
     public void removeItemByIDTest(){
         // Given
         Brand b = new Brand(1, "Petco");
-        Item item = new Item(2);
+        Item item = new Item("A1");
         b.addItem(item);// When
-        boolean remove = b.removeItemByID(2);
+        boolean remove = b.removeItemByID("A1");
         // Then
         assertEquals(0, b.getSize());
-        assertNull(b.getItem(2));
+        assertNull(b.getItem("A1"));
         assertTrue(remove);
     }
 
@@ -73,26 +73,26 @@ public class BrandTest {
     public void removeItemByIDFailTest(){
         // Given
         Brand b = new Brand(1, "Petco");
-        assertFalse(b.removeItemByID(2));
+        assertFalse(b.removeItemByID("A1"));
     }
 
     @Test
     public void containsItemTest(){
         // Given
         Brand b = new Brand(1, "Petco");
-        Item item = new Item(2);
+        Item item = new Item("A1");
         b.addItem(item);
         // Then
-        assertTrue(b.containsItem(2));
+        assertTrue(b.containsItem("A1"));
     }
 
     @Test
     public void clearBrandListTest(){
         // Given
         Brand b = new Brand(1, "Petco");
-        Item item = new Item(2);
-        Item item1 = new Item(3);
-        Item item2 = new Item(4);
+        Item item = new Item("A1");
+        Item item1 = new Item("A2");
+        Item item2 = new Item("A3");
         b.addItem(item);
         b.addItem(item1);
         b.addItem(item2);
@@ -100,16 +100,16 @@ public class BrandTest {
         b.clearBrandList();
         // Then
         assertEquals(0, b.getSize());
-        assertNull(b.getItem(2));
+        assertNull(b.getItem("A2"));
     }
 
     @Test
     public void sizeTest(){
         // Given
         Brand b = new Brand(1, "Petco");
-        Item item = new Item(2);
-        Item item1 = new Item(3);
-        Item item2 = new Item(4);
+        Item item = new Item("A1");
+        Item item1 = new Item("A2");
+        Item item2 = new Item("A3");
         // When
         b.addItem(item);
         b.addItem(item1);
@@ -159,9 +159,9 @@ public class BrandTest {
     public void getBrandListTest(){
         // Given
         Brand b = new Brand(1, "Petco");
-        Item item = new Item(2);
-        Item item1 = new Item(3);
-        Item item2 = new Item(4);
+        Item item = new Item("A1");
+        Item item1 = new Item("A2");
+        Item item2 = new Item("A3");
         // When
         b.addItem(item);
         b.addItem(item1);
