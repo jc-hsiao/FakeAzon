@@ -25,7 +25,7 @@ public class OrderTest {
         Date expectedDate = new Date();
         Date actualDate =  order.getDate();
 
-        Assert.assertEquals(expectedDate , actualDate);
+        Assert.assertTrue(expectedDate.equals(actualDate));
     }
     @Test
     public void getShoppingCartTest(){

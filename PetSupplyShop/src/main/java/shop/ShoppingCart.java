@@ -30,14 +30,6 @@ public class ShoppingCart {
             return false;
         }
     }
-    public boolean removeByAmount(Item item , Integer amount){
-        if(items.containsKey(item) && items.get(item) >= amount){
-            items.put(item , items.get(item) - amount);
-            return true;
-        }else {
-            return false;
-        }
-    }
 
     public boolean containsItem(Item item){
         return items.containsKey(item);
