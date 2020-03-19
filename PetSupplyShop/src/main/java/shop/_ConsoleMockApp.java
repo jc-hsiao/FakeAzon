@@ -1,11 +1,10 @@
 package shop;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-public class _MainApp {
+public class _ConsoleMockApp {
 
 
 
@@ -47,11 +46,11 @@ public class _MainApp {
     public static ArrayList<Item> getListOfItems(){
         Brand brand1 = new Brand(1, "Pedigree");
         Brand brand2 = new Brand(2, "Kong");
-        Item item1 = new Item(1, "dry dog food    ", 10.5,  "Pet Food", brand1);
-        Item item2 = new Item(2, "wet dog food    ", 3.5,   "Pet Food", brand1);
-        Item item3 = new Item(3, "dry cat food    ", 10.5,  "Pet Food", brand1);
-        Item item4 = new Item(4, "squeaker rattle ", 8.59,  "Pet Toys", brand2);
-        Item item5 = new Item(5, "jumbler ball    ", 12.99, "Pet Toys", brand2);
+        Item item1 = new Item("A1", "dry dog food    ", 10.5,  "Pet Food", brand1);
+        Item item2 = new Item("A2", "wet dog food    ", 3.5,   "Pet Food", brand1);
+        Item item3 = new Item("A3", "dry cat food    ", 10.5,  "Pet Food", brand1);
+        Item item4 = new Item("A4", "squeaker rattle ", 8.59,  "Pet Toys", brand2);
+        Item item5 = new Item("A5", "jumbler ball    ", 12.99, "Pet Toys", brand2);
         ArrayList<Item> itemList = new ArrayList<>();
         itemList.add(item1);
         itemList.add(item2);
@@ -101,11 +100,11 @@ public class _MainApp {
 
     // ******************************************************************* COMPARING EACH ITEM ID VS USER INPUT ********
 
-    public boolean validateUserChoice(Integer choice){
+    public boolean validateUserChoice(String choice){
 
         for(Item element : getListOfItems()){
 
-            if(choice == element.getItemID()){
+            if(choice.equals(element.getItemID())){
                 return true;
             }
 
@@ -115,8 +114,8 @@ public class _MainApp {
 
     // ***************************************************************************************** GET ITEM BY ID ********
 
-    public Item getItmById(Integer choice){
-        Item item = null;
+    public Item getItmById(String choice){
+        Item item;
         for(Item element : itemOptions){
 
             if(choice.equals(element.getItemID())){
@@ -149,9 +148,9 @@ public class _MainApp {
 
     // *************************************************************************** Checking vs Items List **************
 
-    public Integer checkIfValid(Integer choice){
+    public String checkIfValid(String choice){
 
-        Integer validInput = null;
+        String validInput = null;
 
         boolean validChoice = false;
         while (validChoice == false){
@@ -161,7 +160,7 @@ public class _MainApp {
             }else{
 
                 System.out.print("Sorry : Invalid input - Try again         : ");
-                choice = getNumberInput();
+                choice = getStringInput();
             }
 
         }
@@ -194,7 +193,7 @@ public class _MainApp {
         printUsersCart();
         System.out.print("Select item to remove from your cart      : ");
 
-        Integer removeChoice = getNumberInput();
+        String removeChoice = getStringInput();
         removeChoice = checkIfValid(removeChoice);
 
         if(user.checkIfCartHas(getItmById(removeChoice))){
@@ -219,7 +218,7 @@ public class _MainApp {
     // ***********************************************************************************************   MAIN   ********
 
     public static void main(String[] args) {
-        _MainApp mainApp = new _MainApp();
+        _ConsoleMockApp mainApp = new _ConsoleMockApp();
 
         mainApp.itemOptions = getListOfItems();
 
@@ -235,7 +234,7 @@ public class _MainApp {
             mainApp.displayItems();
 
             System.out.print("\n" + "Select a product to add to your cart      : ");
-            Integer choice = mainApp.getNumberInput();
+            String choice = mainApp.getStringInput();
             choice = mainApp.checkIfValid(choice);
 
             System.out.print("Enter amount to add                       : ");

@@ -19,11 +19,11 @@ public class Brand {
         listOfProduct.addItem(item);
     }
 
-    public Item getItem(int itemID){
+    public Item getItem(String itemID){
         return listOfProduct.getItem(itemID);
     }
 
-    public boolean removeItemByID(int itemID){
+    public boolean removeItemByID(String itemID){
         if(listOfProduct.containItem(itemID)) {
             listOfProduct.removeItem(itemID);
             return true;
@@ -32,7 +32,7 @@ public class Brand {
         }
     }
 
-    public boolean containsItem(int itemID){
+    public boolean containsItem(String itemID){
         return listOfProduct.containItem(itemID);
     }
 
