@@ -7,9 +7,9 @@ import shop.User;
 
 public class UserTest {
 
-    Item dogFood = new Item(3,"Organic dog food",20.0,"Dog",new Brand());
-    Item birdToy = new Item(4,"Natural chewing log",4.0,"Bird",new Brand());
-    Item catTreat = new Item(5,"Healthy treat for cat",15.0,"Cat",new Brand());
+    Item dogFood = new Item("B3","Organic dog food",20.0,"Dog",new Brand());
+    Item birdToy = new Item("B4","Natural chewing log",4.0,"Bird",new Brand());
+    Item catTreat = new Item("B5","Healthy treat for cat",15.0,"Cat",new Brand());
 
 
     @Test
@@ -206,8 +206,8 @@ public class UserTest {
         boolean add2 = u.addItemToWishList(catTreat,10);
         Assert.assertTrue(add1);
         Assert.assertTrue(add2);
-        Assert.assertEquals(birdToy,u.findWishList(10).getItem(4));
-        Assert.assertEquals(catTreat,u.findWishList(10).getItem(5));
+        Assert.assertEquals(birdToy,u.findWishList(10).getItem("B4"));
+        Assert.assertEquals(catTreat,u.findWishList(10).getItem("B5"));
     }
     @Test
     public void addItemToListFailTest(){
@@ -227,7 +227,7 @@ public class UserTest {
         Assert.assertTrue(add1);
         Assert.assertTrue(add2);
         Assert.assertTrue(remove);
-        Assert.assertEquals(dogFood,u.findWishList(10).getItem(3));
+        Assert.assertEquals(dogFood,u.findWishList(10).getItem("B3"));
     }
 
 
@@ -239,7 +239,7 @@ public class UserTest {
         boolean remove = u.removeItemFromWishList(catTreat,10);
         Assert.assertTrue(add);
         Assert.assertFalse(remove);
-        Assert.assertEquals(birdToy,u.findWishList(10).getItem(4));
+        Assert.assertEquals(birdToy,u.findWishList(10).getItem("B4"));
     }
 
     @Test
