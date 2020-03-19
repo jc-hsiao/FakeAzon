@@ -1,13 +1,10 @@
-package shop.API;
+package shop.api;
 
 import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.core.util.DefaultPrettyPrinter;
 import com.fasterxml.jackson.databind.DeserializationFeature;
-import com.fasterxml.jackson.databind.ObjectWriter;
 import kong.unirest.HttpResponse;
 import kong.unirest.Unirest;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 

@@ -1,6 +1,6 @@
 package shop;
 
-import shop.API.AmazonItem;
+import shop.api.AmazonItem;
 
 public class Item {
 
