@@ -9,8 +9,8 @@ public class ApiConnectionTest {
     @Test
     public void createApiQueryTest(){
         String search = "headphones";
-        String actual =  ApiConnection.createApiQuery(search);
         String expected = "https://amazon-price1.p.rapidapi.com/search?keywords=headphones&marketplace=US";
+        String actual =  ApiConnection.createApiQuery(search);
         assertEquals(expected,actual);
     }
 
