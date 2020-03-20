@@ -8,7 +8,7 @@ import java.util.Date;
 
 public class OrderTest {
 
-    User user = new User(1234,"John","Doe");
+    User user = new User("johnDoe","John","Doe", "password", "johnDoe@gmail.com");
 
     @Test
     public void getUSerTest(){

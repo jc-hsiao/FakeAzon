@@ -34,10 +34,10 @@ public class _ConsoleMockApp {
         System.out.print("Enter your Last Name      : ");
         String lastName = getStringInput();
 
-        System.out.print("Enter your user ID        : ");
-        Integer ID = getNumberInput();
+        System.out.print("Enter your user UserName        : ");
+        String username = getStringInput();
 
-        user = new User(ID , firstName , lastName);
+        user = new User(username , firstName , lastName, "fishsticks", username + "@gmail.com");
 
         System.out.println("\n" + "Thank You - " + firstName + " " + lastName + "\n");
     }

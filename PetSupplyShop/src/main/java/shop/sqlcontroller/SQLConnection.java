@@ -40,24 +40,18 @@ public class SQLConnection {
     /*
 
     *****  TESTING PURPOSES  *******
-
     public static void main(String[] args) {
-
         getConnection();
         try{
-
             Statement statement = connection.createStatement();
             ResultSet rs = statement.executeQuery("select * from test");
             sout(rs);
-
         }catch(SQLException e){
-
             e.printStackTrace();
         }
-
-
-
     }
+
+
 
      */
 

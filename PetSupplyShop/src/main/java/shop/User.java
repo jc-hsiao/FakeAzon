@@ -5,27 +5,29 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class User {
-    private Integer id;
+    private String userName;
     private String firstName;
     private String lastName;
+    private String password;
+    private String email;
+
     private ShoppingCart shoppingCart;
     private List<Order> orderHistory;
     private List<WishList> wishLists;
 
     public User(){}
 
-    public User(Integer id, String firstName, String lastName){
-        this.id=id;
+    public User(String username, String firstName, String lastName, String password, String email){
         this.firstName=firstName;
         this.lastName=lastName;
+        this.userName = username;
+        this.password = password;
+        this.email = email;
         shoppingCart = new ShoppingCart();
         orderHistory = new ArrayList<>();
         wishLists = new ArrayList<>();
     }
 
-    public Integer getId() {
-        return id;
-    }
 
     public String getFirstName() {
         return firstName;
@@ -41,6 +43,30 @@ public class User {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
+    }
+
+    public String getUsername() {
+        return userName;
+    }
+
+    public void setUsername(String username) {
+        this.userName = username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     //==========================Shopping Cart==========================
