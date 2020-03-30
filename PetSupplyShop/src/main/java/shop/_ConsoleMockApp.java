@@ -1,5 +1,9 @@
 package shop;
 
+import shop.models.Brand;
+import shop.models.Item;
+import shop.models.User;
+
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;

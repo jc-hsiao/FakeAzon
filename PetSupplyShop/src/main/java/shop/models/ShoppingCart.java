@@ -1,4 +1,6 @@
-package shop;
+package shop.models;
+
+import shop.models.Item;
 
 import java.util.HashMap;
 import java.util.Map;

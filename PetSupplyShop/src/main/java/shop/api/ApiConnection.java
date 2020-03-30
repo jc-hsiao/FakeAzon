@@ -46,8 +46,6 @@ public class ApiConnection {
         return objectMapper.readValue(fetchApiQuery(createApiQuery(query)), new TypeReference<ArrayList<AmazonItem>>() {});
     }
 
-
-
 }
 
 

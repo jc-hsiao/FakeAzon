@@ -1,8 +1,8 @@
 import org.junit.Assert;
 import org.junit.Test;
-import shop.Item;
-import shop.Order;
-import shop.User;
+import shop.models.Item;
+import shop.models.Order;
+import shop.models.User;
 
 import java.util.Date;
 
