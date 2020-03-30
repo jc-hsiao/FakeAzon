@@ -3,10 +3,8 @@ package shop.itemlists;
 import org.junit.Assert;
 import org.junit.Test;
 
-import shop.Item;
-import shop.Brand;
-import shop.itemlists.ItemList;
-import shop.itemlists.WishList;
+import shop.models.Item;
+import shop.models.Brand;
 
 public class ItemListTest {
 

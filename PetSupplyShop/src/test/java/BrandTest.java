@@ -1,6 +1,6 @@
-import shop.Item;
+import shop.models.Item;
 import org.junit.Test;
-import shop.Brand;
+import shop.models.Brand;
 import shop.itemlists.ProductList;
 import static org.junit.Assert.*;
 import static org.junit.Assert.assertEquals;

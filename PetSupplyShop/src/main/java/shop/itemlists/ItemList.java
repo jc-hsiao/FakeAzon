@@ -1,6 +1,6 @@
 package shop.itemlists;
 
-import shop.Item;
+import shop.models.Item;
 
 import java.util.HashSet;
 import java.util.Set;
