@@ -1,0 +1,7 @@
+#prod profile
+spring:
+  profiles: prod
+  datasource:
+    url: jdbc:mysql://fakeazon.cn8iyodgb9pu.us-east-1.rds.amazonaws.com?serverTimezone=UTC
+    username: justZipCode
+    password: timeToCode?

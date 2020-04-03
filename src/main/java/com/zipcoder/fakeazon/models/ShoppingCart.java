@@ -13,7 +13,7 @@ public class ShoppingCart{
     private User owner;
 
     @ElementCollection
-    @CollectionTable(name = "item_to_shopping_cart",
+    @CollectionTable(name = "shopping_cart_items",
             joinColumns = {@JoinColumn(name = "item_id", referencedColumnName = "id")})
     @MapKeyColumn(name = "item_id")
     @Column
