@@ -1,7 +1,6 @@
 package shop.api;
 
 import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.DeserializationFeature;
 import kong.unirest.HttpResponse;
 import kong.unirest.Unirest;
 
@@ -13,12 +12,10 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class ApiConnection {
 
-
-
-    public static String createApiQuery(String search){
+    public static String createApiQuery(String search, int num){
         return "https://amazon-price1.p.rapidapi.com/search?keywords=" +
                 search +
-                "&marketplace=US";
+                "&marketplace=US&page=" + num;
     }
 
     public static String fetchApiQuery(String query){
@@ -30,20 +27,24 @@ public class ApiConnection {
         return response.getBody();
     }
 
-
     public static void main(String[] args) throws IOException {
-        ArrayList<shop.api.AmazonItem> a =jsonLoadData("headphones");
+        ArrayList<AmazonItem> a = jsonLoadData("headphones");
         for (AmazonItem item :a) {
+            System.out.println(item.getASIN());
             System.out.println(item.getTitle());
             System.out.println(item.getPrice());
+            System.out.println(item.getSubtitle());
+            System.out.println("===================");
         }
+    }
+
+    public static void runSearch(String keyword, int numOfPage){
 
     }
 
-    public static ArrayList<shop.api.AmazonItem> jsonLoadData(String query) throws IOException {
+    public static ArrayList<AmazonItem> jsonLoadData(String query) throws IOException {
         ObjectMapper objectMapper = new ObjectMapper();
-        objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-        return objectMapper.readValue(fetchApiQuery(createApiQuery(query)), new TypeReference<ArrayList<AmazonItem>>() {});
+        return objectMapper.readValue(fetchApiQuery(createApiQuery(query,1)), new TypeReference<ArrayList<AmazonItem>>() {});
     }
 
 

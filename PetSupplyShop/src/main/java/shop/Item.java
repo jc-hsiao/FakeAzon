@@ -45,7 +45,7 @@ public class Item {
         rating = amazonItem.getRating();
         reviews = amazonItem.getTotalReviews();
         imageURL = amazonItem.getImageUrl();
-        amazonURL = amazonItem.getDetailPageUrl();
+        amazonURL = amazonItem.getDetailPageURL();
         category = amazonItem.getSubtitle();
 
         if(amazonItem.getPrice().equals(""))

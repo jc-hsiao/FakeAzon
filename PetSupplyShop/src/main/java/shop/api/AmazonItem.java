@@ -2,19 +2,16 @@ package shop.api;
 
 public class AmazonItem {
 
-    private String ASIN;
+    public String ASIN;
     private String title;
     private String price;
     private String listPrice;
     private String imageUrl;
-    private String detailPageUrl;
+    private String detailPageURL;
     private double rating;
     private int totalReviews;
-
-
-
     private String subtitle;
-    private boolean isPrimeEligible;
+    public String isPrimeEligible;
 
     public AmazonItem() {}
 
@@ -58,12 +55,12 @@ public class AmazonItem {
         this.imageUrl = imageUrl;
     }
 
-    public String getDetailPageUrl() {
-        return detailPageUrl;
+    public String getDetailPageURL() {
+        return detailPageURL;
     }
 
-    public void setDetailPageUrl(String detailPageUrl) {
-        this.detailPageUrl = detailPageUrl;
+    public void setDetailPageURL(String detailPageURL) {
+        this.detailPageURL = detailPageURL;
     }
 
     public double getRating() {
@@ -82,11 +79,11 @@ public class AmazonItem {
         this.totalReviews = totalReviews;
     }
 
-    public boolean isPrimeEligible() {
+    public String isPrimeEligible() {
         return isPrimeEligible;
     }
 
-    public void setPrimeEligible(boolean primeEligible) {
+    public void setPrimeEligible(String primeEligible) {
         isPrimeEligible = primeEligible;
     }
 

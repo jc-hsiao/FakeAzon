@@ -49,8 +49,8 @@ public class AmazonItemTest {
     @Test
     public void setDetailPageUrlTest(){
         String expected = "https://www.amazon.com/VicTsing-Wireless-Portable-Receiver-Adjustable/dp/B013WC0P2A";
-        item.setDetailPageUrl(expected);
-        assertEquals(expected, item.getDetailPageUrl());
+        item.setDetailPageURL(expected);
+        assertEquals(expected, item.getDetailPageURL());
     }
 
     @Test
@@ -67,8 +67,8 @@ public class AmazonItemTest {
 
     @Test
     public void setPrimeEligible(){
-        item.setPrimeEligible(true);
-        assertTrue(item.isPrimeEligible());
+        item.setPrimeEligible("true");
+        assertEquals("true",item.isPrimeEligible());
     }
 
 }
