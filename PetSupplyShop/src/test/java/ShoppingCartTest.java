@@ -1,7 +1,7 @@
-import shop.Item;
+import shop.models.Item;
 import org.junit.Assert;
 import org.junit.Test;
-import shop.ShoppingCart;
+import shop.models.ShoppingCart;
 
 import java.util.HashMap;
 

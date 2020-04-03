@@ -1,9 +1,9 @@
-import shop.Item;
+import shop.models.Item;
 import org.junit.Assert;
 import org.junit.Test;
-import shop.Brand;
-import shop.ShoppingCart;
-import shop.User;
+import shop.models.Brand;
+import shop.models.ShoppingCart;
+import shop.models.User;
 
 public class UserTest {
 

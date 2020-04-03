@@ -1,6 +1,7 @@
-package shop;
+package shop.models;
 
 import shop.api.AmazonItem;
+import shop.models.Brand;
 
 public class Item {
 

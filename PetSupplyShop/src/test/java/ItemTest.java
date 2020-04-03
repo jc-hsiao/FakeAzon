@@ -1,7 +1,7 @@
 import static org.junit.Assert.*;
 
-import shop.Brand;
-import shop.Item;
+import shop.models.Brand;
+import shop.models.Item;
 import org.junit.Test;
 
 public class ItemTest {

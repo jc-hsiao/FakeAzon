@@ -1,4 +1,4 @@
-package shop;
+package shop.models;
 import shop.itemlists.ProductList;
 
 public class Brand {
