@@ -1,13 +1,10 @@
 package shop.models;
-
 import shop.itemlists.WishList;
 import shop.models.Item;
 import shop.models.Order;
 import shop.models.ShoppingCart;
-
 import java.util.ArrayList;
 import java.util.List;
-
 
 public class User {
     private String userName;
