@@ -1,4 +1,9 @@
-package shop.repositories;
+package com.zipcoder.fakeazon.repositories;
 
-public interface ShoppingCartRepository {
+import com.zipcoder.fakeazon.models.ShoppingCart;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+@Repository
+public interface ShoppingCartRepository extends JpaRepository<ShoppingCart,Integer> {
 }
