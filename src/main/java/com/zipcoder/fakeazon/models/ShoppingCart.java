@@ -1,6 +1,7 @@
 package com.zipcoder.fakeazon.models;
 
 import javax.persistence.*;
+import java.util.List;
 import java.util.Map;
 
 @Entity
@@ -14,12 +15,8 @@ public class ShoppingCart{
 
     private Double totalPrice;
 
-    @ElementCollection
-    @CollectionTable(name = "shopping_cart_items",
-            joinColumns = {@JoinColumn(name = "item_id", referencedColumnName = "id")})
-    @MapKeyColumn(name = "item_id")
-    @Column
-    private Map<Item, Integer> items;
+    @OneToMany
+    private List<ItemCount> itemCounts;
 
     public ShoppingCart(){}
 
@@ -47,11 +44,11 @@ public class ShoppingCart{
         this.totalPrice = totalPrice;
     }
 
-    public Map<Item, Integer> getItems() {
-        return items;
+    public List<ItemCount> getItems() {
+        return itemCounts;
     }
 
-    public void setItems(Map<Item, Integer> items) {
-        this.items = items;
+    public void setItems(List<ItemCount> itemCounts) {
+        this.itemCounts = itemCounts;
     }
 }

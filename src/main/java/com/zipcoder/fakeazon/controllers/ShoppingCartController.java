@@ -1,4 +1,3 @@
-package shop.controllers;
-
+package com.zipcoder.fakeazon.controllers;
 public class ShoppingCartController {
 }
