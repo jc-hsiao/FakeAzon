@@ -2,10 +2,10 @@ package com.zipcoder.fakeazon.models;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 import java.util.Map;
 
 @Entity
-@Table(name="order_table")
 public class Order {
     @Id
     @GeneratedValue( strategy = GenerationType.IDENTITY )
@@ -18,12 +18,8 @@ public class Order {
     @ManyToOne
     private User user;
 
-    @ElementCollection
-    @CollectionTable(name = "order_items",
-            joinColumns = {@JoinColumn(name = "order_id", referencedColumnName = "id")})
-    @MapKeyColumn(name = "item_id")
-    @Column
-    private Map<Item, Integer> items;
+    @OneToMany
+    private List<ItemCount> itemCounts;
 
     public int getId() {
         return id;
@@ -57,11 +53,11 @@ public class Order {
         this.user = user;
     }
 
-    public Map<Item, Integer> getItems() {
-        return items;
+    public List<ItemCount> getItems() {
+        return itemCounts;
     }
 
-    public void setItems(Map<Item, Integer> items) {
-        this.items = items;
+    public void setItems(List<ItemCount> itemCounts) {
+        this.itemCounts = itemCounts;
     }
 }
