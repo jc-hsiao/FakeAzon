@@ -3,6 +3,7 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity
+@Table(name = "Users")
 public class User {
 
     @Id

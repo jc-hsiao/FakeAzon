@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 @Entity
+@Table(name = "Orders")
 public class Order {
     @Id
     @GeneratedValue( strategy = GenerationType.IDENTITY )
