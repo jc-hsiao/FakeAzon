@@ -3,7 +3,6 @@ package com.zipcoder.fakeazon.models;
 import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
-
 import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.List;
