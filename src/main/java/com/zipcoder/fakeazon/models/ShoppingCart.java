@@ -9,12 +9,9 @@ public class ShoppingCart{
     @Id
     @GeneratedValue( strategy = GenerationType.IDENTITY )
     private int id;
-
     @OneToOne
     private User owner;
-
-    private Double totalPrice;
-
+    private double total;
     @OneToMany
     private List<ItemCount> itemCounts;
 
@@ -36,19 +33,19 @@ public class ShoppingCart{
         this.id = id;
     }
 
-    public Double getTotalPrice() {
-        return totalPrice;
+    public double getTotal() {
+        return total;
     }
 
-    public void setTotalPrice(Double totalPrice) {
-        this.totalPrice = totalPrice;
+    public void setTotal(double total) {
+        this.total = total;
     }
 
-    public List<ItemCount> getItems() {
+    public List<ItemCount> getItemCounts() {
         return itemCounts;
     }
 
-    public void setItems(List<ItemCount> itemCounts) {
+    public void setItemCounts(List<ItemCount> itemCounts) {
         this.itemCounts = itemCounts;
     }
 }

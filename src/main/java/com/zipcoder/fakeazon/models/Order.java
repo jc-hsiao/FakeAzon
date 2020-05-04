@@ -1,6 +1,7 @@
 package com.zipcoder.fakeazon.models;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -11,14 +12,10 @@ public class Order {
     @Id
     @GeneratedValue( strategy = GenerationType.IDENTITY )
     private int id;
-
-    private Date date;
-
-    private Double totalPrice;
-
+    private LocalDate date;
+    private double totalPrice;
     @ManyToOne
     private User user;
-
     @OneToMany
     private List<ItemCount> itemCounts;
 
@@ -30,19 +27,19 @@ public class Order {
         this.id = id;
     }
 
-    public Date getDate() {
+    public LocalDate getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(LocalDate date) {
         this.date = date;
     }
 
-    public Double getTotalPrice() {
+    public double getTotalPrice() {
         return totalPrice;
     }
 
-    public void setTotalPrice(Double totalPrice) {
+    public void setTotalPrice(double totalPrice) {
         this.totalPrice = totalPrice;
     }
 
@@ -54,11 +51,11 @@ public class Order {
         this.user = user;
     }
 
-    public List<ItemCount> getItems() {
+    public List<ItemCount> getItemCounts() {
         return itemCounts;
     }
 
-    public void setItems(List<ItemCount> itemCounts) {
+    public void setItemCounts(List<ItemCount> itemCounts) {
         this.itemCounts = itemCounts;
     }
 }
