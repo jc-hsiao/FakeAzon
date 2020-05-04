@@ -2,9 +2,7 @@ package com.zipcoder.fakeazon.models;
 
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.util.Date;
 import java.util.List;
-import java.util.Map;
 
 @Entity
 @Table(name="Orders")

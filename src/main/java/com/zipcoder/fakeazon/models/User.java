@@ -9,7 +9,6 @@ public class User {
     @Id
     @GeneratedValue( strategy = GenerationType.IDENTITY )
     private int id;
-    private String userName;
     private String firstName;
     private String lastName;
     private String password;
@@ -26,6 +25,12 @@ public class User {
     @OneToMany(mappedBy = "user")
     private List<WishList> wishLists;
 
+    @OneToOne
+    private Shop shop;
+
+    @OneToOne
+    private Address address;
+
     public User(){}
 
     public int getId() {
@@ -34,14 +39,6 @@ public class User {
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    public String getUserName() {
-        return userName;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName;
     }
 
     public String getFirstName() {
@@ -82,5 +79,37 @@ public class User {
 
     public void setShoppingCart(ShoppingCart shoppingCart) {
         this.shoppingCart = shoppingCart;
+    }
+
+    public List<Order> getOrders() {
+        return orders;
+    }
+
+    public void setOrders(List<Order> orders) {
+        this.orders = orders;
+    }
+
+    public List<WishList> getWishLists() {
+        return wishLists;
+    }
+
+    public void setWishLists(List<WishList> wishLists) {
+        this.wishLists = wishLists;
+    }
+
+    public Shop getShop() {
+        return shop;
+    }
+
+    public void setShop(Shop shop) {
+        this.shop = shop;
+    }
+
+    public Address getAddress() {
+        return address;
+    }
+
+    public void setAddress(Address address) {
+        this.address = address;
     }
 }

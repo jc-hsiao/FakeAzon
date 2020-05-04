@@ -7,9 +7,7 @@ import java.util.List;
 
 @Entity
 public class Shop {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+
     private String name;
     private String description;
     private String logoUrl;
@@ -24,14 +22,6 @@ public class Shop {
     public Shop() {
         this.keywords = new ArrayList<>();
         this.items = new ArrayList<>();
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public String getName() {
