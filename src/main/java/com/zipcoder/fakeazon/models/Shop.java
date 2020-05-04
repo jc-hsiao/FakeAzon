@@ -23,6 +23,7 @@ public class Shop {
 
     public Shop() {
         this.keywords = new ArrayList<>();
+        this.items = new ArrayList<>();
     }
 
     public int getId() {
@@ -47,6 +48,14 @@ public class Shop {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public List<Item> getItems() {
+        return items;
+    }
+
+    public void setItems(List<Item> items) {
+        this.items = items;
     }
 
     public String getLogoUrl() {
