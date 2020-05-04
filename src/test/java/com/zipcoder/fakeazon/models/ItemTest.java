@@ -1,79 +1,147 @@
 package com.zipcoder.fakeazon.models;
 import org.junit.*;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+import static org.junit.Assert.*;
+
 
 public class ItemTest {
 
-    Item item = new Item();
-    int id = 1;
-    String ASIN = "ASDFG";
-    String title = "iphone8 protective screen";
-    String price = "$5.25";
-    String listedPrice = "$3.25";
-    String imageUrl = "pic.jpg";
-    String detailPageURL = "amazon.com/some/page";
-    double rating = 4.8;
-    int totalReviews = 1250;
-    String subtitle = "some company";
-
+    Item item;
 
     @Before
     public void setUp(){
-        item.setId(id);
-        item.setASIN(ASIN);
-        item.setTitle(title);
-        item.setPrice(price);
-        item.setListPrice(listedPrice);
-        item.setImageUrl(imageUrl);
-        item.setDetailPageURL(detailPageURL);
-        item.setRating(rating);
-        item.setTotalReviews(totalReviews);
-        item.setSubtitle(subtitle);
+        item = new Item(1);
+    }
+
+    @Test
+    public void getId(){
+        int expected = 1;
+        int actual = item.getId();
+        assertEquals(expected,actual);
+    }
+
+    @Test
+    public void setId(){
+        int expected = 3;
+        item.setId(3);
+        int actual = item.getId();
+        assertEquals(expected,actual);
+    }
+
+    @Test
+    public void getName(){
+        assertNull(item.getName());
+    }
+
+    @Test
+    public void setName(){
+        String expected = "Leila's Cup";
+        item.setName(expected);
+        String actual = item.getName();
+        assertEquals(expected,actual);
+    }
+
+    @Test
+    public void getPrice(){
+        double expected = 0.0;
+        double actual = item.getPrice();
+        assertEquals(expected,actual,2);
+    }
+
+    @Test
+    public void setPrice(){
+        double expected = 12.00;
+        item.setPrice(expected);
+        double actual = item.getPrice();
+        assertEquals(expected,actual,2);
+    }
+
+    @Test
+    public void getInventoryCount(){
+        int expected = 0;
+        int actual = item.getInventoryCount();
+        assertEquals(expected,actual);
+    }
+
+    @Test
+    public void setInventoryCount(){
+        int expected = 100;
+        item.setInventoryCount(expected);
+        int actual = item.getInventoryCount();
+        assertEquals(expected,actual);
+    }
+
+    @Test
+    public void getImageUrl(){
+        assertNull(item.getImageUrl());
+    }
+
+    @Test
+    public void setImageUrl(){
+        String expected = "https://i.imgur.com/AKF2q5M.jpg";
+        item.setImageUrl(expected);
+        String actual = item.getImageUrl();
+        assertEquals(expected,actual);
+    }
+
+    @Test
+    public void getDescription(){
+        assertNull(item.getImageUrl());
+    }
+
+    @Test
+    public void setDescription(){
+        String expected = "Do you like cups? So do we! Is your name Leila? Well this cup was made for you! Buy it!";
+        item.setDescription(expected);
+        String actual = item.getDescription();
+        assertEquals(expected,actual);
     }
 
 
     @Test
-    public void getId() { Assert.assertEquals(id, item.getId()); }
-
-    @Test
-    public void getASIN() { Assert.assertEquals(ASIN, item.getASIN()); }
-
-    @Test
-    public void getTitle() { Assert.assertEquals(title, item.getTitle()); }
-
-    @Test
-    public void getPrice() { Assert.assertEquals(price, item.getPrice()); }
-
-    @Test
-    public void getListPrice() {
-        Assert.assertEquals(listedPrice, item.getListPrice());
+    public void getRating(){
+        double expected = 0.0;
+        double actual = item.getRating();
+        assertEquals(expected,actual,2);
     }
 
     @Test
-    public void getImageUrl() {
-        Assert.assertEquals(imageUrl, item.getImageUrl());
+    public void setRating(){
+        double expected = 5.00;
+        item.setRating(expected);
+        double actual = item.getRating();
+        assertEquals(expected,actual,2);
     }
 
     @Test
-    public void getDetailPageURL() {
-        Assert.assertEquals(detailPageURL, item.getDetailPageURL());
-    }
-
-
-    @Test
-    public void getRating() {
-        Assert.assertEquals(rating, item.getRating(),0.1);
+    public void getItemTags(){
+        Item nullConstructor = new Item();
+        assertEquals(0, nullConstructor.getItemTags().size());
     }
 
     @Test
-    public void getTotalReviews() {
-        Assert.assertEquals(totalReviews, item.getTotalReviews());
+    public void setItemTags(){
+        List<String> expected = new ArrayList<>(Arrays.asList("Kitchen Ware","Cups","Drinking"));
+        item.setItemTags(expected);
+        List<String> actual = item.getItemTags();
+        assertEquals(expected,actual);
     }
 
     @Test
-    public void getSubtitle() {
-        Assert.assertEquals(subtitle, item.getSubtitle());
+    public void getShop(){
+        assertNull(item.getShop());
     }
 
+    @Test
+    public void setShop(){
+        Shop expected = new Shop();
+        item.setShop(expected);
+        Shop actual = item.getShop();
+        assertEquals(expected,actual);
+    }
 
 }

@@ -1,22 +1,34 @@
 package com.zipcoder.fakeazon.models;
 import javax.persistence.*;
+import javax.validation.constraints.DecimalMax;
+import javax.validation.constraints.DecimalMin;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class Item {
     @Id
     @GeneratedValue( strategy = GenerationType.IDENTITY )
     private int id;
-    private String ASIN;
-    private String title;
-    private String price;
-    private String listPrice;
+    private String name;
+    private double price;
+    private int inventoryCount;
     private String imageUrl;
-    private String detailPageURL;
+    private String description;
+
+    @DecimalMax(value = "5.00", message = "That's over 5 STARS!")
+    @DecimalMin(value = "1.00", message = "Cant give less than 1 STAR!")
     private double rating;
-    private int totalReviews;
-    private String subtitle;
+
+    @ElementCollection
+    private List<String> itemTags = new ArrayList<>();
+
+    @ManyToOne
+    private Shop shop;
 
     public Item(){}
+
+    public Item(int id){this.id = id;}
 
     public int getId() {
         return id;
@@ -26,52 +38,28 @@ public class Item {
         this.id = id;
     }
 
-    public String getASIN() {
-        return ASIN;
+    public String getName() {
+        return name;
     }
 
-    public void setASIN(String ASIN) {
-        this.ASIN = ASIN;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public String getPrice() {
+    public double getPrice() {
         return price;
     }
 
-    public void setPrice(String price) {
+    public void setPrice(double price) {
         this.price = price;
     }
 
-    public String getListPrice() {
-        return listPrice;
+    public int getInventoryCount() {
+        return inventoryCount;
     }
 
-    public void setListPrice(String listPrice) {
-        this.listPrice = listPrice;
-    }
-
-    public String getImageUrl() {
-        return imageUrl;
-    }
-
-    public void setImageUrl(String imageUrl) {
-        this.imageUrl = imageUrl;
-    }
-
-    public String getDetailPageURL() {
-        return detailPageURL;
-    }
-
-    public void setDetailPageURL(String detailPageURL) {
-        this.detailPageURL = detailPageURL;
+    public void setInventoryCount(int inventoryCount) {
+        this.inventoryCount = inventoryCount;
     }
 
     public double getRating() {
@@ -82,21 +70,35 @@ public class Item {
         this.rating = rating;
     }
 
-    public int getTotalReviews() {
-        return totalReviews;
+    public String getImageUrl() {
+        return imageUrl;
     }
 
-    public void setTotalReviews(int totalReviews) {
-        this.totalReviews = totalReviews;
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 
-    public String getSubtitle() {
-        return subtitle;
+    public String getDescription() {
+        return description;
     }
 
-    public void setSubtitle(String subtitle) {
-        this.subtitle = subtitle;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
+    public List<String> getItemTags() {
+        return itemTags;
+    }
 
+    public void setItemTags(List<String> itemTags) {
+        this.itemTags = itemTags;
+    }
+
+    public Shop getShop() {
+        return shop;
+    }
+
+    public void setShop(Shop shop) {
+        this.shop = shop;
+    }
 }
