@@ -24,6 +24,7 @@ public class Item {
     private List<String> itemTags = new ArrayList<>();
 
     @ManyToOne
+    @JoinColumn( name = "shop_id")
     private Shop shop;
 
     public Item(){}
