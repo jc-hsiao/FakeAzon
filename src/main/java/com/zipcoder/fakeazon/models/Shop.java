@@ -18,6 +18,8 @@ public class Shop {
     private List<String> keywords;
     @OneToOne
     private User owner;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "shop")
+    private List<Item> items;
 
     public Shop() {
         this.keywords = new ArrayList<>();
