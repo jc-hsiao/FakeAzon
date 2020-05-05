@@ -13,12 +13,10 @@ public class ShoppingCart{
     @OneToOne
     private User owner;
     private double total;
-
     @OneToMany
     private List<Item> items;
-
+    @ElementCollection
     private List<Integer> itemCounts;
-
 
     public ShoppingCart(){}
 
