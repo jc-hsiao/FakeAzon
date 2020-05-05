@@ -14,6 +14,8 @@ public class Order {
     private User user;
     @OneToOne
     private ShoppingCart cart;
+    private LocalDate datePlaced;
+    private int status;
 
     public int getId() {
         return id;
@@ -37,5 +39,21 @@ public class Order {
 
     public void setCart(ShoppingCart cart) {
         this.cart = cart;
+    }
+
+    public LocalDate getDatePlaced() {
+        return datePlaced;
+    }
+
+    public void setDatePlaced(LocalDate datePlaced) {
+        this.datePlaced = datePlaced;
+    }
+
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
     }
 }

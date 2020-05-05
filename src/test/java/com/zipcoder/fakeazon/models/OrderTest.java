@@ -3,6 +3,8 @@ package com.zipcoder.fakeazon.models;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.time.LocalDate;
+
 import static org.junit.Assert.*;
 
 public class OrderTest {
@@ -39,5 +41,22 @@ public class OrderTest {
         order.setCart(cart);
         double actual = order.getCart().getTotal();
         assertEquals(expected, actual, .001);
+    }
+
+    @Test
+    public void setStatusTest(){
+        order.setStatus(1);
+        int expected = 1;
+        int actual = order.getStatus();
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    public void setDateTest(){
+        LocalDate previous = LocalDate.of(2020, 1, 20);
+        LocalDate date = LocalDate.now();
+        order.setDatePlaced(date);
+        LocalDate created = order.getDatePlaced();
+        assertTrue(created.isAfter(previous));
     }
 }
