@@ -8,14 +8,12 @@ import java.util.List;
 @Table(name="Orders")
 public class Order {
     @Id
-    @GeneratedValue( strategy = GenerationType.IDENTITY )
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    private LocalDate date;
-    private double totalPrice;
     @ManyToOne
     private User user;
-    @OneToMany
-    private List<ItemCount> itemCounts;
+    @OneToOne
+    private ShoppingCart cart;
 
     public int getId() {
         return id;
@@ -23,22 +21,6 @@ public class Order {
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    public LocalDate getDate() {
-        return date;
-    }
-
-    public void setDate(LocalDate date) {
-        this.date = date;
-    }
-
-    public double getTotalPrice() {
-        return totalPrice;
-    }
-
-    public void setTotalPrice(double totalPrice) {
-        this.totalPrice = totalPrice;
     }
 
     public User getUser() {
@@ -49,11 +31,11 @@ public class Order {
         this.user = user;
     }
 
-    public List<ItemCount> getItemCounts() {
-        return itemCounts;
+    public ShoppingCart getCart() {
+        return cart;
     }
 
-    public void setItemCounts(List<ItemCount> itemCounts) {
-        this.itemCounts = itemCounts;
+    public void setCart(ShoppingCart cart) {
+        this.cart = cart;
     }
 }

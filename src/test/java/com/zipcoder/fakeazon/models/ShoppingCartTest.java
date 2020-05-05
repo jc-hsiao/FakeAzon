@@ -3,6 +3,7 @@ package com.zipcoder.fakeazon.models;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.List;
 
@@ -43,12 +44,29 @@ public class ShoppingCartTest {
     }
 
     @Test
-    public void setItemCountsTest(){
-        ItemCount[] items = {new ItemCount(), new ItemCount()};
-        List<ItemCount> list = Arrays.asList(items);
-        cart.setItemCounts(list);
+    public void setDateTest(){
+        LocalDate previous = LocalDate.of(2020, 1, 20);
+        LocalDate date = LocalDate.now();
+        cart.setDatePlaced(date);
+        LocalDate created = cart.getDatePlaced();
+        assertTrue(created.isAfter(previous));
+    }
+
+    @Test
+    public void setItemsTest(){
+        Item[] items = {new Item(), new Item()};
+        List<Item> list = Arrays.asList(items);
+        cart.setItems(list);
         int expected = 2;
-        int actual = cart.getItemCounts().size();
+        int actual = cart.getItems().size();
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    public void setStatusTest(){
+        cart.setStatus(1);
+        int expected = 1;
+        int actual = cart.getStatus();
         assertEquals(expected, actual);
     }
 }
