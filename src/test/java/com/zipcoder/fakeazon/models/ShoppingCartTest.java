@@ -4,6 +4,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -56,4 +57,15 @@ public class ShoppingCartTest {
     }
 
 
+    @Test
+    public void getItemCounts() {
+        assertNull(cart.getItemCounts());
+    }
+
+    @Test
+    public void setItemCount() {
+        ArrayList<Integer> counts = new ArrayList<>();
+        cart.setItemCounts( counts );
+        assertEquals(counts,cart.getItemCounts());
+    }
 }
