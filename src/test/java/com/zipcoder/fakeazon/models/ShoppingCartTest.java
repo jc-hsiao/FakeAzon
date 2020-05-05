@@ -43,14 +43,7 @@ public class ShoppingCartTest {
         assertEquals(expected, actual, .001);
     }
 
-    @Test
-    public void setDateTest(){
-        LocalDate previous = LocalDate.of(2020, 1, 20);
-        LocalDate date = LocalDate.now();
-        cart.setDatePlaced(date);
-        LocalDate created = cart.getDatePlaced();
-        assertTrue(created.isAfter(previous));
-    }
+
 
     @Test
     public void setItemsTest(){
@@ -62,11 +55,5 @@ public class ShoppingCartTest {
         assertEquals(expected, actual);
     }
 
-    @Test
-    public void setStatusTest(){
-        cart.setStatus(1);
-        int expected = 1;
-        int actual = cart.getStatus();
-        assertEquals(expected, actual);
-    }
+
 }

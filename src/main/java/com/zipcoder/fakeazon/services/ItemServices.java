@@ -57,5 +57,22 @@ public class ItemServices {
 
     // INDIVIDUAL UPDATES
 
+    public Item increaseInventoryCount(Integer itemId, Integer amountToIncrease) throws Exception {
+        Optional<Item> item = findOne(itemId);
+        if(item.isPresent()){
+            item.get().setInventoryCount(item.get().getInventoryCount() + amountToIncrease);
+          return  repo.save(item.get());
+        } else
+            throw new Exception("No item with "+ itemId + "exists!");
+    }
+
+    public Item decreaseInventoryCount(Integer itemId, Integer amountToDecrease) throws Exception {
+        Optional<Item> item = findOne(itemId);
+        if(item.isPresent()){
+            item.get().setInventoryCount(item.get().getInventoryCount() - amountToDecrease);
+            return  repo.save(item.get());
+        } else
+            throw new Exception("No item with "+ itemId + "exists!");
+    }
 
 }

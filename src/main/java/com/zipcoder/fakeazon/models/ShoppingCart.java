@@ -13,10 +13,10 @@ public class ShoppingCart{
     @OneToOne
     private User owner;
     private double total;
-    private LocalDate datePlaced;
+
     @OneToMany
     private List<Item> items;
-    private int status;
+
 
     public ShoppingCart(){}
 
@@ -44,13 +44,6 @@ public class ShoppingCart{
         this.total = total;
     }
 
-    public LocalDate getDatePlaced() {
-        return datePlaced;
-    }
-
-    public void setDatePlaced(LocalDate datePlaced) {
-        this.datePlaced = datePlaced;
-    }
 
     public List<Item> getItems() {
         return items;
@@ -60,11 +53,4 @@ public class ShoppingCart{
         this.items = items;
     }
 
-    public int getStatus() {
-        return status;
-    }
-
-    public void setStatus(int status) {
-        this.status = status;
-    }
 }
