@@ -17,6 +17,8 @@ public class ShoppingCart{
     @OneToMany
     private List<Item> items;
 
+    private List<Integer> itemCounts;
+
 
     public ShoppingCart(){}
 
@@ -53,4 +55,11 @@ public class ShoppingCart{
         this.items = items;
     }
 
+    public List<Integer> getItemCounts() {
+        return itemCounts;
+    }
+
+    public void setItemCounts(List<Integer> itemCounts) {
+        this.itemCounts = itemCounts;
+    }
 }
