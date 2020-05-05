@@ -104,17 +104,14 @@ public class ItemTest {
 
     @Test
     public void getRating(){
-        double expected = 0.0;
-        double actual = item.getRating();
-        assertEquals(expected,actual,2);
+        assertNull(item.getRating());
     }
 
     @Test
     public void setRating(){
-        double expected = 5.00;
-        item.setRating(expected);
-        double actual = item.getRating();
-        assertEquals(expected,actual,2);
+        List<Double> ratings = new ArrayList<>(Arrays.asList(1.23,2.50,4.00,5.00));
+        item.setRating(ratings);
+        assertEquals(4, ratings.size());
     }
 
     @Test

@@ -1,7 +1,5 @@
 package com.zipcoder.fakeazon.models;
 import javax.persistence.*;
-import javax.validation.constraints.DecimalMax;
-import javax.validation.constraints.DecimalMin;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,9 +14,8 @@ public class Item {
     private String imageUrl;
     private String description;
 
-    @DecimalMax(value = "5.00", message = "That's over 5 STARS!")
-    @DecimalMin(value = "1.00", message = "Cant give less than 1 STAR!")
-    private double rating;
+    @ElementCollection
+    private List<Double> rating;
 
     @ElementCollection
     private List<String> itemTags = new ArrayList<>();
@@ -63,11 +60,11 @@ public class Item {
         this.inventoryCount = inventoryCount;
     }
 
-    public double getRating() {
+    public List<Double> getRating() {
         return rating;
     }
 
-    public void setRating(double rating) {
+    public void setRating(List<Double> rating) {
         this.rating = rating;
     }
 
