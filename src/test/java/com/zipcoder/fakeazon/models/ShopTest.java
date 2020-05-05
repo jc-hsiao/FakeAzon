@@ -16,6 +16,14 @@ public class ShopTest {
     }
 
     @Test
+    public void setIdTest(){
+        shop.setId(1);
+        int expected = 1;
+        int actual = shop.getId();
+        assertEquals(expected, actual);
+    }
+
+    @Test
     public void setNameTest(){
         shop.setName("My Shop");
         String expected = "My Shop";
