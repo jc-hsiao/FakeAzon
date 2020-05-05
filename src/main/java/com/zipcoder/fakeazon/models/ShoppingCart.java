@@ -2,7 +2,6 @@ package com.zipcoder.fakeazon.models;
 
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -16,11 +15,10 @@ public class ShoppingCart{
     private double total;
     @OneToMany
     private List<Item> items;
+    @ElementCollection
+    private List<Integer> itemCounts;
 
-    public ShoppingCart(){
-        this.items = new ArrayList<>();
-        this.total = 0.00;
-    }
+    public ShoppingCart(){}
 
     public User getOwner() {
         return owner;
@@ -55,4 +53,11 @@ public class ShoppingCart{
         this.items = items;
     }
 
+    public List<Integer> getItemCounts() {
+        return itemCounts;
+    }
+
+    public void setItemCounts(List<Integer> itemCounts) {
+        this.itemCounts = itemCounts;
+    }
 }
