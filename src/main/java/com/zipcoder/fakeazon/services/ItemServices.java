@@ -30,6 +30,23 @@ public class ItemServices {
         return repo.save(item);
     }
 
+    public Item updateFullItem(Integer itemId, Item item) throws Exception {
+        Item itemToUpdate;
+        if(findOne(itemId).isPresent()){
+            itemToUpdate = findOne(itemId).get();
+            itemToUpdate.setName(item.getName());
+            itemToUpdate.setPrice(item.getPrice());
+            itemToUpdate.setDescription(item.getDescription());
+            itemToUpdate.setImageUrl(item.getImageUrl());
+            itemToUpdate.setInventoryCount(item.getInventoryCount());
+            itemToUpdate.setItemTags(item.getItemTags());
+            itemToUpdate.setShop(item.getShop());
+            itemToUpdate.setRating(item.getRating());
+            return saveItem(itemToUpdate);
+        } else
+            throw new Exception("No item with "+ itemId + "exists!");
+    }
+
     public boolean deleteItem(Integer itemId){
         if(findOne(itemId).isPresent()){
             repo.deleteById(itemId);
@@ -37,4 +54,8 @@ public class ItemServices {
         } else
             return false;
     }
+
+    // INDIVIDUAL UPDATES
+
+
 }
