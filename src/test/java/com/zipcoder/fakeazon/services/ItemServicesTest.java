@@ -2,6 +2,7 @@ package com.zipcoder.fakeazon.services;
 
 import com.zipcoder.fakeazon.models.Item;
 import com.zipcoder.fakeazon.repositories.ItemRepository;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -32,6 +33,21 @@ class ItemServicesTest {
 
     @MockBean
     private ItemRepository repository;
+
+    @Test
+    @DisplayName("Test Check Item Existence: PASS")
+    public void testItemExists() throws Exception {
+        Item mockItem = new Item();
+        doReturn(Optional.of(mockItem)).when(repository).findById(1);
+        assertNotNull(service.checkIfItemExists(1));
+    }
+
+    @Test
+    @DisplayName("Test Check Item Existence: FAIL")
+    public void testItemNotExist() throws Exception {
+        Assertions.assertThrows(Exception.class,
+                () -> service.checkIfItemExists(15));
+    }
 
     @Test
     @DisplayName("Test Rating System")
