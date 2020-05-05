@@ -3,7 +3,6 @@ package com.zipcoder.fakeazon.models;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -19,11 +18,21 @@ public class ShoppingCartTest {
     }
 
     @Test
+    public void getIdTest(){
+        assertNotEquals(cart.getId(), 1);
+    }
+
+    @Test
     public void setIdTest(){
         cart.setId(1);
         int expected = 1;
         int actual = cart.getId();
         assertEquals(expected, actual);
+    }
+
+    @Test
+    public void getOwnerTest(){
+        assertNull(cart.getOwner());
     }
 
     @Test
@@ -37,6 +46,11 @@ public class ShoppingCartTest {
     }
 
     @Test
+    public void getTotalTest(){
+        assertEquals(cart.getTotal(), 0.00, .001);
+    }
+
+    @Test
     public void setTotalTest(){
         cart.setTotal(45.55);
         double expected = 45.55;
@@ -44,7 +58,10 @@ public class ShoppingCartTest {
         assertEquals(expected, actual, .001);
     }
 
-
+    @Test
+    public void getItemsTest(){
+        assertEquals(cart.getItems().size(), 0);
+    }
 
     @Test
     public void setItemsTest(){
@@ -56,10 +73,9 @@ public class ShoppingCartTest {
         assertEquals(expected, actual);
     }
 
-
     @Test
     public void getItemCounts() {
-        assertNull(cart.getItemCounts());
+        assertEquals(cart.getItemCounts().size(), 0);
     }
 
     @Test
