@@ -29,7 +29,7 @@ public class ShoppingCartServices {
     // PUT
     public ShoppingCart addItemToCart(Item item, int id){
         ShoppingCart cart = cartRepo.getOne(id);
-        cart.getItems().add(item);
+        //cart.getItems().add(item);
         return cartRepo.save(cart);
     }
 
