@@ -82,7 +82,6 @@ public class ShopService {
         Shop shop = checkIfShopExists(shopId);
         Arrays.stream(items).forEach(item -> {
             item.setShop(shop);
-            item.setRating(new ArrayList<>(Arrays.asList(5.0,5.0)));
             itemServices.saveItem(item);
         });
         shop.getItems().addAll(Arrays.asList(items));
