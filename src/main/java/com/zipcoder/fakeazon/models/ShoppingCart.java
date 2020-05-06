@@ -1,9 +1,8 @@
 package com.zipcoder.fakeazon.models;
 
 import javax.persistence.*;
-import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 @Entity
 public class ShoppingCart{
@@ -13,12 +12,16 @@ public class ShoppingCart{
     @OneToOne
     private User owner;
     private double total;
-
     @OneToMany
     private List<Item> items;
+    @ElementCollection
+    private List<Integer> itemCounts;
 
-
-    public ShoppingCart(){}
+    public ShoppingCart(){
+        this.total = 0.00;
+        this.items = new ArrayList<>();
+        this.itemCounts = new ArrayList<>();
+    }
 
     public User getOwner() {
         return owner;
@@ -44,7 +47,6 @@ public class ShoppingCart{
         this.total = total;
     }
 
-
     public List<Item> getItems() {
         return items;
     }
@@ -53,4 +55,11 @@ public class ShoppingCart{
         this.items = items;
     }
 
+    public List<Integer> getItemCounts() {
+        return itemCounts;
+    }
+
+    public void setItemCounts(List<Integer> itemCounts) {
+        this.itemCounts = itemCounts;
+    }
 }
