@@ -1,9 +1,7 @@
 package com.zipcoder.fakeazon.services;
 
 import com.zipcoder.fakeazon.models.ItemCount;
-import com.zipcoder.fakeazon.models.Shop;
 import com.zipcoder.fakeazon.models.ShoppingCart;
-import com.zipcoder.fakeazon.models.User;
 import com.zipcoder.fakeazon.repositories.ItemCountRepository;
 import com.zipcoder.fakeazon.repositories.ShoppingCartRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,17 +35,14 @@ public class ShoppingCartServices {
         return cartRepo.findAll();
     }
 
-    public ShoppingCart findCartByUser(int id){
+    public Optional<ShoppingCart> findCartByUser(int id){
         return cartRepo.findShoppingCartByOwner_Id(id);
     }
     // PUT
-    public ShoppingCart addItemCountToCart(int itemCountId, int cartId){
+    public ShoppingCart addItemCountToCart(int cartId, ItemCount itemCount){
         ShoppingCart original = cartRepo.getOne(cartId);
-        ItemCount itemCount = itemCountRepo.getOne(itemCountId);
-        if (checkIfItemCountIsValid(itemCount.getAmount(), itemCountId)) {
-            original.getItemCounts().add(itemCount);
-            itemCountRepo.save(itemCount);
-        }
+        itemCountRepo.save(itemCount);
+        original.getItemCounts().add(itemCount);
         return cartRepo.save(original);
     }
 
@@ -75,9 +70,14 @@ public class ShoppingCartServices {
 //        return cartRepo.save(cart);
 //    }
 
-    public boolean checkIfItemCountIsValid(int amount, int itemCountId){
-        ItemCount itemCount = itemCountRepo.getOne(itemCountId);
-        return itemCount.getAmount() > amount;
+    public boolean clearAllItemsFromCart(int ownerId){
+        Optional<ShoppingCart> cart = cartRepo.findShoppingCartByOwner_Id(ownerId);
+        if(!cart.get().getItemCounts().isEmpty()){
+            cart.get().getItemCounts().clear();
+            cartRepo.save(cart.get());
+            return true;
+        }
+        return false;
     }
 
 }

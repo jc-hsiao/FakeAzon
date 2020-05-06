@@ -5,9 +5,11 @@ import com.zipcoder.fakeazon.models.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.Optional;
+
 @Repository
 public interface ShoppingCartRepository extends JpaRepository<ShoppingCart,Integer> {
 
-    ShoppingCart findShoppingCartByOwner_Id(int id);
+    Optional<ShoppingCart> findShoppingCartByOwner_Id(int id);
 
 }
