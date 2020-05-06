@@ -79,4 +79,21 @@ public class ShoppingCartServiceTest {
         assertFalse(mockCart.getItemCounts().contains(itemCount));
     }
 
+    @Test
+    public void clearAllItemsFromEmptyCartTest(){
+        User owner = new User();
+        given(cartRepo.findShoppingCartByOwner_Id(owner.getId())).willReturn(Optional.of(mockCart));
+        assertFalse(service.clearAllItemsFromCart(owner.getId()));
+    }
+
+    @Test
+    public void clearAllItemsFromCartWithItemsTest(){
+        List<ItemCount> itemCounts = new ArrayList<>(Arrays.asList(new ItemCount(), new ItemCount()));
+        User owner = new User();
+        mockCart.setItemCounts(itemCounts);
+        given(countRepo.findAll()).willReturn(itemCounts);
+        given(cartRepo.findShoppingCartByOwner_Id(owner.getId())).willReturn(Optional.of(mockCart));
+        assertTrue(service.clearAllItemsFromCart(owner.getId()));
+    }
+
 }
