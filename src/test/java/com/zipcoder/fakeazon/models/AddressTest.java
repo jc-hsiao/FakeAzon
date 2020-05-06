@@ -16,6 +16,19 @@ public class AddressTest {
     }
 
     @Test
+    public void getId(){
+        assertNull(address.getId());
+    }
+
+    @Test
+    public void setId(){
+        Integer id = 1;
+        address.setId(id);
+        assertEquals(id,address.getId());
+    }
+
+
+    @Test
     public void getStreet() {
         Assert.assertNull(address.getStreet());
     }
