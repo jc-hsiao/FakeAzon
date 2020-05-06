@@ -20,8 +20,6 @@ import java.util.List;
 import java.util.Optional;
 import static org.mockito.BDDMockito.given;
 import static org.junit.Assert.*;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.mock;
 
 
 @ExtendWith(SpringExtension.class)
@@ -42,6 +40,7 @@ public class ShoppingCartServiceTest {
     private ShoppingCart mockCart = new ShoppingCart();
     private ItemCount itemCount = new ItemCount();
 
+    // TODO Create Cart Test
 
     @Test
     public void findByIdTest() throws Exception{
@@ -78,6 +77,8 @@ public class ShoppingCartServiceTest {
         service.removeItemCountFromCart(1,1);
         assertFalse(mockCart.getItemCounts().contains(itemCount));
     }
+
+
 
     @Test
     public void clearAllItemsFromEmptyCartTest(){
