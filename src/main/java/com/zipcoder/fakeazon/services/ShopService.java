@@ -46,4 +46,5 @@ public class ShopService {
             return shop.get();
         else throw new Exception("No shop with "+ shopId + "exists!");
     }
+
 }

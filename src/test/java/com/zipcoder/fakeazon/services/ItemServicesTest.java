@@ -74,10 +74,17 @@ class ItemServicesTest {
     }
 
     @Test
-    @DisplayName("Test Delete Item")
+    @DisplayName("Test Delete Item: PASS")
     public void testDeleteItem(){
         doReturn(Optional.of(mockItem)).when(repository).findById(1);
         assertTrue(service.deleteItem(1));
+    }
+
+    @Test
+    @DisplayName("Test Delete Item: FAIL")
+    public void testDeleteItemFail(){
+        doReturn(Optional.of(mockItem)).when(repository).findById(1);
+        assertFalse(service.deleteItem(5));
     }
 
     @Test
