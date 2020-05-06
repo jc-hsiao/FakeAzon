@@ -70,30 +70,4 @@ public class ShoppingCartTest {
         assertEquals(expected, cart.getItemCounts());
     }
 
-//    @Test
-//    public void getItemsTest(){
-//        assertEquals(cart.getItems().size(), 0);
-//    }
-//
-//    @Test
-//    public void setItemsTest(){
-//        Item[] items = {new Item(), new Item()};
-//        List<Item> list = Arrays.asList(items);
-//        cart.setItems(list);
-//        int expected = 2;
-//        int actual = cart.getItems().size();
-//        assertEquals(expected, actual);
-//    }
-
-//    @Test
-//    public void getItemCounts() {
-//        assertEquals(cart.getItemCounts().size(), 0);
-//    }
-//
-//    @Test
-//    public void setItemCount() {
-//        ArrayList<Integer> counts = new ArrayList<>();
-//        cart.setItemCounts( counts );
-//        assertEquals(counts,cart.getItemCounts());
-//    }
 }
