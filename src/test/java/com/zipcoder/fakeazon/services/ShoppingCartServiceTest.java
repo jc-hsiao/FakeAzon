@@ -41,6 +41,11 @@ public class ShoppingCartServiceTest {
     private ItemCount itemCount = new ItemCount();
 
     // TODO Create Cart Test
+    @Test
+    public void createCartTest(){
+        given(cartRepo.save(mockCart)).willReturn(mockCart);
+        assertNotNull(service.createShoppingCart(mockCart));
+    }
 
     @Test
     public void findByIdTest() throws Exception{
@@ -78,7 +83,16 @@ public class ShoppingCartServiceTest {
         assertFalse(mockCart.getItemCounts().contains(itemCount));
     }
 
-
+    @Test
+    public void updateItemCountQuantityTest() throws Exception{
+        mockCart.getItemCounts().add(itemCount);
+        given(cartRepo.getOne(1)).willReturn(mockCart);
+        given(countRepo.getOne(1)).willReturn(itemCount);
+        service.updateItemCountQuantity(1,1, 5);
+        int expected = 5;
+        int actual = mockCart.getItemCounts().get(0).getAmount();
+        assertEquals(expected, actual);
+    }
 
     @Test
     public void clearAllItemsFromEmptyCartTest(){

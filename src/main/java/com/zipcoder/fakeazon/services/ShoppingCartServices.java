@@ -54,10 +54,20 @@ public class ShoppingCartServices {
         return cartRepo.save(cart);
     }
 
-//    public ShoppingCart updateItemCountQuantity(int itemCountId, int cartId, int quantity){
-//        ShoppingCart cart = cartRepo.getOne(cartId);
-//
-//    }
+    public ShoppingCart updateItemCountQuantity(int itemCountId, int cartId, int quantity){
+        ShoppingCart cart = cartRepo.getOne(cartId);
+        ItemCount itemCount = itemCountRepo.getOne(itemCountId);
+        List<ItemCount> cartItems = cart.getItemCounts();
+        for(ItemCount ic: cartItems){
+            if(ic == itemCount && cartItems.contains(ic)){
+                itemCount.setAmount(quantity);
+                int index = cartItems.indexOf(ic);
+                ItemCount updatedItem = cartItems.get(index);
+                itemCountRepo.save(updatedItem);
+            }
+        }
+        return cartRepo.save(cart);
+    }
 
     public boolean clearAllItemsFromCart(int ownerId){
         Optional<ShoppingCart> cart = cartRepo.findShoppingCartByOwner_Id(ownerId);
