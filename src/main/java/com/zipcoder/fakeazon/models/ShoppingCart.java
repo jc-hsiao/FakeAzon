@@ -54,6 +54,4 @@ public class ShoppingCart{
         this.itemCounts = itemCounts;
     }
 
-
-
 }
