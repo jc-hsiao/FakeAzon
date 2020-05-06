@@ -13,10 +13,9 @@ public class ShoppingCart{
     @OneToOne
     private User owner;
     private double total;
-    @OneToMany
-    private List<Item> items;
-    @ElementCollection
-    private List<Integer> itemCounts;
+
+
+    private List<ItemCount> ItemCounts;
 
     public ShoppingCart(){}
 
@@ -45,19 +44,14 @@ public class ShoppingCart{
     }
 
 
-    public List<Item> getItems() {
-        return items;
+    public List<ItemCount> getItemCounts() {
+        return ItemCounts;
     }
 
-    public void setItems(List<Item> items) {
-        this.items = items;
+    public void setItemCounts(List<ItemCount> itemCounts) {
+        ItemCounts = itemCounts;
     }
 
-    public List<Integer> getItemCounts() {
-        return itemCounts;
-    }
 
-    public void setItemCounts(List<Integer> itemCounts) {
-        this.itemCounts = itemCounts;
-    }
+
 }
