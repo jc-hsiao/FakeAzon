@@ -5,6 +5,7 @@ import com.zipcoder.fakeazon.repositories.ShopRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -58,7 +59,19 @@ public class ShopService {
         return saveShop(shop);
     }
 
+    public Shop addKeywords(Integer shopId, String[] keywords) throws Exception{
+        Shop shop = checkIfShopExists(shopId);
+        shop.getKeywords().addAll(Arrays.asList(keywords));
+        return saveShop(shop);
+    }
 
+    public Shop removeKeywords(Integer shopId, String[] keywords) throws Exception{
+        Shop shop = checkIfShopExists(shopId);
+        List<String> currentKeywords = shop.getKeywords();
+        Arrays.stream(keywords).forEach(currentKeywords::remove);
+        shop.setKeywords(currentKeywords);
+        return saveShop(shop);
+    }
 
     // Verify Shop Existence
 
@@ -68,6 +81,7 @@ public class ShopService {
             return shop.get();
         else throw new Exception("No shop with "+ shopId + "exists!");
     }
+
 
 
 }
