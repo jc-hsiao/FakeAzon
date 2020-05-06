@@ -130,4 +130,34 @@ class ShopServiceTest {
         assertEquals(expected,actual);
     }
 
+    @Test
+    @DisplayName("Test Add Keywords")
+    public void testAddKeywords() throws Exception {
+        Shop testShop = new Shop();
+        testShop.setKeywords(new ArrayList<>(Arrays.asList("KW1","KW2")));
+        doReturn(Optional.of(testShop)).when(repo).findById(1);
+        doReturn(testShop).when(repo).save(testShop);
+
+        String expected = "KW3";
+
+        String actual = service.addKeywords(1,new String[]{"KW3"}).getKeywords().get(2);
+
+        assertEquals(expected,actual);
+    }
+
+    @Test
+    @DisplayName("Test Remove Keywords")
+    public void testRemoveKeywords() throws Exception {
+        Shop testShop = new Shop();
+        testShop.setKeywords(new ArrayList<>(Arrays.asList("KW1","KW2", "KW3")));
+        doReturn(Optional.of(testShop)).when(repo).findById(1);
+        doReturn(testShop).when(repo).save(testShop);
+
+        String expected = "KW3";
+
+        String actual = service.removeKeywords(1,new String[]{"KW2"}).getKeywords().get(1);
+
+        assertEquals(expected,actual);
+    }
+
 }
