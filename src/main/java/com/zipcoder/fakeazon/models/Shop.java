@@ -9,7 +9,7 @@ import java.util.List;
 public class Shop {
     @Id
     @GeneratedValue( strategy = GenerationType.IDENTITY )
-    private int id;
+    private Integer id;
     private String name;
     private String description;
     private String logoUrl;
@@ -30,7 +30,7 @@ public class Shop {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
