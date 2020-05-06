@@ -54,7 +54,7 @@ public class ShoppingCartServices {
         return cartRepo.save(cart);
     }
 
-//    public ShoppingCart increaseItemCountInCart(int itemCountId, int cartId, int amount){
+//    public ShoppingCart increaseItemCountInCart(int itemCountId, int cartId, int quantity){
 //        ShoppingCart cart = cartRepo.getOne(cartId);
 //
 //    }
