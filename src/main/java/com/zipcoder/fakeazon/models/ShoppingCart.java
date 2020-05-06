@@ -12,14 +12,12 @@ public class ShoppingCart{
     @OneToOne
     private User owner;
     private double total;
-    @OneToMany
-    private List<Item> items;
-    @ElementCollection
-    private List<Integer> itemCounts;
+
+
+    private List<ItemCount> itemCounts;
 
     public ShoppingCart(){
         this.total = 0.00;
-        this.items = new ArrayList<>();
         this.itemCounts = new ArrayList<>();
     }
 
@@ -47,19 +45,15 @@ public class ShoppingCart{
         this.total = total;
     }
 
-    public List<Item> getItems() {
-        return items;
-    }
 
-    public void setItems(List<Item> items) {
-        this.items = items;
-    }
-
-    public List<Integer> getItemCounts() {
+    public List<ItemCount> getItemCounts() {
         return itemCounts;
     }
 
-    public void setItemCounts(List<Integer> itemCounts) {
-        this.itemCounts = itemCounts;
+    public void setItemCounts(List<ItemCount> itemCounts) {
+        itemCounts = itemCounts;
     }
+
+
+
 }
