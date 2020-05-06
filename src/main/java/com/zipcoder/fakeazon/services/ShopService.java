@@ -1,6 +1,5 @@
 package com.zipcoder.fakeazon.services;
 
-import com.zipcoder.fakeazon.models.Item;
 import com.zipcoder.fakeazon.models.Shop;
 import com.zipcoder.fakeazon.repositories.ShopRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,12 +38,33 @@ public class ShopService {
             return false;
     }
 
+    // Updates
+
+    public Shop updateName(Integer shopId, String shopName) throws Exception {
+        Shop shop = checkIfShopExists(shopId);
+        shop.setName(shopName);
+        return saveShop(shop);
+    }
+
+    public Shop updateDescription(Integer shopId, String shopDescription) throws Exception {
+        Shop shop = checkIfShopExists(shopId);
+        shop.setDescription(shopDescription);
+        return saveShop(shop);
+    }
+
+    public Shop updateLogoUrl(Integer shopId, String shopLogoUrl) throws Exception {
+        Shop shop = checkIfShopExists(shopId);
+        shop.setLogoUrl(shopLogoUrl);
+        return saveShop(shop);
+    }
+
     // Verify Shop Existence
-    public Shop checkIfItemExists(Integer shopId) throws Exception {
+    public Shop checkIfShopExists(Integer shopId) throws Exception {
         Optional<Shop> shop = findOne(shopId);
         if (shop.isPresent())
             return shop.get();
         else throw new Exception("No shop with "+ shopId + "exists!");
     }
+
 
 }
