@@ -17,8 +17,8 @@ public class ShoppingCartServices {
     }
 
     // TODO POST get user for cart then save both
-    public ShoppingCart createShoppingCart(ShoppingCart sc, int id){
-        return sc;
+    public ShoppingCart createShoppingCart(ShoppingCart cart){
+        return cart;
     }
 
     // GET
