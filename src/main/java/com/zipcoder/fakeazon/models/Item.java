@@ -18,13 +18,16 @@ public class Item {
     private List<Double> rating;
 
     @ElementCollection
-    private List<String> itemTags = new ArrayList<>();
+    private List<String> itemTags;
 
     @ManyToOne
     @JoinColumn( name = "shop_id")
     private Shop shop;
 
-    public Item(){}
+    public Item(){
+        rating = new ArrayList<>();
+        itemTags = new ArrayList<>();
+    }
 
     public Item(int id){this.id = id;}
 

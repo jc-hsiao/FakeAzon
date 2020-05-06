@@ -1,10 +1,12 @@
 package com.zipcoder.fakeazon.services;
 
+import com.zipcoder.fakeazon.models.Item;
 import com.zipcoder.fakeazon.models.Shop;
 import com.zipcoder.fakeazon.repositories.ShopRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
@@ -14,9 +16,12 @@ public class ShopService {
 
     private final ShopRepository repo;
 
+    private final ItemServices itemServices;
+
     @Autowired
-    public ShopService(ShopRepository repo){
+    public ShopService(ShopRepository repo, ItemServices itemServices){
         this.repo = repo;
+        this.itemServices = itemServices;
     }
 
     public Optional<Shop> findOne(Integer shopId){
@@ -72,6 +77,19 @@ public class ShopService {
         shop.setKeywords(currentKeywords);
         return saveShop(shop);
     }
+
+    public Shop addItemsToShop(Integer shopId, Item[] items) throws Exception{
+        Shop shop = checkIfShopExists(shopId);
+        Arrays.stream(items).forEach(item -> {
+            item.setShop(shop);
+            item.setRating(new ArrayList<>(Arrays.asList(5.0,5.0)));
+            itemServices.saveItem(item);
+        });
+        shop.getItems().addAll(Arrays.asList(items));
+        return saveShop(shop);
+    }
+
+
 
     // Verify Shop Existence
 

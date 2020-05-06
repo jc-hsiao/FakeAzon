@@ -2,6 +2,7 @@ package com.zipcoder.fakeazon.services;
 
 import com.zipcoder.fakeazon.models.Item;
 import com.zipcoder.fakeazon.models.Shop;
+import com.zipcoder.fakeazon.repositories.ItemRepository;
 import com.zipcoder.fakeazon.repositories.ShopRepository;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -34,7 +35,13 @@ import static org.mockito.Mockito.doReturn;
 class ShopServiceTest {
 
     @Autowired
+    private ItemServices itemService;
+
+    @Autowired
     private ShopService service;
+
+    @MockBean
+    private ItemRepository itemRepo;
 
     @MockBean
     private ShopRepository repo;
@@ -156,6 +163,25 @@ class ShopServiceTest {
         String expected = "KW3";
 
         String actual = service.removeKeywords(1,new String[]{"KW2"}).getKeywords().get(1);
+
+        assertEquals(expected,actual);
+    }
+
+    @Test
+    @DisplayName("Test Add Items To Shop")
+    public void testAddItemsToShop() throws Exception {
+        Shop testShop = new Shop();
+        doReturn(Optional.of(testShop)).when(repo).findById(1);
+        doReturn(testShop).when(repo).save(testShop);
+        Item item1 = new Item();
+        Item item2 = new Item();
+        doReturn(item1).when(itemRepo).save(item1);
+        doReturn(item2).when(itemRepo).save(item2);
+
+        Item[] items = new Item[]{itemService.saveItem(item1),itemService.saveItem(item2)};
+        Integer expected = 2;
+
+        Integer actual = service.addItemsToShop(1, items).getItems().size();
 
         assertEquals(expected,actual);
     }
