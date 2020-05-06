@@ -51,7 +51,7 @@ public class ShoppingCart{
     }
 
     public void setItemCounts(List<ItemCount> itemCounts) {
-        itemCounts = itemCounts;
+        this.itemCounts = itemCounts;
     }
 
 
