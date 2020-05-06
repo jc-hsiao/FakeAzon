@@ -58,7 +58,10 @@ public class ShopService {
         return saveShop(shop);
     }
 
+
+
     // Verify Shop Existence
+
     public Shop checkIfShopExists(Integer shopId) throws Exception {
         Optional<Shop> shop = findOne(shopId);
         if (shop.isPresent())

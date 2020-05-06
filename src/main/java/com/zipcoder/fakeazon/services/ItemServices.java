@@ -95,6 +95,12 @@ public class ItemServices {
         return repo.save(item);
     }
 
+    public Item addRating(Integer itemId, Double rating) throws Exception {
+        Item item = checkIfItemExists(itemId);
+        item.getRating().add(rating);
+        return repo.save(item);
+    }
+
     public Double getRating(Integer itemId) throws Exception {
         Item item = checkIfItemExists(itemId);
         List<Double> ratings = item.getRating();

@@ -115,6 +115,111 @@ class ItemServicesTest {
         assertEquals(expected,actual);
     }
 
+    @Test
+    @DisplayName("Test Update Item Name")
+    public void testUpdateItemName() throws Exception {
+        Item testItem = new Item();
+        testItem.setName("Test");
+        doReturn(Optional.of(testItem)).when(repository).findById(1);
+        doReturn(testItem).when(repository).save(testItem);
+
+        String expected = "Updated";
+
+        String actual = service.updateName(1,expected).getName();
+
+        assertEquals(expected,actual);
+    }
+
+    @Test
+    @DisplayName("Test Update Item Price")
+    public void testUpdateItemPrice() throws Exception {
+        Item testItem = new Item();
+        testItem.setPrice(123.45);
+        doReturn(Optional.of(testItem)).when(repository).findById(1);
+        doReturn(testItem).when(repository).save(testItem);
+
+        Double expected = 43.21;
+
+        Double actual = service.updatePrice(1,expected).getPrice();
+
+        assertEquals(expected,actual);
+    }
+
+    @Test
+    @DisplayName("Test Update Item Image URL")
+    public void testUpdateItemImageUrl() throws Exception {
+        Item testItem = new Item();
+        testItem.setImageUrl("imgur.com/test");
+        doReturn(Optional.of(testItem)).when(repository).findById(1);
+        doReturn(testItem).when(repository).save(testItem);
+
+        String expected = "imgur.com/updated";
+
+        String actual = service.updateImageUrl(1,expected).getImageUrl();
+
+        assertEquals(expected,actual);
+    }
+
+    @Test
+    @DisplayName("Test Update Item Description")
+    public void testUpdateItemDescription() throws Exception {
+        Item testItem = new Item();
+        testItem.setDescription("Test Test Test");
+        doReturn(Optional.of(testItem)).when(repository).findById(1);
+        doReturn(testItem).when(repository).save(testItem);
+
+        String expected = "Updated Updated Updated";
+
+        String actual = service.updateDescription(1,expected).getDescription();
+
+        assertEquals(expected,actual);
+    }
+
+    @Test
+    @DisplayName("Test Add Item Tags")
+    public void testAddItemTags() throws Exception {
+        Item testItem = new Item();
+        testItem.setItemTags(new ArrayList<>(Arrays.asList("Tag1","Tag2")));
+        doReturn(Optional.of(testItem)).when(repository).findById(1);
+        doReturn(testItem).when(repository).save(testItem);
+
+        String expected = "Tag3";
+
+        String actual = service.addItemTags(1,new String[]{"Tag3"}).getItemTags().get(2);
+
+        assertEquals(expected,actual);
+    }
+
+    @Test
+    @DisplayName("Test Remove Item Tags")
+    public void testRemoveItemTags() throws Exception {
+        Item testItem = new Item();
+        testItem.setItemTags(new ArrayList<>(Arrays.asList("Tag1","Tag2","Tag3")));
+        doReturn(Optional.of(testItem)).when(repository).findById(1);
+        doReturn(testItem).when(repository).save(testItem);
+
+        String expected = "Tag3";
+
+        String actual = service.removeItemTags(1,new String[]{"Tag2"}).getItemTags().get(1);
+
+        assertEquals(expected,actual);
+    }
+
+    @Test
+    @DisplayName("Test Add Rating")
+    public void testAddRating() throws Exception {
+        Item testItem = new Item();
+        testItem.setRating(new ArrayList<>(Arrays.asList(4.50,4.80)));
+        doReturn(Optional.of(testItem)).when(repository).findById(1);
+        doReturn(testItem).when(repository).save(testItem);
+
+        Double expected = 5.00;
+
+        Double actual = service.addRating(1,5.00).getRating().get(2);
+
+        assertEquals(expected,actual);
+    }
+
 
     @Test
     @DisplayName("Test Rating System")
