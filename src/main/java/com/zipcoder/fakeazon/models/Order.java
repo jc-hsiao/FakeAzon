@@ -17,6 +17,8 @@ public class Order {
     private LocalDate datePlaced;
     private int status;
 
+    public Order() {}
+
     public int getId() {
         return id;
     }
