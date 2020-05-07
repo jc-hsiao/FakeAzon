@@ -1,5 +1,6 @@
 package com.zipcoder.fakeazon.services;
 
+import com.zipcoder.fakeazon.exception.NotFoundException;
 import com.zipcoder.fakeazon.models.Item;
 import com.zipcoder.fakeazon.repositories.ItemRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,43 +43,43 @@ public class ItemServices {
 
     // INDIVIDUAL UPDATES
 
-    public Item increaseInventoryCount(Integer itemId, Integer amountToIncrease) throws Exception {
+    public Item increaseInventoryCount(Integer itemId, Integer amountToIncrease){
         Item item = checkIfItemExists(itemId);
         item.setInventoryCount(item.getInventoryCount() + amountToIncrease);
         return repo.save(item);
     }
 
-    public Item decreaseInventoryCount(Integer itemId, Integer amountToDecrease) throws Exception {
+    public Item decreaseInventoryCount(Integer itemId, Integer amountToDecrease){
         Item item = checkIfItemExists(itemId);
         item.setInventoryCount(item.getInventoryCount() - amountToDecrease);
         return repo.save(item);
     }
 
-    public Item updateName(Integer itemId, String name) throws Exception {
+    public Item updateName(Integer itemId, String name){
         Item item = checkIfItemExists(itemId);
         item.setName(name);
         return repo.save(item);
     }
 
-    public Item updatePrice(Integer itemId, Double newPrice) throws Exception {
+    public Item updatePrice(Integer itemId, Double newPrice){
         Item item = checkIfItemExists(itemId);
         item.setPrice(newPrice);
         return repo.save(item);
     }
 
-    public Item updateImageUrl(Integer itemId, String imageUrl) throws Exception {
+    public Item updateImageUrl(Integer itemId, String imageUrl){
         Item item = checkIfItemExists(itemId);
         item.setImageUrl(imageUrl);
         return repo.save(item);
     }
 
-    public Item updateDescription(Integer itemId, String description) throws Exception {
+    public Item updateDescription(Integer itemId, String description){
         Item item = checkIfItemExists(itemId);
         item.setDescription(description);
         return repo.save(item);
     }
 
-    public Item addItemTags(Integer itemId, String[] itemTags) throws Exception {
+    public Item addItemTags(Integer itemId, String[] itemTags){
         Item item = checkIfItemExists(itemId);
         List<String> tags = item.getItemTags();
         tags.addAll(Arrays.asList(itemTags));
@@ -86,7 +87,7 @@ public class ItemServices {
         return repo.save(item);
     }
 
-    public Item removeItemTags(Integer itemId, String[] itemTags) throws Exception {
+    public Item removeItemTags(Integer itemId, String[] itemTags){
         Item item = checkIfItemExists(itemId);
         List<String> tags = item.getItemTags();
         tags.addAll(Arrays.asList(itemTags));
@@ -95,13 +96,13 @@ public class ItemServices {
         return repo.save(item);
     }
 
-    public Item addRating(Integer itemId, Double rating) throws Exception {
+    public Item addRating(Integer itemId, Double rating){
         Item item = checkIfItemExists(itemId);
         item.getRating().add(rating);
         return repo.save(item);
     }
 
-    public Double getRating(Integer itemId) throws Exception {
+    public Double getRating(Integer itemId){
         Item item = checkIfItemExists(itemId);
         List<Double> ratings = item.getRating();
         return ratings.stream().collect(Collectors.averagingDouble(Double::valueOf));
@@ -109,11 +110,11 @@ public class ItemServices {
 
 
     // Verify Item Existence
-    public Item checkIfItemExists(Integer itemId) throws Exception {
+    public Item checkIfItemExists(Integer itemId){
         Optional<Item> item = findOne(itemId);
         if (item.isPresent())
             return item.get();
-        else throw new Exception("No item with "+ itemId + "exists!");
+        else throw new NotFoundException("The item that you're looking for was not found!");
     }
 
 }

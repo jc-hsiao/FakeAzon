@@ -1,7 +1,9 @@
 package com.zipcoder.fakeazon.services;
 
+import com.zipcoder.fakeazon.exception.NotFoundException;
 import com.zipcoder.fakeazon.models.Item;
 import com.zipcoder.fakeazon.models.Shop;
+import com.zipcoder.fakeazon.repositories.ItemRepository;
 import com.zipcoder.fakeazon.repositories.ShopRepository;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -34,7 +36,13 @@ import static org.mockito.Mockito.doReturn;
 class ShopServiceTest {
 
     @Autowired
+    private ItemServices itemService;
+
+    @Autowired
     private ShopService service;
+
+    @MockBean
+    private ItemRepository itemRepo;
 
     @MockBean
     private ShopRepository repo;
@@ -43,15 +51,15 @@ class ShopServiceTest {
 
     @Test
     @DisplayName("Test Check Shop Existence: PASS")
-    public void testItemExists() throws Exception {
+    public void testItemExists() {
         doReturn(Optional.of(mockShop)).when(repo).findById(1);
         assertNotNull(service.checkIfShopExists(1));
     }
 
     @Test
     @DisplayName("Test Check Shop Existence: FAIL")
-    public void testItemNotExist() throws Exception {
-        Assertions.assertThrows(Exception.class,
+    public void testItemNotExist() {
+        Assertions.assertThrows(NotFoundException.class,
                 () -> service.checkIfShopExists(15));
     }
 
@@ -93,7 +101,7 @@ class ShopServiceTest {
 
     @Test
     @DisplayName("Test Update Shop Name")
-    public void testUpdateShopName() throws Exception {
+    public void testUpdateShopName(){
         Shop testShop = new Shop();
         testShop.setName("Test");
         doReturn(Optional.of(testShop)).when(repo).findById(1);
@@ -106,7 +114,7 @@ class ShopServiceTest {
 
     @Test
     @DisplayName("Test Update Shop Description")
-    public void testUpdateShopDescription() throws Exception {
+    public void testUpdateShopDescription(){
         Shop testShop = new Shop();
         testShop.setDescription("Test Test Test");
         doReturn(Optional.of(testShop)).when(repo).findById(1);
@@ -119,7 +127,7 @@ class ShopServiceTest {
 
     @Test
     @DisplayName("Test Update Shop Logo URL")
-    public void testUpdateShopLogoUrl() throws Exception {
+    public void testUpdateShopLogoUrl(){
         Shop testShop = new Shop();
         testShop.setLogoUrl("imgur.com/myLogo");
         doReturn(Optional.of(testShop)).when(repo).findById(1);
@@ -132,7 +140,7 @@ class ShopServiceTest {
 
     @Test
     @DisplayName("Test Add Keywords")
-    public void testAddKeywords() throws Exception {
+    public void testAddKeywords(){
         Shop testShop = new Shop();
         testShop.setKeywords(new ArrayList<>(Arrays.asList("KW1","KW2")));
         doReturn(Optional.of(testShop)).when(repo).findById(1);
@@ -147,7 +155,7 @@ class ShopServiceTest {
 
     @Test
     @DisplayName("Test Remove Keywords")
-    public void testRemoveKeywords() throws Exception {
+    public void testRemoveKeywords(){
         Shop testShop = new Shop();
         testShop.setKeywords(new ArrayList<>(Arrays.asList("KW1","KW2", "KW3")));
         doReturn(Optional.of(testShop)).when(repo).findById(1);
@@ -157,6 +165,48 @@ class ShopServiceTest {
 
         String actual = service.removeKeywords(1,new String[]{"KW2"}).getKeywords().get(1);
 
+        assertEquals(expected,actual);
+    }
+
+    @Test
+    @DisplayName("Test Add Items To Shop")
+    public void testAddItemsToShop(){
+        Shop testShop = new Shop();
+        Item item1 = new Item();
+        Item item2 = new Item();
+        doReturn(Optional.of(testShop)).when(repo).findById(1);
+        doReturn(testShop).when(repo).save(testShop);
+        doReturn(item1).when(itemRepo).save(item1);
+        doReturn(item2).when(itemRepo).save(item2);
+
+        Item[] items = new Item[]{itemService.saveItem(item1),itemService.saveItem(item2)};
+        Integer expected = 2;
+
+        Integer actual = service.addItemsToShop(1, items).getItems().size();
+
+        assertEquals(expected,actual);
+    }
+
+    @Test
+    @DisplayName("Test Remove Items From Shop")
+    public void testRemoveItemsFromShop(){
+        Shop testShop = new Shop();
+        doReturn(Optional.of(testShop)).when(repo).findById(1);
+        doReturn(testShop).when(repo).save(testShop);
+        Item item1 = new Item();
+        Item item2 = new Item();
+        doReturn(item1).when(itemRepo).save(item1);
+        doReturn(item2).when(itemRepo).save(item2);
+
+        Item[] items = new Item[]{itemService.saveItem(item1),itemService.saveItem(item2)};
+        service.addItemsToShop(1, items);
+        Integer expectedBefore = 2;
+        Integer actualBefore = service.findOne(1).get().getItems().size();
+
+        Integer expected = 0;
+        Integer actual = service.removeItemsFromShop(1, items).getItems().size();
+
+        assertEquals(expectedBefore,actualBefore);
         assertEquals(expected,actual);
     }
 
