@@ -1,5 +1,8 @@
 package com.zipcoder.fakeazon.services;
 
+import ch.qos.logback.core.encoder.EchoEncoder;
+import com.zipcoder.fakeazon.exception.NotFoundException;
+import com.zipcoder.fakeazon.models.Item;
 import com.zipcoder.fakeazon.models.Shop;
 import com.zipcoder.fakeazon.repositories.ShopRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,9 +17,12 @@ public class ShopService {
 
     private final ShopRepository repo;
 
+    private final ItemServices itemServices;
+
     @Autowired
-    public ShopService(ShopRepository repo){
+    public ShopService(ShopRepository repo, ItemServices itemServices){
         this.repo = repo;
+        this.itemServices = itemServices;
     }
 
     public Optional<Shop> findOne(Integer shopId){
@@ -41,31 +47,31 @@ public class ShopService {
 
     // Updates
 
-    public Shop updateName(Integer shopId, String shopName) throws Exception {
+    public Shop updateName(Integer shopId, String shopName){
         Shop shop = checkIfShopExists(shopId);
         shop.setName(shopName);
         return saveShop(shop);
     }
 
-    public Shop updateDescription(Integer shopId, String shopDescription) throws Exception {
+    public Shop updateDescription(Integer shopId, String shopDescription){
         Shop shop = checkIfShopExists(shopId);
         shop.setDescription(shopDescription);
         return saveShop(shop);
     }
 
-    public Shop updateLogoUrl(Integer shopId, String shopLogoUrl) throws Exception {
+    public Shop updateLogoUrl(Integer shopId, String shopLogoUrl){
         Shop shop = checkIfShopExists(shopId);
         shop.setLogoUrl(shopLogoUrl);
         return saveShop(shop);
     }
 
-    public Shop addKeywords(Integer shopId, String[] keywords) throws Exception{
+    public Shop addKeywords(Integer shopId, String[] keywords){
         Shop shop = checkIfShopExists(shopId);
         shop.getKeywords().addAll(Arrays.asList(keywords));
         return saveShop(shop);
     }
 
-    public Shop removeKeywords(Integer shopId, String[] keywords) throws Exception{
+    public Shop removeKeywords(Integer shopId, String[] keywords){
         Shop shop = checkIfShopExists(shopId);
         List<String> currentKeywords = shop.getKeywords();
         Arrays.stream(keywords).forEach(currentKeywords::remove);
@@ -73,13 +79,36 @@ public class ShopService {
         return saveShop(shop);
     }
 
+    public Shop addItemsToShop(Integer shopId, Item[] items){
+        Shop shop = checkIfShopExists(shopId);
+        Arrays.stream(items).forEach(item -> {
+            item.setShop(shop);
+            itemServices.saveItem(item);
+        });
+        shop.getItems().addAll(Arrays.asList(items));
+        return saveShop(shop);
+    }
+
+    public Shop removeItemsFromShop(Integer shopId, Item[] items){
+        Shop shop = checkIfShopExists(shopId);
+        List<Item> shopItems = shop.getItems();
+        Arrays.stream(items).forEach(item -> {
+            shopItems.remove(item);
+            itemServices.deleteItem(item.getId());
+        });
+        shop.setItems(shopItems);
+        return saveShop(shop);
+    }
+
+
+
     // Verify Shop Existence
 
-    public Shop checkIfShopExists(Integer shopId) throws Exception {
+    public Shop checkIfShopExists(Integer shopId){
         Optional<Shop> shop = findOne(shopId);
         if (shop.isPresent())
             return shop.get();
-        else throw new Exception("No shop with "+ shopId + "exists!");
+        else throw new NotFoundException("The Shop that you're looking for was not found!");
     }
 
 
