@@ -40,7 +40,6 @@ public class ShoppingCartServiceTest {
     private ShoppingCart mockCart = new ShoppingCart();
     private ItemCount itemCount = new ItemCount();
 
-    // TODO Create Cart Test
     @Test
     public void createCartTest(){
         given(cartRepo.save(mockCart)).willReturn(mockCart);
