@@ -39,8 +39,9 @@ public class ShoppingCartServices {
         return cartRepo.findShoppingCartByOwner_Id(id);
     }
     // PUT
-    public ShoppingCart addItemCountToCart(int cartId, ItemCount itemCount){
+    public ShoppingCart addItemCountToCart(int cartId, int countId){
         ShoppingCart original = cartRepo.getOne(cartId);
+        ItemCount itemCount = itemCountRepo.getOne(countId);
         itemCountRepo.save(itemCount);
         original.getItemCounts().add(itemCount);
         return cartRepo.save(original);

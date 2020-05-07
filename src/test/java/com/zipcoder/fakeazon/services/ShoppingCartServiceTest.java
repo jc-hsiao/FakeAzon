@@ -68,9 +68,9 @@ public class ShoppingCartServiceTest {
 
     @Test
     public void addItemCountTOCartTest() throws Exception{
-        given(countRepo.findById(1)).willReturn(Optional.of(itemCount));
+        given(countRepo.getOne(1)).willReturn(itemCount);
         given(cartRepo.getOne(1)).willReturn(mockCart);
-        service.addItemCountToCart(1, itemCount);
+        service.addItemCountToCart(1, 1);
         assertTrue(mockCart.getItemCounts().contains(itemCount));
     }
 
