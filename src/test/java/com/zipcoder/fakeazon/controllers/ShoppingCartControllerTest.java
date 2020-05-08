@@ -16,6 +16,10 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Optional;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.ArgumentMatchers.any;
@@ -35,7 +39,6 @@ public class ShoppingCartControllerTest {
 
     @MockBean
     private ShoppingCartServices cartService;
-
 
     @Test
     @DisplayName("POST /cart/create")
@@ -75,6 +78,25 @@ public class ShoppingCartControllerTest {
 
         mockMvc.perform(get("/cart/{id}", 1))
                 .andExpect(status().isNotFound());
+    }
+
+    @Test
+    @DisplayName("GET /cart/all")
+    public void findAllCartsTest() throws Exception{
+        ShoppingCart mockCart = new ShoppingCart(1, new User(), 15.55);
+        ShoppingCart mockCart1 = new ShoppingCart(2, new User(), 35.95);
+        List<ShoppingCart> carts =new ArrayList<>(Arrays.asList(mockCart, mockCart1));
+        given(cartService.findAll()).willReturn(carts);
+
+        mockMvc.perform(get("/cart/all"))
+                .andExpect(status().isOk())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+
+                .andExpect(jsonPath("$[0].id", is(1)))
+                .andExpect(jsonPath("$[0].total", is(15.55)))
+
+                .andExpect(jsonPath("$[1].id", is(2)))
+                .andExpect(jsonPath("$[1].total", is(35.95)));
     }
 
     public static String asJsonString(final Object obj){

@@ -18,14 +18,11 @@ public class UserTest {
     }
 
     @Test
-    public void getId() {
-        Assert.assertEquals(0,user.getId());
-    }
-
-    @Test
     public void setId() {
         user.setId(1);
-        Assert.assertEquals(1,user.getId());
+        Integer expected = 1;
+        Integer actual = user.getId();
+        Assert.assertEquals(expected, actual);
     }
 
     @Test

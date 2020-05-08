@@ -39,7 +39,7 @@ public class ShoppingCartServices {
         return cartRepo.findAll();
     }
 
-    public Optional<ShoppingCart> findCartByUser(int id){
+    public Optional<ShoppingCart> findCartByUser(Integer id){
         return cartRepo.findShoppingCartByOwner_Id(id);
     }
     // PUT
@@ -74,7 +74,7 @@ public class ShoppingCartServices {
         return cartRepo.save(cart);
     }
 
-    public boolean clearAllItemsFromCart(int ownerId){
+    public boolean clearAllItemsFromCart(Integer ownerId){
         Optional<ShoppingCart> cart = cartRepo.findShoppingCartByOwner_Id(ownerId);
         if(!cart.get().getItemCounts().isEmpty()){
             cart.get().getItemCounts().clear();
