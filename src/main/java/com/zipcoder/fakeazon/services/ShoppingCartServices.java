@@ -26,6 +26,10 @@ public class ShoppingCartServices {
     public ShoppingCart createShoppingCart(ShoppingCart cart){
         return cartRepo.save(cart);
     }
+
+//    public ItemCount createItemCount(ItemCount itemCount){
+//        return itemCountRepo.save(itemCount);
+//    }
     // GET
     public Optional<ShoppingCart> findOne(int id){
         return cartRepo.findById(id);
@@ -39,8 +43,9 @@ public class ShoppingCartServices {
         return cartRepo.findShoppingCartByOwner_Id(id);
     }
     // PUT
-    public ShoppingCart addItemCountToCart(int cartId, ItemCount itemCount){
+    public ShoppingCart addItemCountToCart(int cartId, int countId){
         ShoppingCart original = cartRepo.getOne(cartId);
+        ItemCount itemCount = itemCountRepo.getOne(countId);
         itemCountRepo.save(itemCount);
         original.getItemCounts().add(itemCount);
         return cartRepo.save(original);

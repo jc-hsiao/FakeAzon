@@ -12,7 +12,6 @@ public class ShoppingCart{
     @OneToOne
     private User owner;
     private double total;
-
     @OneToMany
     private List<ItemCount> itemCounts;
 
@@ -44,7 +43,6 @@ public class ShoppingCart{
     public void setTotal(double total) {
         this.total = total;
     }
-
 
     public List<ItemCount> getItemCounts() {
         return itemCounts;
