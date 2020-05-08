@@ -36,7 +36,7 @@ public class OrderServices {
         return orderRepo.findAll();
     }
 
-    public Optional<List<Order>> findOrdersByUser(int id){
+    public Optional<List<Order>> findOrdersByUser(Integer id){
         return orderRepo.findOrdersByUser(id);
     }
 
