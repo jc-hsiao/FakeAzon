@@ -20,6 +20,12 @@ public class ShoppingCart{
         this.itemCounts = new ArrayList<>();
     }
 
+    public ShoppingCart(int id, User owner, double total) {
+        this.id = id;
+        this.owner = owner;
+        this.total = total;
+    }
+
     public User getOwner() {
         return owner;
     }
