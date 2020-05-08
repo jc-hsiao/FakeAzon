@@ -20,7 +20,7 @@ public class ShoppingCartController {
         this.cartService = cartService;
     }
 
-    @PostMapping("/cart")
+    @PostMapping("/cart/create")
     public ResponseEntity<ShoppingCart> createShoppingCart(@RequestBody ShoppingCart cart){
         return new ResponseEntity<>(cartService.createShoppingCart(cart), HttpStatus.CREATED);
     }
