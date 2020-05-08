@@ -10,11 +10,20 @@ import static org.junit.Assert.*;
 
 public class UserTest {
 
-    User user;
+    private User user;
 
     @Before
     public void setup(){
         user = new User();
+    }
+
+    @Test
+    public void nonNullaryConstructorTest(){
+        User user1 = new User(1,"Moe", "Aydin","password", "moe@email.com");
+        Assert.assertEquals("Moe", user1.getFirstName());
+        Assert.assertEquals("Aydin", user1.getLastName());
+        Assert.assertEquals("password", user1.getPassword());
+        Assert.assertEquals("moe@email.com", user1.getEmail());
     }
 
     @Test

@@ -34,6 +34,12 @@ public class OrderServiceTest {
     private Order mockOrder = new Order();
 
     @Test
+    public void saveOrderTest() throws Exception{
+        given(orderRepo.save(mockOrder)).willReturn(mockOrder);
+        assertNotNull(service.save(mockOrder));
+    }
+
+    @Test
     public void createOrderTest() throws Exception{
         given(orderRepo.save(mockOrder)).willReturn(mockOrder);
         assertNotNull(service.createOrder(mockOrder));

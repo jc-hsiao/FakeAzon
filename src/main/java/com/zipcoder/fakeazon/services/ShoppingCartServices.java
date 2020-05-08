@@ -51,7 +51,7 @@ public class ShoppingCartServices {
         return cartRepo.save(original);
     }
 
-    public ShoppingCart removeItemCountFromCart(Integer itemCountId, int cartId){
+    public ShoppingCart removeItemCountFromCart(Integer itemCountId, Integer cartId){
         ShoppingCart cart = cartRepo.getOne(cartId);
         ItemCount itemCount = itemCountRepo.getOne(itemCountId);
         cart.getItemCounts().remove(itemCount);
