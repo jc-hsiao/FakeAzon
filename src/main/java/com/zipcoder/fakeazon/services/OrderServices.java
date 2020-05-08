@@ -19,6 +19,9 @@ public class OrderServices {
         this.orderRepo = orderRepo;
     }
 
+    public Order save(Order order){
+        return orderRepo.save(order);
+    }
     // POST
     public Order createOrder(Order order){
         order.setDatePlaced(LocalDate.now());
