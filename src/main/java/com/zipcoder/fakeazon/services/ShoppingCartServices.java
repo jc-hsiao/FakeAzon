@@ -26,6 +26,10 @@ public class ShoppingCartServices {
     public ShoppingCart createShoppingCart(ShoppingCart cart){
         return cartRepo.save(cart);
     }
+
+//    public ItemCount createItemCount(ItemCount itemCount){
+//        return itemCountRepo.save(itemCount);
+//    }
     // GET
     public Optional<ShoppingCart> findOne(int id){
         return cartRepo.findById(id);
