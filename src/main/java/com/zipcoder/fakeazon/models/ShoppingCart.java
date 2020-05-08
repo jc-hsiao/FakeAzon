@@ -8,7 +8,7 @@ import java.util.List;
 public class ShoppingCart{
     @Id
     @GeneratedValue( strategy = GenerationType.IDENTITY )
-    private int id;
+    private Integer id;
     @OneToOne
     private User owner;
     private double total;
@@ -20,7 +20,7 @@ public class ShoppingCart{
         this.itemCounts = new ArrayList<>();
     }
 
-    public ShoppingCart(int id, User owner, double total) {
+    public ShoppingCart(Integer id, User owner, double total) {
         this.id = id;
         this.owner = owner;
         this.total = total;
@@ -34,11 +34,11 @@ public class ShoppingCart{
         this.owner = owner;
     }
 
-    public int getId() {
-        return id;
+    public Integer getId() {
+        return this.id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

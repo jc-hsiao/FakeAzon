@@ -32,21 +32,21 @@ public class OrderControllerTest {
     @Autowired
     private MockMvc mockMvc;
 
-//    @Test
-//    @DisplayName("GET /order/1")
-//    public void getOrderByIdTest() throws Exception{
-//        Order mockOrder = new Order();
-//        doReturn(mockOrder).when(orderService).save(mockOrder);
-//        doReturn(Optional.of(mockOrder)).when(orderService).findOne(mockOrder.getId());
-//
-//        mockMvc.perform(get("/order/{orderId}",mockOrder.getId()))
-//
-//                .andExpect(status().isOk())
-//                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
-//
+    @Test
+    @DisplayName("GET /order/1")
+    public void getOrderByIdTest() throws Exception{
+        Order mockOrder = new Order();
+        doReturn(mockOrder).when(orderService).save(mockOrder);
+        doReturn(Optional.of(mockOrder)).when(orderService).findOne(mockOrder.getId());
+
+        mockMvc.perform(get("/order/{orderId}",mockOrder.getId()))
+
+                .andExpect(status().isOk())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON));
+
 //                .andExpect(jsonPath("$.id", is(mockOrder.getId())))
 //                .andExpect(jsonPath("$.user", is(mockOrder.getUser())));
-//    }
+    }
 
     static String asJsonString(final Object obj){
         try{
