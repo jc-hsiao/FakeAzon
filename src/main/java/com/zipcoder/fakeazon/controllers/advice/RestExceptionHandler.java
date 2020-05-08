@@ -12,8 +12,6 @@ import javax.servlet.http.HttpServletRequest;
 @ControllerAdvice
 public class RestExceptionHandler {
 
-    // Commented out until I know how to use this/test
-
     @ExceptionHandler(NotFoundException.class)
     public ResponseEntity<?> handleNotFoundException(NotFoundException nf, HttpServletRequest request){
         ErrorDetail error = new ErrorDetail();
@@ -24,4 +22,6 @@ public class RestExceptionHandler {
         error.setDeveloperMessage("This error came from " + nf.getCause() + "\n" + nf.getMessage());
         return new ResponseEntity<>(error.getDetail(), HttpStatus.NOT_FOUND);
     }
+
+
 }
