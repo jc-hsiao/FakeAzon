@@ -5,6 +5,7 @@ import com.zipcoder.fakeazon.models.ShoppingCart;
 import com.zipcoder.fakeazon.models.User;
 import com.zipcoder.fakeazon.repositories.ItemCountRepository;
 import com.zipcoder.fakeazon.repositories.ShoppingCartRepository;
+import com.zipcoder.fakeazon.repositories.UserRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,15 +36,20 @@ public class ShoppingCartServiceTest {
     private ShoppingCartRepository cartRepo;
 
     @MockBean
+    private UserRepository userRepo;
+
+    @MockBean
     private ItemCountRepository countRepo;
 
     private ShoppingCart mockCart = new ShoppingCart();
     private ItemCount itemCount = new ItemCount();
+    private User mockUser = new User();
 
     @Test
-    public void createCartTest(){
+    public void createCartTest() throws Exception{
+        given(userRepo.findById(1)).willReturn(Optional.of(mockUser));
         given(cartRepo.save(mockCart)).willReturn(mockCart);
-        assertNotNull(service.createShoppingCart(mockCart));
+        assertNotNull(service.createShoppingCart(mockCart, 1));
     }
 
     @Test

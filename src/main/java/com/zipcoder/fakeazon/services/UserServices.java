@@ -19,6 +19,10 @@ public class UserServices {
         this.userRepo = userRepo;
     }
 
+    public User save(User user){
+        return userRepo.save(user);
+    }
+
     public User createUser(User user){
         if(!userRepo.findUserByEmail(user.getEmail()).isPresent()){
             return userRepo.save(user);

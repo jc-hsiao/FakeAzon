@@ -34,6 +34,12 @@ public class UserServiceTest {
     private User mockUser = new User();
 
     @Test
+    public void save() throws Exception{
+        given(userRepo.save(mockUser)).willReturn(mockUser);
+        assertNotNull(mockUser);
+    }
+
+    @Test
     public void createUserTest() throws Exception{
         given(userRepo.save(mockUser)).willReturn(mockUser);
         assertNotNull(userService.createUser(mockUser));
