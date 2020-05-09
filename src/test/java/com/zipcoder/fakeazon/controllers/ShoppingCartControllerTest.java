@@ -47,7 +47,6 @@ public class ShoppingCartControllerTest {
     public void createShoppingCartTest() throws Exception{
         ShoppingCart mockCart = new ShoppingCart();
         User mockUser = new User();
-        given(userService.findUserById(1)).willReturn(Optional.of(mockUser));
         given(cartService.createShoppingCart(mockCart, 1)).willReturn(mockCart);
 
         mockMvc.perform(MockMvcRequestBuilders
