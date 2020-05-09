@@ -31,7 +31,9 @@ public class User {
     @OneToOne
     private Address address;
 
-    public User(){}
+    public User(){
+        shoppingCart = new ShoppingCart();
+    }
 
     public int getId() {
         return id;

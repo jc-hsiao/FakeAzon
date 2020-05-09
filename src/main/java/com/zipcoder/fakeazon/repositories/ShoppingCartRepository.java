@@ -12,5 +12,4 @@ public interface ShoppingCartRepository extends JpaRepository<ShoppingCart,Integ
 
     Optional<ShoppingCart> findShoppingCartByOwner_Id(int id);
 
-
 }
