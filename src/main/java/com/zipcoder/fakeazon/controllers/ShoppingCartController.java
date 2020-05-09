@@ -47,6 +47,7 @@ public class ShoppingCartController {
         return new ResponseEntity<>(cartService.findAll(), HttpStatus.OK);
     }
 
+    // TODO PUT Mappings for adding items to cart, removing, and also clearing cart items, updating quantities
 //    @PutMapping("/cart/{cartId}/item/{countId}")
 //    public ResponseEntity<ShoppingCart> addItemCountToCart(@PathVariable int cartId, @PathVariable int countId){
 //        return new ResponseEntity<>(cartService.addItemCountToCart(cartId, countId), HttpStatus.OK);

@@ -2,7 +2,6 @@ package com.zipcoder.fakeazon.controllers;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.zipcoder.fakeazon.models.Order;
-import com.zipcoder.fakeazon.models.ShoppingCart;
 import com.zipcoder.fakeazon.models.User;
 import com.zipcoder.fakeazon.services.OrderServices;
 import com.zipcoder.fakeazon.services.UserServices;
@@ -129,8 +128,8 @@ public class OrderControllerTest {
     @DisplayName("/order/1/status")
     public void updateOrderStatusTest() throws Exception{
         Order mockOrder = new Order(1,0);
-        Order updatedtOrder = new Order(1,1);
-        given(orderService.updateStatus(mockOrder.getId())).willReturn(updatedtOrder);
+        Order updatedOrder = new Order(1,1);
+        given(orderService.updateStatus(mockOrder.getId())).willReturn(updatedOrder);
 
         mockMvc.perform(put("/order/{orderId}/status", 1)
                 .header(HttpHeaders.IF_MATCH, 1)
