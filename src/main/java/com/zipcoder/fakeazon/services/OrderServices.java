@@ -42,10 +42,10 @@ public class OrderServices {
 
     // PUT
     public Order updateStatus(Integer id){
-        Order order = orderRepo.getOne(id);
-        if(order.getStatus() == 0){
-            order.setStatus(1);
+        Optional<Order> order = orderRepo.findById(id);
+        if(order.get().getStatus() == 0){
+            order.get().setStatus(1);
         }
-        return orderRepo.save(order);
+        return orderRepo.save(order.get());
     }
 }

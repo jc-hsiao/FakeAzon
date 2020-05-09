@@ -69,7 +69,7 @@ public class OrderServiceTest {
     @Test
     public void updateStatusTest() throws Exception{
         mockOrder.setStatus(0);
-        given(orderRepo.getOne(1)).willReturn(mockOrder);
+        given(orderRepo.findById(1)).willReturn(Optional.of(mockOrder));
         service.updateStatus(1);
         assertEquals(1, mockOrder.getStatus());
     }
