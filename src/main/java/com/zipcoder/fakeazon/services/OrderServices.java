@@ -28,7 +28,7 @@ public class OrderServices {
         return orderRepo.save(order);
     }
     // GET
-    public Optional<Order> findOne(int id){
+    public Optional<Order> findOne(Integer id){
         return orderRepo.findById(id);
     }
 
@@ -41,7 +41,7 @@ public class OrderServices {
     }
 
     // PUT
-    public Order updateStatus(int id){
+    public Order updateStatus(Integer id){
         Order order = orderRepo.getOne(id);
         if(order.getStatus() == 0){
             order.setStatus(1);

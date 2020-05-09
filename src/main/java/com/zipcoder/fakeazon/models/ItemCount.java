@@ -8,18 +8,18 @@ import javax.persistence.Id;
 public class ItemCount {
     @Id
     @GeneratedValue( strategy = GenerationType.IDENTITY )
-    int countId;
+    Integer countId;
 
     int itemId;
     int amount;
 
     public ItemCount() { }
 
-    public int getCountId() {
+    public Integer getCountId() {
         return countId;
     }
 
-    public void setCountId(int countId) {
+    public void setCountId(Integer countId) {
         this.countId = countId;
     }
 

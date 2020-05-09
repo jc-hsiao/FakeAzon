@@ -13,10 +13,6 @@ public class ItemCountTest {
         this.itemCount = new ItemCount();
     }
 
-    @Test
-    public void getCountIdTest(){
-        assertNotEquals(itemCount.getCountId(), 1);
-    }
 
     @Test
     public void setCountIdTest(){
