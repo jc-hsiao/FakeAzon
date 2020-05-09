@@ -89,6 +89,8 @@ public class ShopService {
         return saveShop(shop);
     }
 
+
+
     public Shop removeItemsFromShop(Integer shopId, Item[] items){
         Shop shop = checkIfShopExists(shopId);
         List<Item> shopItems = shop.getItems();

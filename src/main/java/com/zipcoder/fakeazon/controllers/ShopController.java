@@ -36,6 +36,11 @@ public class ShopController {
         return new ResponseEntity<>(service.findAll(), HttpStatus.OK);
     }
 
+    @PostMapping("/create")
+    public ResponseEntity<Shop> create(@RequestBody Shop shop){
+        return new ResponseEntity<>(service.saveShop(shop), HttpStatus.CREATED);
+    }
+
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<Boolean> delete(@PathVariable Integer id) {
         return new ResponseEntity<>(service.deleteShop(id),HttpStatus.OK);
