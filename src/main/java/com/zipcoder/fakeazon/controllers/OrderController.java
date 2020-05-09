@@ -26,24 +26,24 @@ public class OrderController {
     }
 
     @GetMapping("/order/{orderId}")
-    public ResponseEntity<?> findById(@PathVariable int orderId){
+    public ResponseEntity<?> findById(@PathVariable Integer orderId){
         return orderService.findOne(orderId).map(order ->
                 ResponseEntity.ok().body(order)).orElse(ResponseEntity.notFound().build());
     }
 
-    @GetMapping("/order/all")
+    @GetMapping("/orders/all")
     public ResponseEntity<List<Order>> findAll(){
         return new ResponseEntity<>(orderService.findAll(), HttpStatus.OK);
     }
 
-    @GetMapping("/order/user/{userId}")
-    public ResponseEntity<?> findOrdersByUser(@PathVariable int userId){
+    @GetMapping("/orders/user/{userId}")
+    public ResponseEntity<?> findOrdersByUser(@PathVariable Integer userId){
         return orderService.findOrdersByUser(userId).map(order ->
                 ResponseEntity.ok().body(order)).orElse(ResponseEntity.notFound().build());
     }
 
     @PutMapping("/order/{orderId}/status")
-    public ResponseEntity<Order> updateOrderStatus(@PathVariable int orderId){
+    public ResponseEntity<Order> updateOrderStatus(@PathVariable Integer orderId){
         return new ResponseEntity<>(orderService.updateStatus(orderId), HttpStatus.OK);
     }
 }
