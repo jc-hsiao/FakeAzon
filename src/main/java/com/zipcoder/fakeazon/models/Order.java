@@ -9,7 +9,7 @@ import java.util.List;
 public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Integer id;
     @ManyToOne
     private User user;
     @OneToOne
@@ -19,11 +19,16 @@ public class Order {
 
     public Order() {}
 
-    public int getId() {
+    public Order(Integer id, int status) {
+        this.id = id;
+        this.status = status;
+    }
+
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

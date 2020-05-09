@@ -7,7 +7,7 @@ import java.util.List;
 public class Item {
     @Id
     @GeneratedValue( strategy = GenerationType.IDENTITY )
-    private int id;
+    private Integer id;
     private String name;
     private double price;
     private int inventoryCount;
@@ -29,10 +29,10 @@ public class Item {
         itemTags = new ArrayList<>();
     }
 
-    public Item(int id){this.id = id;}
+    public Item(Integer id){this.id = id;}
 
-    public int getId() {
-        return id;
+    public Integer getId() {
+        return this.id;
     }
 
     public void setId(int id) {
