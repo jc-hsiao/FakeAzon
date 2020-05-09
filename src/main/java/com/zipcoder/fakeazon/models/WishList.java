@@ -1,13 +1,14 @@
 package com.zipcoder.fakeazon.models;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
 public class WishList{
     @Id
     @GeneratedValue( strategy = GenerationType.IDENTITY )
-    private int id;
+    private Integer id;
     private String name;
 
     @ManyToOne
@@ -16,11 +17,15 @@ public class WishList{
     @OneToMany
     private List<Item> items;
 
-    public int getId() {
+    public WishList() {
+        this.items = new ArrayList<>();
+    }
+
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -47,4 +52,6 @@ public class WishList{
     public void setItems(List<Item> items) {
         this.items = items;
     }
+
+
 }

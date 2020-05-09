@@ -2,7 +2,6 @@ package com.zipcoder.fakeazon.services;
 
 import com.zipcoder.fakeazon.exception.NotFoundException;
 import com.zipcoder.fakeazon.models.Address;
-import com.zipcoder.fakeazon.models.Item;
 import com.zipcoder.fakeazon.models.Shop;
 import com.zipcoder.fakeazon.models.User;
 import com.zipcoder.fakeazon.repositories.UserRepository;
@@ -16,7 +15,7 @@ import java.util.Optional;
 @Service
 public class UserServices {
 
-    private UserRepository userRepo;
+    final private UserRepository userRepo;
 
     @Autowired
     public UserServices(UserRepository userRepo) {
