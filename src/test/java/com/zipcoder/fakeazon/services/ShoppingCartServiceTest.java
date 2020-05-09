@@ -26,7 +26,7 @@ import static org.junit.Assert.*;
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
 @AutoConfigureMockMvc
-@ActiveProfiles("local")
+@ActiveProfiles("h2")
 public class ShoppingCartServiceTest {
 
     @Autowired
