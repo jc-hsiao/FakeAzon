@@ -66,7 +66,15 @@ public class ShopController {
         return new ResponseEntity<>(service.removeKeywords(id,keywords),HttpStatus.OK);
     }
 
+    @PutMapping("/add/items/{id}")
+    public ResponseEntity<Shop> addItemsToShop(@PathVariable Integer id, @RequestParam Item[] items){
+        return new ResponseEntity<>(service.addItemsToShop(id,items),HttpStatus.OK);
+    }
 
+    @PutMapping("/remove/items/{id}")
+    public ResponseEntity<Shop> removeItemsToShop(@PathVariable Integer id, @RequestParam Item[] items){
+        return new ResponseEntity<>(service.removeItemsFromShop(id,items),HttpStatus.OK);
+    }
 
 
 }
