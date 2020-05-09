@@ -20,7 +20,7 @@ public class ShoppingCartController {
         this.cartService = cartService;
     }
 
-    @PostMapping("/cart")
+    @PostMapping("/cart/create")
     public ResponseEntity<ShoppingCart> createShoppingCart(@RequestBody ShoppingCart cart){
         return new ResponseEntity<>(cartService.createShoppingCart(cart), HttpStatus.CREATED);
     }
@@ -31,13 +31,13 @@ public class ShoppingCartController {
 //    }
 
     @GetMapping("/cart/{id}")
-    public ResponseEntity<?> findCartById(@PathVariable int id){
+    public ResponseEntity<?> findCartById(@PathVariable Integer id){
         return cartService.findOne(id).map( cart ->
                  ResponseEntity.ok().body(cart)).orElse(ResponseEntity.notFound().build());
     }
 
     @GetMapping("/cart/user/{userId}")
-    public ResponseEntity<?> findCartByUser(@PathVariable int userId){
+    public ResponseEntity<?> findCartByUser(@PathVariable Integer userId){
         return cartService.findCartByUser(userId).map( cart ->
                 ResponseEntity.ok().body(cart)).orElse(ResponseEntity.notFound().build());
     }

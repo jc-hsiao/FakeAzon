@@ -19,6 +19,9 @@ public class OrderServices {
         this.orderRepo = orderRepo;
     }
 
+    public Order save(Order order){
+        return orderRepo.save(order);
+    }
     // POST
     public Order createOrder(Order order){
         order.setDatePlaced(LocalDate.now());
@@ -33,7 +36,7 @@ public class OrderServices {
         return orderRepo.findAll();
     }
 
-    public Optional<List<Order>> findOrdersByUser(int id){
+    public Optional<List<Order>> findOrdersByUser(Integer id){
         return orderRepo.findOrdersByUser(id);
     }
 

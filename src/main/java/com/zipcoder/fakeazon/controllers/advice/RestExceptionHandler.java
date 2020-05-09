@@ -12,17 +12,15 @@ import javax.servlet.http.HttpServletRequest;
 @ControllerAdvice
 public class RestExceptionHandler {
 
-    // Commented out until I know how to use this/test
-
-//    @ExceptionHandler(NotFoundException.class)
-//    public ResponseEntity<?> handleNotFoundException(NotFoundException nf, HttpServletRequest request){
-//        ErrorDetail error = new ErrorDetail();
-//        error.setTitle("Whoops! ¯\\_(ツ)_/¯ Nothing Here!");
-//        error.setStatus(HttpStatus.NOT_FOUND.value());
-//        error.setDetail("The resource you are looking for was not found!");
-//        error.setTimeStamp(System.currentTimeMillis());
-//        error.setDeveloperMessage("This error came from " + nf.getCause() + "\n" + nf.getMessage());
-//        return new ResponseEntity<>(error.getDetail(), HttpStatus.NOT_FOUND);
-//    }
+    @ExceptionHandler(NotFoundException.class)
+    public ResponseEntity<?> handleNotFoundException(NotFoundException nf, HttpServletRequest request){
+        ErrorDetail error = new ErrorDetail();
+        error.setTitle("Whoops! ¯\\_(ツ)_/¯ Nothing Here!");
+        error.setStatus(HttpStatus.NOT_FOUND.value());
+        error.setDetail("The resource you are looking for was not found!");
+        error.setTimeStamp(System.currentTimeMillis());
+        error.setDeveloperMessage("This error came from " + nf.getCause() + "\n" + nf.getMessage());
+        return new ResponseEntity<>(error.getDetail(), HttpStatus.NOT_FOUND);
+    }
 
 }

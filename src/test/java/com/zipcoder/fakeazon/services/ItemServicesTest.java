@@ -67,6 +67,14 @@ class ItemServicesTest {
     }
 
     @Test
+    @DisplayName("Test Find All Items By Shop")
+    public void testFindAllItemsByShop(){
+        List<Item> items = new ArrayList<>(Arrays.asList(new Item(), new Item()));
+        doReturn(items).when(repository).findAllByShop_Id(1);
+        assertEquals(2, service.findAllByShop(1).size());
+    }
+
+    @Test
     @DisplayName("Test Save Item")
     public void testSaveItem(){
         doReturn(mockItem).when(repository).save(any());
