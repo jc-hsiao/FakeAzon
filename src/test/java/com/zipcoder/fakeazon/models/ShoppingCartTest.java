@@ -14,15 +14,10 @@ public class ShoppingCartTest {
     }
 
     @Test
-    public void getIdTest(){
-        assertNotEquals(cart.getId(), 1);
-    }
-
-    @Test
     public void setIdTest(){
         cart.setId(1);
-        int expected = 1;
-        int actual = cart.getId();
+        Integer expected = 1;
+        Integer actual = cart.getId();
         assertEquals(expected, actual);
     }
 

@@ -10,7 +10,7 @@ import static org.junit.Assert.*;
 
 public class UserTest {
 
-    User user;
+    private User user;
 
     @Before
     public void setup(){
@@ -18,14 +18,20 @@ public class UserTest {
     }
 
     @Test
-    public void getId() {
-        Assert.assertEquals(0,user.getId());
+    public void nonNullaryConstructorTest(){
+        User user1 = new User(1,"Moe", "Aydin","password", "moe@email.com");
+        Assert.assertEquals("Moe", user1.getFirstName());
+        Assert.assertEquals("Aydin", user1.getLastName());
+        Assert.assertEquals("password", user1.getPassword());
+        Assert.assertEquals("moe@email.com", user1.getEmail());
     }
 
     @Test
     public void setId() {
         user.setId(1);
-        Assert.assertEquals(1,user.getId());
+        Integer expected = 1;
+        Integer actual = user.getId();
+        Assert.assertEquals(expected, actual);
     }
 
     @Test
