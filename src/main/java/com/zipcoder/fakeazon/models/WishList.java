@@ -1,6 +1,7 @@
 package com.zipcoder.fakeazon.models;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -15,6 +16,10 @@ public class WishList{
 
     @OneToMany
     private List<Item> items;
+
+    public WishList() {
+        this.items = new ArrayList<>();
+    }
 
     public Integer getId() {
         return id;
