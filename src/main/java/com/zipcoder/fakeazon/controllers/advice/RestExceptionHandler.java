@@ -23,5 +23,4 @@ public class RestExceptionHandler {
         return new ResponseEntity<>(error.getDetail(), HttpStatus.NOT_FOUND);
     }
 
-
 }

@@ -29,6 +29,8 @@ public class ItemServices {
         return repo.findAll();
     }
 
+    public List<Item> findAllByShop(Integer shopId) {return repo.findAllByShop_Id(shopId);}
+
     public Item saveItem(Item item){
         return repo.save(item);
     }
