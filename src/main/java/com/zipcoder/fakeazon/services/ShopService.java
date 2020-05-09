@@ -100,8 +100,6 @@ public class ShopService {
         return saveShop(shop);
     }
 
-
-
     // Verify Shop Existence
 
     public Shop checkIfShopExists(Integer shopId){

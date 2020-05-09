@@ -118,6 +118,22 @@ class ItemControllerTest {
     }
 
     @Test
+    @DisplayName("DELETE /item/delete/{id}")
+    void testDeleteItem() throws Exception {
+        doReturn(true).when(service).deleteItem(1);
+
+        MvcResult result = mockMvc.perform(delete("/item/delete/{id}",1)
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(String.valueOf(true)))
+
+                .andExpect(status().isOk())
+                .andReturn();
+
+        String content = result.getResponse().getContentAsString();
+        assertEquals("true",content);
+    }
+
+    @Test
     @DisplayName("PUT /item/inventory/increase/{id}")
     void testIncreaseInventory() throws Exception {
         doReturn(Optional.of(mockItem)).when(service).findOne(1);
