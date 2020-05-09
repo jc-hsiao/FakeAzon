@@ -43,13 +43,15 @@ public class ShoppingCartControllerTest {
     private UserServices userService;
 
     @Test
-    @DisplayName("POST /cart/create")
+    @DisplayName("POST /user/{userId}/cart/create")
     public void createShoppingCartTest() throws Exception{
         ShoppingCart mockCart = new ShoppingCart();
-        given(cartService.createShoppingCart(mockCart)).willReturn(mockCart);
+        User mockUser = new User();
+        given(userService.findUserById(1)).willReturn(Optional.of(mockUser));
+        given(cartService.createShoppingCart(mockCart, 1)).willReturn(mockCart);
 
         mockMvc.perform(MockMvcRequestBuilders
-                .post("/cart/create")
+                .post("/user/{userId}/cart/create", 1)
                 .content(asJsonString(new ShoppingCart()))
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON))
@@ -116,7 +118,6 @@ public class ShoppingCartControllerTest {
                 .andExpect(jsonPath("$.id", is(1)))
                 .andExpect(jsonPath("$.total", is(15.55)));
     }
-
 
     public static String asJsonString(final Object obj){
         try{
