@@ -52,6 +52,4 @@ public class WishList{
     public void setItems(List<Item> items) {
         this.items = items;
     }
-
-
 }

@@ -4,6 +4,8 @@ import com.zipcoder.fakeazon.models.Address;
 import com.zipcoder.fakeazon.models.Shop;
 import com.zipcoder.fakeazon.models.User;
 import com.zipcoder.fakeazon.repositories.UserRepository;
+import org.junit.Assert;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,25 +39,25 @@ public class UserServicesTest {
     private final User mockUser = new User();
 
     @Test
-    public void save() throws Exception{
+    public void save(){
         given(userRepo.save(mockUser)).willReturn(mockUser);
         assertNotNull(mockUser);
     }
 
     @Test
-    public void createUserTest() throws Exception{
+    public void createUserTest(){
         given(userRepo.save(mockUser)).willReturn(mockUser);
         assertNotNull(userService.createUser(mockUser));
     }
 
     @Test
-    public void findByIdTest() throws Exception{
+    public void findByIdTest(){
         given(userRepo.findById(1)).willReturn(Optional.of(mockUser));
         assertTrue(userService.findUserById(1).isPresent());
     }
 
     @Test
-    public void findAllUsersTest() throws Exception{
+    public void findAllUsersTest(){
         List<User> users = new ArrayList<>(Arrays.asList(mockUser, new User(), new User()));
         given(userRepo.findAll()).willReturn(users);
         assertEquals(3, userService.findAllUsers().size());
@@ -124,4 +126,29 @@ public class UserServicesTest {
 
         assertEquals(newShop,actual);
     }
+
+    @Test
+    public void checkIfUserExistTest_fail(){
+        doReturn(Optional.of(mockUser)).when(userRepo).findById(1);
+        Assertions.assertThrows(Exception.class,
+                    () -> userService.checkIfUserExists(2));
+    }
+
+    @Test
+    public void createUserTest_fail(){
+        User u = new User();
+        String email = "yyy@xxx.zzz";
+        u.setEmail(email);
+        doReturn(Optional.of(u)).when(userRepo).findUserByEmail(email);
+        Assertions.assertThrows(Exception.class,
+                () -> userService.createUser(u));
+    }
+
+    @Test
+    public void saveUserTest(){
+        doReturn(mockUser).when(userRepo).save(mockUser);
+        Assert.assertEquals(mockUser, userService.save(mockUser));
+    }
+
+
 }

@@ -1,5 +1,6 @@
 package com.zipcoder.fakeazon.services;
 
+import com.zipcoder.fakeazon.exception.IllegalArgumentException;
 import com.zipcoder.fakeazon.exception.NotFoundException;
 import com.zipcoder.fakeazon.models.Item;
 import com.zipcoder.fakeazon.models.User;
@@ -31,8 +32,8 @@ public class WishListServices {
 
     //create wishlist by userId
     public WishList createWishList(WishList wishList, Integer userId){
-        User u = userServices.checkIfUserExists(userId);
-        wishList.setUser(u);
+        Optional<User> u = userServices.findUserById(userId);
+        u.ifPresent(wishList::setUser);
         return repo.save(wishList);
     }
 
@@ -50,10 +51,12 @@ public class WishListServices {
         List<Item> itemList = wList.getItems();
         //check if the item is already in the list
         for(Item it:itemList){
-            if(it.getId() != newItem.getId()){
-                itemList.add(newItem);
+            if(it.getId().equals(newItem.getId())){
+                // item duplicate, terminate
+                throw new IllegalArgumentException();
             }
         }
+        itemList.add(newItem);
         return repo.save(wList);
     }
 
@@ -64,17 +67,22 @@ public class WishListServices {
         Item newItem = itemServices.checkIfItemExists(itemId);
         List<Item> itemList = wList.getItems();
         //check if the item is in the list
+        Item toBeRemoved = null;
         for(Item it:itemList){
-            if(it.getId() == newItem.getId()){
-                itemList.remove(newItem);
-            }else{
-                throw new NotFoundException("That item is not in this list");
+            if(it.getId().equals(newItem.getId())) {
+                toBeRemoved = it;
+                break;
             }
         }
+        if(toBeRemoved == null)
+            throw new NotFoundException("The item is not even in the list!");
+        else
+           itemList.remove(toBeRemoved);
+
         return repo.save(wList);
     }
 
-    public WishList delteWishList(Integer id){
+    public WishList deleteWishList(Integer id){
         WishList wList = checkIfWishListExists(id);
         repo.delete(wList);
         return wList;
