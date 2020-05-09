@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.zipcoder.fakeazon.models.ShoppingCart;
 import com.zipcoder.fakeazon.models.User;
 import com.zipcoder.fakeazon.services.ShoppingCartServices;
+import com.zipcoder.fakeazon.services.UserServices;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -21,8 +22,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
-import static org.mockito.Mockito.doReturn;
-import static org.mockito.ArgumentMatchers.any;
 import static org.hamcrest.Matchers.is;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
@@ -40,6 +39,9 @@ public class ShoppingCartControllerTest {
     @MockBean
     private ShoppingCartServices cartService;
 
+    @MockBean
+    private UserServices userService;
+
     @Test
     @DisplayName("POST /cart/create")
     public void createShoppingCartTest() throws Exception{
@@ -47,10 +49,10 @@ public class ShoppingCartControllerTest {
         given(cartService.createShoppingCart(mockCart)).willReturn(mockCart);
 
         mockMvc.perform(MockMvcRequestBuilders
-                            .post("/cart/create")
-                            .content(asJsonString(new ShoppingCart()))
-                            .contentType(MediaType.APPLICATION_JSON)
-                            .accept(MediaType.APPLICATION_JSON))
+                .post("/cart/create")
+                .content(asJsonString(new ShoppingCart()))
+                .contentType(MediaType.APPLICATION_JSON)
+                .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isCreated());
     }
 
@@ -98,6 +100,23 @@ public class ShoppingCartControllerTest {
                 .andExpect(jsonPath("$[1].id", is(2)))
                 .andExpect(jsonPath("$[1].total", is(35.95)));
     }
+
+    @Test
+    @DisplayName("GET /cart/user/{userId}")
+    public void findCartByUserTest() throws Exception{
+        User mockUser = new User(1, "Moe", "Aydin", "password", "moe@email.com");
+        ShoppingCart mockCart = new ShoppingCart(1, mockUser, 15.55);
+        given(cartService.findCartByUser(1)).willReturn(Optional.of(mockCart));
+        given(userService.findUserById(1)).willReturn(Optional.of(mockUser));
+
+        mockMvc.perform(get("/cart/user/{userId}", 1))
+                .andExpect(status().isOk())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+
+                .andExpect(jsonPath("$.id", is(1)))
+                .andExpect(jsonPath("$.total", is(15.55)));
+    }
+
 
     public static String asJsonString(final Object obj){
         try{
