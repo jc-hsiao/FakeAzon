@@ -2,6 +2,7 @@ package com.zipcoder.fakeazon.controllers;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.zipcoder.fakeazon.models.Order;
+import com.zipcoder.fakeazon.models.ShoppingCart;
 import com.zipcoder.fakeazon.models.User;
 import com.zipcoder.fakeazon.services.OrderServices;
 import com.zipcoder.fakeazon.services.UserServices;
@@ -12,10 +13,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -24,8 +27,7 @@ import java.util.Optional;
 
 import static org.hamcrest.Matchers.is;
 import static org.mockito.BDDMockito.given;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @ExtendWith(SpringExtension.class)
@@ -43,22 +45,19 @@ public class OrderControllerTest {
     @Autowired
     private MockMvc mockMvc;
 
-//    @Test
-//    @DisplayName("GET /order/1")
-//    public void getOrderByIdTest() throws Exception{
-//        Order mockOrder = new Order();
-//        doReturn(mockOrder).when(orderService).save(mockOrder);
-//        doReturn(Optional.of(mockOrder)).when(orderService).findOne(mockOrder.getId());
-//
-//        mockMvc.perform(get("/order/{orderId}",mockOrder.getId()))
-//
-//                .andExpect(status().isOk())
-//                .andExpect(content().contentType(MediaType.APPLICATION_JSON));
-//
-////                .andExpect(jsonPath("$.id", is(mockOrder.getId())))
-////                .andExpect(jsonPath("$.user", is(mockOrder.getUser())));
-//    }
+    @Test
+    @DisplayName("POST /order/create")
+    public void createOrderTest() throws Exception{
+        Order mockOrder = new Order(1, 0);
+        given(orderService.createOrder(mockOrder)).willReturn(mockOrder);
 
+        mockMvc.perform(MockMvcRequestBuilders
+                .post("/order/create")
+                .content(asJsonString(new Order()))
+                .contentType(MediaType.APPLICATION_JSON)
+                .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isCreated());
+    }
 
     @Test
     @DisplayName("GET /order/1 -> Success")
@@ -126,21 +125,21 @@ public class OrderControllerTest {
                 .andExpect(jsonPath("$[1].status", is(1)));
     }
 
-//    @Test
-//    @DisplayName("/order/1/status")
-//    public void updateOrderStatusTest() throws Exception{
-//        Order mockOrder = new Order(1,0);
-//        given(orderService.findOne(1)).willReturn(Optional.of(mockOrder));
-//        given(orderService.updateStatus(1)).willReturn(mockOrder);
-//
-//        mockMvc.perform(put("/order/{orderId}/status", 1)
-//                .param("status", String.valueOf(1))
-//                .contentType(MediaType.APPLICATION_JSON)
-//                .content(asJsonString(mockOrder)))
-//
-//                .andExpect(status().isOk())
-//                .andExpect(jsonPath("$.status", is(1)));
-//    }
+    @Test
+    @DisplayName("/order/1/status")
+    public void updateOrderStatusTest() throws Exception{
+        Order mockOrder = new Order(1,0);
+        Order updatedtOrder = new Order(1,1);
+        given(orderService.updateStatus(mockOrder.getId())).willReturn(updatedtOrder);
+
+        mockMvc.perform(put("/order/{orderId}/status", 1)
+                .header(HttpHeaders.IF_MATCH, 1)
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(asJsonString(mockOrder)))
+
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.status", is(1)));
+    }
 
     static String asJsonString(final Object obj){
         try{

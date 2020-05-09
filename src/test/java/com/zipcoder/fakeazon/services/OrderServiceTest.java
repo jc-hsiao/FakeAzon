@@ -18,7 +18,6 @@ import java.util.List;
 import java.util.Optional;
 import static org.mockito.BDDMockito.given;
 import static org.junit.Assert.*;
-import static org.mockito.Mockito.mock;
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
