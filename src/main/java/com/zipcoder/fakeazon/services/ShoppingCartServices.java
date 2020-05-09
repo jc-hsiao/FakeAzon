@@ -2,6 +2,7 @@ package com.zipcoder.fakeazon.services;
 
 import com.zipcoder.fakeazon.models.ItemCount;
 import com.zipcoder.fakeazon.models.ShoppingCart;
+import com.zipcoder.fakeazon.models.User;
 import com.zipcoder.fakeazon.repositories.ItemCountRepository;
 import com.zipcoder.fakeazon.repositories.ShoppingCartRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,11 +20,17 @@ public class ShoppingCartServices {
     private ItemCountRepository itemCountRepo;
 
     @Autowired
+    private UserServices userService;
+
+    @Autowired
     public ShoppingCartServices(ShoppingCartRepository cartRepo) {
         this.cartRepo = cartRepo;
     }
     // POST
-    public ShoppingCart createShoppingCart(ShoppingCart cart){
+    public ShoppingCart createShoppingCart(ShoppingCart cart, Integer id){
+        Optional<User> user = userService.findUserById(id);
+        cart.setOwner(user.get());
+        userService.save(user.get());
         return cartRepo.save(cart);
     }
 
