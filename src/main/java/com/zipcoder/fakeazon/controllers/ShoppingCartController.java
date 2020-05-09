@@ -37,7 +37,7 @@ public class ShoppingCartController {
     }
 
     @GetMapping("/cart/user/{userId}")
-    public ResponseEntity<?> findCartByUser(@PathVariable int userId){
+    public ResponseEntity<?> findCartByUser(@PathVariable Integer userId){
         return cartService.findCartByUser(userId).map( cart ->
                 ResponseEntity.ok().body(cart)).orElse(ResponseEntity.notFound().build());
     }
