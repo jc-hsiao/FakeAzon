@@ -83,11 +83,6 @@ public class UserTest {
     }
 
     @Test
-    public void getShoppingCart() {
-        Assert.assertNull(user.getShoppingCart());
-    }
-
-    @Test
     public void setShoppingCart() {
         ShoppingCart expected = new ShoppingCart();
         user.setShoppingCart(expected);
