@@ -46,12 +46,12 @@ public class ShoppingCartServices {
     }
     // PUT
     public ShoppingCart addItemCountToCart(Integer cartId, Integer countId, int quantity){
-        ShoppingCart original = cartRepo.getOne(cartId);
-        ItemCount itemCount = itemCountRepo.getOne(countId);
-        itemCount.setAmount(quantity);
-        itemCountRepo.save(itemCount);
-        original.getItemCounts().add(itemCount);
-        return cartRepo.save(original);
+        Optional<ShoppingCart> original = cartRepo.findById(cartId);
+        Optional<ItemCount> itemCount = itemCountRepo.findById(countId);
+        itemCount.get().setAmount(quantity);
+        itemCountRepo.save(itemCount.get());
+        original.get().getItemCounts().add(itemCount.get());
+        return cartRepo.save(original.get());
     }
 
     public ShoppingCart removeItemCountFromCart(Integer itemCountId, Integer cartId){
