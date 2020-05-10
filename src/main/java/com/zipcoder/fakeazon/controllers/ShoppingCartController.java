@@ -13,7 +13,7 @@ import java.util.List;
 @RestController
 public class ShoppingCartController {
 
-    private ShoppingCartServices cartService;
+    private final ShoppingCartServices cartService;
 
     @Autowired
     public ShoppingCartController(ShoppingCartServices cartService) {
@@ -43,8 +43,8 @@ public class ShoppingCartController {
     }
 
     // TODO PUT Mappings for adding items to cart, removing, and also clearing cart items, updating quantities
-    @PutMapping("/cart/{cartId}/item/{countId}")
-    public ResponseEntity<ShoppingCart> addItemCountToCart(@PathVariable Integer cartId, @PathVariable Integer countId, @RequestParam int quantity){
-        return new ResponseEntity<>(cartService.addItemCountToCart(cartId, countId, quantity), HttpStatus.OK);
-    }
+//    @PutMapping("/cart/{cartId}/item/{countId}")
+//    public ResponseEntity<ShoppingCart> addItemCountToCart(@PathVariable Integer cartId, @PathVariable Integer countId, @RequestParam int quantity){
+//        return new ResponseEntity<>(cartService.addItemCountToCart(cartId, countId, quantity), HttpStatus.OK);
+//    }
 }
