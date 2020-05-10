@@ -17,11 +17,15 @@ public class WishListTest {
     }
 
     @Test
+    public void getId() {
+        Assert.assertEquals(0, wishList.getId(),0.1);
+    }
+
+    @Test
     public void setId() {
         int expected = 1;
         wishList.setId(expected);
-        int actual = wishList.getId();
-        Assert.assertEquals(expected, actual );
+        Assert.assertEquals(1, wishList.getId(),0.1);
     }
 
     @Test

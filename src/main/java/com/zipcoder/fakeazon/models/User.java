@@ -31,7 +31,9 @@ public class User {
     @OneToOne
     private Address address;
 
-    public User(){}
+    public User(){
+        shoppingCart = new ShoppingCart();
+    }
 
     public User(Integer id, String firstName, String lastName, String password, String email) {
         this.id = id;
