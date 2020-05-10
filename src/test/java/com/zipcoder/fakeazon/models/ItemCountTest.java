@@ -47,4 +47,11 @@ public class ItemCountTest {
         int actual = itemCount.getAmount();
         assertEquals(expected, actual);
     }
+
+    @Test
+    public void setShoppingCartTest(){
+        ShoppingCart cart = new ShoppingCart();
+        itemCount.setCart(cart);
+        assertEquals(cart, itemCount.getCart());
+    }
 }
