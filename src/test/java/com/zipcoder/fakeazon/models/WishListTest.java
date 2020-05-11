@@ -17,11 +17,6 @@ public class WishListTest {
     }
 
     @Test
-    public void getId() {
-        Assert.assertEquals(0, wishList.getId(),0.1);
-    }
-
-    @Test
     public void setId() {
         int expected = 1;
         wishList.setId(expected);
@@ -50,11 +45,6 @@ public class WishListTest {
         User expected = new User();
         wishList.setUser(expected);
         Assert.assertEquals(expected, wishList.getUser());
-    }
-
-    @Test
-    public void getItems() {
-        Assert.assertNull(wishList.getItems());
     }
 
     @Test

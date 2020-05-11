@@ -1,17 +1,19 @@
 package com.zipcoder.fakeazon.models;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import javax.persistence.*;
 
 @Entity
 public class ItemCount {
     @Id
     @GeneratedValue( strategy = GenerationType.IDENTITY )
-    Integer countId;
+    private Integer countId;
 
-    int itemId;
-    int amount;
+    private int itemId;
+    private int amount;
+    @ManyToOne
+    @JsonIgnore
+    private ShoppingCart cart;
 
     public ItemCount() { }
 
@@ -37,5 +39,13 @@ public class ItemCount {
 
     public void setAmount(int amount) {
         this.amount = amount;
+    }
+
+    public ShoppingCart getCart() {
+        return cart;
+    }
+
+    public void setCart(ShoppingCart cart) {
+        this.cart = cart;
     }
 }

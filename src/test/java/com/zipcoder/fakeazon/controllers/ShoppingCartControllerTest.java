@@ -1,8 +1,10 @@
 package com.zipcoder.fakeazon.controllers;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.zipcoder.fakeazon.models.ItemCount;
 import com.zipcoder.fakeazon.models.ShoppingCart;
 import com.zipcoder.fakeazon.models.User;
+import com.zipcoder.fakeazon.repositories.ItemCountRepository;
 import com.zipcoder.fakeazon.services.ShoppingCartServices;
 import com.zipcoder.fakeazon.services.UserServices;
 import org.junit.jupiter.api.Test;
@@ -12,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
@@ -23,7 +26,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 import static org.hamcrest.Matchers.is;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 import static org.mockito.BDDMockito.given;
 
@@ -117,6 +120,27 @@ public class ShoppingCartControllerTest {
                 .andExpect(jsonPath("$.id", is(1)))
                 .andExpect(jsonPath("$.total", is(15.55)));
     }
+
+//    @Test
+//    @DisplayName("PUT /cart/1/item/1")
+//    public void addItemCountToCartTest() throws Exception{
+//        User mockUser = new User(1, "Moe", "Aydin", "password", "moe@email.com");
+//        ShoppingCart mockCart = new ShoppingCart(1, mockUser, 15.55);
+//        ItemCount itemCount = new ItemCount();
+//        given(cartService.findCartByUser(1)).willReturn(Optional.of(mockCart));
+//        given(countRepo.findById(1)).willReturn(Optional.of(itemCount));
+//        given(cartService.addItemCountToCart(1,1,5)).willReturn(mockCart);
+//        String amount = "5";
+//
+//        mockMvc.perform(put("/cart/{cartId}/item/{countId}",1,1)
+//                        .header(HttpHeaders.IF_MATCH, 1)
+//                        .param("quantity", amount))
+//
+//                        .andExpect(status().isOk())
+//                        .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
+//
+//                        .andExpect(jsonPath("$.itemCounts", is(String.valueOf(itemCount))));
+//    }
 
     public static String asJsonString(final Object obj){
         try{

@@ -74,10 +74,11 @@ public class ShoppingCartServiceTest {
 
     @Test
     public void addItemCountTOCartTest() throws Exception{
-        given(countRepo.getOne(1)).willReturn(itemCount);
-        given(cartRepo.getOne(1)).willReturn(mockCart);
-        service.addItemCountToCart(1, 1);
+        given(countRepo.findById(1)).willReturn(Optional.of(itemCount));
+        given(cartRepo.findById(1)).willReturn(Optional.of(mockCart));
+        service.addItemCountToCart(1, 1, 5);
         assertTrue(mockCart.getItemCounts().contains(itemCount));
+        assertEquals(mockCart.getItemCounts().get(0).getAmount(), 5);
     }
 
     @Test

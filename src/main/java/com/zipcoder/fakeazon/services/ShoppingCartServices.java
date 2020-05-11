@@ -14,16 +14,14 @@ import java.util.Optional;
 @Service
 public class ShoppingCartServices {
 
-    private ShoppingCartRepository cartRepo;
+    private final ShoppingCartRepository cartRepo;
+    private final ItemCountRepository itemCountRepo;
+    private final UserServices userService;
 
     @Autowired
-    private ItemCountRepository itemCountRepo;
-
-    @Autowired
-    private UserServices userService;
-
-    @Autowired
-    public ShoppingCartServices(ShoppingCartRepository cartRepo) {
+    public ShoppingCartServices(ShoppingCartRepository cartRepo, ItemCountRepository itemCountRepo, UserServices userService) {
+        this.itemCountRepo = itemCountRepo;
+        this.userService = userService;
         this.cartRepo = cartRepo;
     }
     // POST
@@ -34,9 +32,6 @@ public class ShoppingCartServices {
         return cartRepo.save(cart);
     }
 
-//    public ItemCount createItemCount(ItemCount itemCount){
-//        return itemCountRepo.save(itemCount);
-//    }
     // GET
     public Optional<ShoppingCart> findOne(Integer id){
         return cartRepo.findById(id);
@@ -50,12 +45,13 @@ public class ShoppingCartServices {
         return cartRepo.findShoppingCartByOwner_Id(id);
     }
     // PUT
-    public ShoppingCart addItemCountToCart(Integer cartId, int countId){
-        ShoppingCart original = cartRepo.getOne(cartId);
-        ItemCount itemCount = itemCountRepo.getOne(countId);
-        itemCountRepo.save(itemCount);
-        original.getItemCounts().add(itemCount);
-        return cartRepo.save(original);
+    public ShoppingCart addItemCountToCart(Integer cartId, Integer countId, int quantity){
+        Optional<ShoppingCart> original = cartRepo.findById(cartId);
+        Optional<ItemCount> itemCount = itemCountRepo.findById(countId);
+        itemCount.get().setAmount(quantity);
+        itemCountRepo.save(itemCount.get());
+        original.get().getItemCounts().add(itemCount.get());
+        return cartRepo.save(original.get());
     }
 
     public ShoppingCart removeItemCountFromCart(Integer itemCountId, Integer cartId){

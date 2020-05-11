@@ -13,7 +13,7 @@ import java.util.List;
 @RestController
 public class ShoppingCartController {
 
-    private ShoppingCartServices cartService;
+    private final ShoppingCartServices cartService;
 
     @Autowired
     public ShoppingCartController(ShoppingCartServices cartService) {
@@ -24,11 +24,6 @@ public class ShoppingCartController {
     public ResponseEntity<ShoppingCart> createShoppingCart(@RequestBody ShoppingCart cart, @PathVariable Integer userId){
         return new ResponseEntity<>(cartService.createShoppingCart(cart, userId), HttpStatus.CREATED);
     }
-
-//    @PostMapping("/itemCount")
-//    public ResponseEntity<ItemCount> createItemCount(@RequestBody ItemCount itemCount){
-//        return new ResponseEntity<>(cartService.createItemCount(itemCount), HttpStatus.CREATED);
-//    }
 
     @GetMapping("/cart/{id}")
     public ResponseEntity<?> findCartById(@PathVariable Integer id){
@@ -47,8 +42,9 @@ public class ShoppingCartController {
         return new ResponseEntity<>(cartService.findAll(), HttpStatus.OK);
     }
 
+    // TODO PUT Mappings for adding items to cart, removing, and also clearing cart items, updating quantities
 //    @PutMapping("/cart/{cartId}/item/{countId}")
-//    public ResponseEntity<ShoppingCart> addItemCountToCart(@PathVariable int cartId, @PathVariable int countId){
-//        return new ResponseEntity<>(cartService.addItemCountToCart(cartId, countId), HttpStatus.OK);
+//    public ResponseEntity<ShoppingCart> addItemCountToCart(@PathVariable Integer cartId, @PathVariable Integer countId, @RequestParam int quantity){
+//        return new ResponseEntity<>(cartService.addItemCountToCart(cartId, countId, quantity), HttpStatus.OK);
 //    }
 }

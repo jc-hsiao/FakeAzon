@@ -16,7 +16,7 @@ public class User {
     @Column(unique = true)
     private String email;
 
-    @OneToOne
+    @OneToOne(cascade = {CascadeType.ALL})
     private ShoppingCart shoppingCart;
 
     @OneToMany(mappedBy = "user")
@@ -25,7 +25,7 @@ public class User {
     @OneToMany(mappedBy = "user")
     private List<WishList> wishLists;
 
-    @OneToOne
+    @OneToOne(cascade = {CascadeType.ALL})
     private Shop shop;
 
     @OneToOne
