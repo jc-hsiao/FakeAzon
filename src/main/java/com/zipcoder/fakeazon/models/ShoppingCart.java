@@ -9,7 +9,7 @@ public class ShoppingCart{
     @Id
     @GeneratedValue( strategy = GenerationType.IDENTITY )
     private Integer id;
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     private User owner;
     private double total;
     @OneToMany

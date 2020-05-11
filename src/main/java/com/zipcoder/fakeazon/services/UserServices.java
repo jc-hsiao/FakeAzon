@@ -3,7 +3,9 @@ package com.zipcoder.fakeazon.services;
 import com.zipcoder.fakeazon.exception.NotFoundException;
 import com.zipcoder.fakeazon.models.Address;
 import com.zipcoder.fakeazon.models.Shop;
+import com.zipcoder.fakeazon.models.ShoppingCart;
 import com.zipcoder.fakeazon.models.User;
+import com.zipcoder.fakeazon.repositories.ShoppingCartRepository;
 import com.zipcoder.fakeazon.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,9 +18,11 @@ import java.util.Optional;
 public class UserServices {
 
     final private UserRepository userRepo;
+    private final ShoppingCartRepository cartRepo;
 
     @Autowired
-    public UserServices(UserRepository userRepo) {
+    public UserServices(UserRepository userRepo, ShoppingCartRepository cartRepo) {
+        this.cartRepo = cartRepo;
         this.userRepo = userRepo;
     }
 
@@ -27,7 +31,11 @@ public class UserServices {
     }
 
     public User createUser(User user){
+        ShoppingCart cart = new ShoppingCart();
         if(!userRepo.findUserByEmail(user.getEmail()).isPresent()){
+            user.setShoppingCart(cart);
+            cart.setOwner(user);
+            cartRepo.save(cart);
             return userRepo.save(user);
         }
         else throw new IllegalArgumentException("Email is already in our system. Try something else!");
