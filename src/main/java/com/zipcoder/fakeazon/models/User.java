@@ -16,7 +16,7 @@ public class User {
     @Column(unique = true)
     private String email;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne
     private ShoppingCart shoppingCart;
 
     @OneToMany(mappedBy = "user")
@@ -31,9 +31,7 @@ public class User {
     @OneToOne
     private Address address;
 
-    public User(){
-        shoppingCart = new ShoppingCart();
-    }
+    public User(){ }
 
     public User(Integer id, String firstName, String lastName, String password, String email) {
         this.id = id;

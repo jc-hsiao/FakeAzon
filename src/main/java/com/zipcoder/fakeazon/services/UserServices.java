@@ -33,9 +33,10 @@ public class UserServices {
     public User createUser(User user){
         ShoppingCart cart = new ShoppingCart();
         if(!userRepo.findUserByEmail(user.getEmail()).isPresent()){
-            user.setShoppingCart(cart);
+            user = userRepo.save(user);
             cart.setOwner(user);
             cartRepo.save(cart);
+            user.setShoppingCart(cart);
             return userRepo.save(user);
         }
         else throw new IllegalArgumentException("Email is already in our system. Try something else!");
