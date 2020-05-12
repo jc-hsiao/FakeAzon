@@ -215,6 +215,7 @@ class ShopControllerTest {
                 .andExpect(jsonPath("$.keywords[0]", is("KW2")));
     }
 
+
     public static String asJsonString(final Object obj){
         try{
             return new ObjectMapper().writeValueAsString(obj);
