@@ -1,5 +1,7 @@
 package com.zipcoder.fakeazon.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -9,6 +11,7 @@ public class ShoppingCart{
     @Id
     @GeneratedValue( strategy = GenerationType.IDENTITY )
     private Integer id;
+    @JsonIgnore
     @OneToOne
     private User owner;
     private double total;

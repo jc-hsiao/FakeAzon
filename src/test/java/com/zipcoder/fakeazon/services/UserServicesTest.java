@@ -44,11 +44,11 @@ public class UserServicesTest {
         assertNotNull(mockUser);
     }
 
-    @Test
-    public void createUserTest(){
-        given(userRepo.save(mockUser)).willReturn(mockUser);
-        assertNotNull(userService.createUser(mockUser));
-    }
+//    @Test
+//    public void createUserTest(){
+//        given(userRepo.save(mockUser)).willReturn(mockUser);
+//        assertNotNull(userService.createUser(mockUser));
+//    }
 
     @Test
     public void findByIdTest(){
