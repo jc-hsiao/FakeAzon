@@ -2,12 +2,15 @@ package com.zipcoder.fakeazon.services;
 
 import com.zipcoder.fakeazon.models.Address;
 import com.zipcoder.fakeazon.models.Shop;
+import com.zipcoder.fakeazon.models.ShoppingCart;
 import com.zipcoder.fakeazon.models.User;
+import com.zipcoder.fakeazon.repositories.ShoppingCartRepository;
 import com.zipcoder.fakeazon.repositories.UserRepository;
 import org.junit.Assert;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -36,7 +39,11 @@ public class UserServicesTest {
     @MockBean
     private UserRepository userRepo;
 
+    @MockBean
+    private ShoppingCartRepository cartRepo;
+
     private final User mockUser = new User();
+    private final ShoppingCart mockCart = new ShoppingCart();
 
     @Test
     public void save(){
@@ -44,11 +51,14 @@ public class UserServicesTest {
         assertNotNull(mockUser);
     }
 
-//    @Test
-//    public void createUserTest(){
-//        given(userRepo.save(mockUser)).willReturn(mockUser);
-//        assertNotNull(userService.createUser(mockUser));
-//    }
+    @Test
+    public void createUserTest(){
+        given(userRepo.save(mockUser)).willReturn(mockUser);
+        given(cartRepo.save(mockCart)).willReturn(mockCart);
+        assertNotNull(userService.createUser(mockUser));
+        assertNotNull(mockCart);
+        assertEquals(mockUser.getShoppingCart().getId(), mockCart.getId());
+    }
 
     @Test
     public void findByIdTest(){

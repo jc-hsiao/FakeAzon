@@ -46,21 +46,6 @@ public class ShoppingCartControllerTest {
     private UserServices userService;
 
     @Test
-    @DisplayName("POST /user/{userId}/cart/create")
-    public void createShoppingCartTest() throws Exception{
-        ShoppingCart mockCart = new ShoppingCart();
-        User mockUser = new User();
-        given(cartService.createShoppingCart(mockCart, 1)).willReturn(mockCart);
-
-        mockMvc.perform(MockMvcRequestBuilders
-                .post("/user/{userId}/cart/create", 1)
-                .content(asJsonString(new ShoppingCart()))
-                .contentType(MediaType.APPLICATION_JSON)
-                .accept(MediaType.APPLICATION_JSON))
-                .andExpect(status().isCreated());
-    }
-
-    @Test
     @DisplayName("GET /cart/1 -> Success")
     public void findCartByIdTest() throws Exception{
         ShoppingCart mockCart = new ShoppingCart(1, new User(), 15.55);
