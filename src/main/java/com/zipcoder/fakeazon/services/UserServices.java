@@ -39,7 +39,7 @@ public class UserServices {
             user.setShoppingCart(cart);
             return userRepo.save(user);
         }
-        else throw new IllegalArgumentException("Email is already in our system. Try something else!");
+        else throw new IllegalArgumentException("Email is already in our system.Try something else!");
     }
 
     public Optional<User> findUserById(Integer id){
