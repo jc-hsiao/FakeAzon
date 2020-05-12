@@ -36,21 +36,10 @@ public class ShoppingCartServiceTest {
     private ShoppingCartRepository cartRepo;
 
     @MockBean
-    private UserRepository userRepo;
-
-    @MockBean
     private ItemCountRepository countRepo;
 
     private ShoppingCart mockCart = new ShoppingCart();
     private ItemCount itemCount = new ItemCount();
-    private User mockUser = new User();
-
-    @Test
-    public void createCartTest() throws Exception{
-        given(userRepo.findById(1)).willReturn(Optional.of(mockUser));
-        given(cartRepo.save(mockCart)).willReturn(mockCart);
-        assertNotNull(service.createShoppingCart(mockCart, 1));
-    }
 
     @Test
     public void findByIdTest() throws Exception{

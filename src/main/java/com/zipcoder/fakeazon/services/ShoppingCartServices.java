@@ -24,13 +24,6 @@ public class ShoppingCartServices {
         this.userService = userService;
         this.cartRepo = cartRepo;
     }
-    // POST
-    public ShoppingCart createShoppingCart(ShoppingCart cart, Integer id){
-        Optional<User> user = userService.findUserById(id);
-        cart.setOwner(user.get());
-        userService.save(user.get());
-        return cartRepo.save(cart);
-    }
 
     // GET
     public Optional<ShoppingCart> findOne(Integer id){

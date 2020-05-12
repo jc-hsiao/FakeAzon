@@ -20,11 +20,6 @@ public class ShoppingCartController {
         this.cartService = cartService;
     }
 
-    @PostMapping("/user/{userId}/cart/create")
-    public ResponseEntity<ShoppingCart> createShoppingCart(@RequestBody ShoppingCart cart, @PathVariable Integer userId){
-        return new ResponseEntity<>(cartService.createShoppingCart(cart, userId), HttpStatus.CREATED);
-    }
-
     @GetMapping("/cart/{id}")
     public ResponseEntity<?> findCartById(@PathVariable Integer id){
         return cartService.findOne(id).map( cart ->
